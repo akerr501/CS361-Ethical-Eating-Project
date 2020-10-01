@@ -6,7 +6,7 @@ The Party Planning Committee consists of five team members:
 * [Adam Kerr](https://github.com/akerr501)
 * [Christine Pham](https://github.com/cupham211) 
 * [Maddie Smith](https://github.com/smitmad9)
-*
+* [Eric Sanchez](https://github.com/ericsanch)
 *
 
 ## About the project
