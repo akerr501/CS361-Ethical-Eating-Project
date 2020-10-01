@@ -5,7 +5,7 @@ This repository is for our Software Engineering I (CS 361) team project at Orego
 The Party Planning Committee consists of five team members:
 * [Adam Kerr](https://github.com/akerr501)
 * [Christine Pham](https://github.com/cupham211) 
-*
+* [Maddie Smith](https://github.com/smitmad9)
 *
 *
 
