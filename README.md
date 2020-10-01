@@ -7,7 +7,7 @@ The Party Planning Committee consists of five team members:
 * [Christine Pham](https://github.com/cupham211) 
 * [Maddie Smith](https://github.com/smitmad9)
 * [Eric Sanchez](https://github.com/ericsanch)
-*
+* [Danielle DuChene](https://github.com/aceDuChene)
 
 ## About the project
 
