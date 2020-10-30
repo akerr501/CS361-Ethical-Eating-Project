@@ -1,0 +1,25 @@
+{
+  "name": "cs361-ethical-eating-project",
+  "version": "1.0.0",
+  "description": "CS361 Project",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akerr501/CS361-Ethical-Eating-Project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/akerr501/CS361-Ethical-Eating-Project/issues"
+  },
+  "homepage": "https://github.com/akerr501/CS361-Ethical-Eating-Project#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-handlebars": "^5.2.0",
+    "handlebars": "^4.7.6"
+  }
+}
