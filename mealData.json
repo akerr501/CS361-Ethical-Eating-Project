@@ -1,0 +1,10 @@
+[
+  {
+    "ID": "val",
+    "Name": "Name goes here",
+    "Ingredients": ["IDs go here"],
+    "Rating": "Average of each ingredient?",
+    "Public": "True or false",
+    "Image": "Not sure if we're having one of theses"
+  }
+]

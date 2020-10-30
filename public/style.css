@@ -1,0 +1,64 @@
+/*
+** File for styling the website
+** Authors
+ */
+
+/* General Setup */
+
+header{
+    background-color: rgba(189, 180, 180, 0.76);
+    color: black;
+
+}
+
+body{
+    background-color: white;
+    color: black;
+    margin: 0;
+    font-size: large;
+
+}
+
+a{
+    text-decoration: none;
+    color: #d73f09;
+
+}
+
+a:hover{
+    text-decoration: underline;
+
+}
+
+h3{
+    color: #fcf6f6;
+
+}
+
+/* Nav Bar Set up */
+.navbar{
+    font-size: 20px;
+    line-height: 22px;
+}
+
+.navlist{
+    margin: 0;
+    padding: 10px 30px;
+
+}
+
+.navitem{
+    display: inline-block;
+
+}
+
+.navlink a{
+    padding: 8px 10px;
+    display: inline-block;
+    color: white;
+
+}
+
+.navlink a:hover{
+    text-decoration: none;
+}

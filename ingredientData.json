@@ -1,0 +1,10 @@
+[
+  {
+    "ID": "val",
+    "Name": "Name goes here",
+    "Rating": "Rating goes here",
+    "Issues": "Description goes here",
+    "Subsitutes": ["IDs go here"],
+    "Image": "Not sure if we're having one of theses"
+  }
+]

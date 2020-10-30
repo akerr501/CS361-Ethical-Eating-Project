@@ -1,0 +1,11 @@
+[
+  {
+    "ID": "val",
+    "Name": "Name here",
+    "Email": "Email here",
+    "Password": "Password here",
+    "Recipes": ["IDs go here"],
+    "Settings": "True or False",
+    "Avatar": "not sure what goes here"
+  }
+]
