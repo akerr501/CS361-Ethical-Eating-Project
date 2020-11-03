@@ -1,1 +1,27 @@
-<p>Search Page</p>
+<div name="body">
+  <h1>Search Results: {{search}}</h1>
+  <div name="ingredients">
+    <ul name="iList">
+      {{#each ingredients}}
+      <li>
+        <div class="result">
+          <a href="http://localhost:3000/ingredient?ID={{{ID}}}">{{Name}}</a>
+          <p>{{Issues}}</p>
+        </div>
+      </li>
+    {{/each}}
+    </ul>
+  </div>
+  <div name="meals">
+    <ul name="mList">
+    {{#each meals}}
+      <li>
+        <div class="result">
+          <a href="http://localhost:3000/ingredient?ID={{{ID}}}">{{Name}}</a>
+          <p>{{Rating}}</p>
+        </div>
+      </li>
+    {{/each}}
+    </ul>
+  </div>
+</div>

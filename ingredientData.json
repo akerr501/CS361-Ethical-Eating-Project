@@ -1,10 +1,266 @@
 [
-  {
-    "ID": "val",
-    "Name": "Name goes here",
-    "Rating": "Rating goes here",
-    "Issues": "Description goes here",
-    "Subsitutes": ["IDs go here"],
-    "Image": "Not sure if we're having one of theses"
-  }
+ {
+   "ID": 1,
+   "Name": "chicken",
+   "Rating": 48,
+   "Issues": "Although impactful to the environment to raise chickens, chicken farming uses approximately 1/4 the water, uses approximately 1/10 as much land, emits approximately 1/6 the amount of CO2 as compared with beef on a weight basis",
+   "Substitutes": "",
+   "Image": ""
+ },
+ {
+   "ID": 2,
+   "Name": "beef",
+   "Rating": 17,
+   "Issues": "cows are one of the most environmentally impactful forms of food in production. Responsible for high greenhouse gas emissions, surface water pollution, and extremely high water use",
+   "Substitutes": "",
+   "Image": ""
+ },
+ {
+   "ID": 3,
+   "Name": "pork",
+   "Rating": 40,
+   "Issues": "Pig farming is a major producer of waste by-product which contributes to surface water and air pollution.",
+   "Substitutes": "",
+   "Image": ""
+ },
+ {
+   "ID": 4,
+   "Name": "eggs",
+   "Rating": 62,
+   "Issues": "Much of the environmental impact associated with egg production is attributed to the production of feed and transportation of eggs to the end consumer. Eggs have an pproximate carbon footprint of 2.7 kg of CO2 equivalent per dozen eggs, on par with milk and much lower than that of beef and pork",
+   "Substitutes": "",
+   "Image": "phys.org"
+ },
+ {
+   "ID": 5,
+   "Name": "lamb",
+   "Rating": 24,
+   "Issues": "Sheep farming contributes an estimated 39.2 kg CO2 eqivalent per kilogram of consumable meet produced. Sheep farming is also the number 4 contributor to SO2 emissions to the atmosphere and number 5 contributor of eutrophying emissions to surface water.",
+   "Substitutes": "",
+   "Image": "Environmental working group"
+ },
+ {
+   "ID": 6,
+   "Name": "cheese",
+   "Rating": 43,
+   "Issues": "Cheese production contributes an estimated 13.5 kg CO2 equivalent per kilogram of food produced. Cheese production is also very water intensive, requiring approximately 700 gallons per pound of finished cheese.",
+   "Substitutes": "",
+   "Image": "Environmental working group"
+ },
+ {
+   "ID": 7,
+   "Name": "rice",
+   "Rating": 53,
+   "Issues": "Rice production is a major emitter of methane and nitrous oxide, particularly in intermittently flooded rice farms",
+   "Substitutes": "",
+   "Image": ""
+ },
+ {
+   "ID": 8,
+   "Name": "almonds",
+   "Rating": 43,
+   "Issues": "farmed in california, water intensive",
+   "Substitutes": "",
+   "Image": ""
+ },
+ {
+   "ID": 9,
+   "Name": "quinoa",
+   "Rating": 50,
+   "Issues": "farmed in south america, hard on local populations because of high foreign demand",
+   "Substitutes": "",
+   "Image": ""
+ },
+ {
+   "ID": 10,
+   "Name": "avocado",
+   "Rating": 90,
+   "Issues": "mostly good?",
+   "Substitutes": "",
+   "Image": "Environmental Working Group Clean Fifteen List"
+ },
+ {
+   "ID": 11,
+   "Name": "corn",
+   "Rating": 90,
+   "Issues": "mostly good?",
+   "Substitutes": "",
+   "Image": "Environmental Working Group Clean Fifteen List"
+ },
+ {
+   "ID": 12,
+   "Name": "pineapple",
+   "Rating": 90,
+   "Issues": "mostly good?",
+   "Substitutes": "",
+   "Image": "Environmental Working Group Clean Fifteen List"
+ },
+ {
+   "ID": 13,
+   "Name": "onion",
+   "Rating": 90,
+   "Issues": "mostly good?",
+   "Substitutes": "",
+   "Image": "Environmental Working Group Clean Fifteen List"
+ },
+ {
+   "ID": 14,
+   "Name": "aspearagus",
+   "Rating": 90,
+   "Issues": "mostly good?",
+   "Substitutes": "",
+   "Image": "Environmental Working Group Clean Fifteen List"
+ },
+ {
+   "ID": 15,
+   "Name": "eggplant",
+   "Rating": 90,
+   "Issues": "mostly good?",
+   "Substitutes": "",
+   "Image": "Environmental Working Group Clean Fifteen List"
+ },
+ {
+   "ID": 16,
+   "Name": "cauliflower",
+   "Rating": 90,
+   "Issues": "mostly good?",
+   "Substitutes": "",
+   "Image": "Environmental Working Group Clean Fifteen List"
+ },
+ {
+   "ID": 17,
+   "Name": "cantaloupe",
+   "Rating": 90,
+   "Issues": "mostly good?",
+   "Substitutes": "",
+   "Image": "Environmental Working Group Clean Fifteen List"
+ },
+ {
+   "ID": 18,
+   "Name": "broccoli",
+   "Rating": 90,
+   "Issues": "mostly good?",
+   "Substitutes": "",
+   "Image": "Environmental Working Group Clean Fifteen List"
+ },
+ {
+   "ID": 19,
+   "Name": "mushrooms",
+   "Rating": 90,
+   "Issues": "mostly good?",
+   "Substitutes": "",
+   "Image": "Environmental Working Group Clean Fifteen List"
+ },
+ {
+   "ID": 20,
+   "Name": "cabbage",
+   "Rating": 90,
+   "Issues": "mostly good?",
+   "Substitutes": "",
+   "Image": "Environmental Working Group Clean Fifteen List"
+ },
+ {
+   "ID": 21,
+   "Name": "kiwi",
+   "Rating": 90,
+   "Issues": "mostly good?",
+   "Substitutes": "",
+   "Image": "Environmental Working Group Clean Fifteen List"
+ },
+ {
+   "ID": 22,
+   "Name": "strawberries",
+   "Rating": 50,
+   "Issues": "likely to be high in pesticides",
+   "Substitutes": "",
+   "Image": "Environmental Working Group Dirty Dozen List"
+ },
+ {
+   "ID": 23,
+   "Name": "spinach",
+   "Rating": 50,
+   "Issues": "likely to be high in pesticides",
+   "Substitutes": "",
+   "Image": "Environmental Working Group Dirty Dozen List"
+ },
+ {
+   "ID": 24,
+   "Name": "kale",
+   "Rating": 50,
+   "Issues": "likely to be high in pesticides",
+   "Substitutes": "",
+   "Image": "Environmental Working Group Dirty Dozen List"
+ },
+ {
+   "ID": 25,
+   "Name": "nectarines",
+   "Rating": 50,
+   "Issues": "likely to be high in pesticides",
+   "Substitutes": "",
+   "Image": "Environmental Working Group Dirty Dozen List"
+ },
+ {
+   "ID": 26,
+   "Name": "apples",
+   "Rating": 50,
+   "Issues": "likely to be high in pesticides",
+   "Substitutes": "",
+   "Image": "Environmental Working Group Dirty Dozen List"
+ },
+ {
+   "ID": 27,
+   "Name": "grapes",
+   "Rating": 50,
+   "Issues": "likely to be high in pesticides",
+   "Substitutes": "",
+   "Image": "Environmental Working Group Dirty Dozen List"
+ },
+ {
+   "ID": 28,
+   "Name": "peaches",
+   "Rating": 50,
+   "Issues": "likely to be high in pesticides",
+   "Substitutes": "",
+   "Image": "Environmental Working Group Dirty Dozen List"
+ },
+ {
+   "ID": 29,
+   "Name": "cherries",
+   "Rating": 50,
+   "Issues": "likely to be high in pesticides",
+   "Substitutes": "",
+   "Image": "Environmental Working Group Dirty Dozen List"
+ },
+ {
+   "ID": 30,
+   "Name": "pears",
+   "Rating": 50,
+   "Issues": "likely to be high in pesticides",
+   "Substitutes": "",
+   "Image": "Environmental Working Group Dirty Dozen List"
+ },
+ {
+   "ID": 31,
+   "Name": "celery",
+   "Rating": 50,
+   "Issues": "likely to be high in pesticides",
+   "Substitutes": "",
+   "Image": "Environmental Working Group Dirty Dozen List"
+ },
+ {
+   "ID": 32,
+   "Name": "potatoes",
+   "Rating": 50,
+   "Issues": "likely to be high in pesticides",
+   "Substitutes": "",
+   "Image": "Environmental Working Group Dirty Dozen List"
+ },
+ {
+   "ID": 33,
+   "Name": "tomatoes",
+   "Rating": 50,
+   "Issues": "likely to be high in pesticides",
+   "Substitutes": "",
+   "Image": "Environmental Working Group Dirty Dozen List"
+ }
 ]

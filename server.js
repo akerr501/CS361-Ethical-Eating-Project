@@ -18,6 +18,29 @@ app.set('view engine', 'handlebars');
 app.use(express.json());
 app.use(express.static('public'));
 
+const search = (req, res, next) => {
+  var context = {};
+  context.meals = [];
+  context.ingredients = [];
+  context.search = req.query.q;
+  var search = context.search.toLowerCase();
+  var meal = mealData;
+  var ing = ingredientData;
+  for (i in ing){
+    if (ing[i].Name.toLowerCase().includes(search)){
+      context.ingredients.push(ing[i]);
+    }
+  }
+  for (j in meal){
+    if (meal[j].Name.toLowerCase().includes(search)){
+      context.meals.push(meal[j]);
+    }
+  }
+  console.log(context);
+  res.status(200);
+  res.render("searchPage", context);
+
+} 
 
 app.get('/', function(req, res, next) {
   console.log("Serving the Home Page");
@@ -43,13 +66,26 @@ app.get('/saved', function(req, res, next) {
   });
 });
 
+app.get('/search', function(req, res, next) {
+  console.log("serving search results");
+  search(req, res, next);
+});
+
 app.get('/browse', function(req, res, next) {
   console.log("Serving the Browse Page");
+  var context = {};
+  context.ingredients= ingredientData;
+  console.log(context);
   res.status(200);
-  res.render("browsePage", {
-
-  });
+  res.render("browsePage", context);
 });
+
+//app.get('/ingredient', function(req, res, next){
+//  console.log("Serving Ingredient detail page");
+//  var context = {};
+//  let parsedQs = querystring.parse(parsedUrl.query);
+//  context.ingredient = parsedQs;
+//});
 
 app.get('/login', function(req, res, next) {
   console.log("Serving the Login Page");
