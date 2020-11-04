@@ -1,6 +1,7 @@
 <div name="body">
   <h1>Search Results: {{search}}</h1>
   <div name="ingredients">
+    <h2 class="sTitle">Ingredients</h2>
     <ul name="iList">
       {{#each ingredients}}
       <li>
@@ -13,11 +14,12 @@
     </ul>
   </div>
   <div name="meals">
-    <ul name="mList">
+   <h2 class="sTitle">Meals</h2>
+   <ul name="mList">
     {{#each meals}}
       <li>
         <div class="result">
-          <a href="http://localhost:3000/ingredient?ID={{{ID}}}">{{Name}}</a>
+          <a href="http://localhost:3000/meal?ID={{{ID}}}">{{Name}}</a>
           <p>{{Rating}}</p>
         </div>
       </li>

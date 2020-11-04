@@ -1,0 +1,32 @@
+<div name="body">
+  <h1 name="mealName">
+    {{meal.Name}}
+  </h1>
+  <h2 name="mealRating">
+    {{meal.er}}
+  </h2>
+  <table name="ingredientTable">
+    <thead>
+      <tr>
+      <th>
+        Ingredients
+      </th>
+      <th>
+        Ethical Rating
+      </th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each ingredient}}
+        <tr>
+          <td>
+            {{Name}}
+          </td>
+          <td>
+            {{Rating}}
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>

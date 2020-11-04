@@ -42,6 +42,25 @@ const search = (req, res, next) => {
 
 } 
 
+const mealPage = (req, res, next) => {
+  var context = {};
+  context.meal = {};
+  context.ingredient = {};
+  var ID = req.query.ID;
+  context.meal.Name = mealData[ID].Name;
+  context.meal.er = mealData[ID].Rating;
+  var ingredients = [];
+  ingredients = mealData[ID].Ingredients;
+  for (i in ingredients){
+    context.ingredient[i] = {"Name" : ingredientData[ingredients[i]].Name,
+      "Rating" : ingredientData[ingredients[i]].Rating};
+  }
+  console.log(context.meal);
+  console.log(context.ingredient);
+//  console.log(mealData[0].Name);
+  res.render("mealPage", context);
+}
+
 app.get('/', function(req, res, next) {
   console.log("Serving the Home Page");
   res.status(200);
@@ -78,6 +97,12 @@ app.get('/browse', function(req, res, next) {
   console.log(context);
   res.status(200);
   res.render("browsePage", context);
+});
+
+app.get('/meal', function(req, res, next){
+  console.log("serving meal page");
+  context = {};
+  mealPage(req, res, next);  
 });
 
 //app.get('/ingredient', function(req, res, next){
