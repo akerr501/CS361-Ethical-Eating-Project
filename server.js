@@ -57,7 +57,6 @@ const mealPage = (req, res, next) => {
   }
   console.log(context.meal);
   console.log(context.ingredient);
-//  console.log(mealData[0].Name);
   res.render("mealPage", context);
 }
 
