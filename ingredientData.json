@@ -1,10 +1,146 @@
 [
   {
-    "ID": "val",
-    "Name": "Name goes here",
-    "Rating": "Rating goes here",
-    "Issues": "Description goes here",
-    "Subsitutes": ["IDs go here"],
+    "ID": "i1",
+    "Name": "Bluefin Tuna",
+    "Rating": 15,
+    "Issues": "Critically Endangered Species due to over-fishing.",
+    "Subsitutes": ["i9"],
+    "Image": "Not sure if we're having one of theses"
+  },
+    {
+    "ID": "i2",
+    "Name": "Nutella",
+    "Rating": 48,
+    "Issues": "Heavy deforestation to produce palm oil--an ingredient heavily used in making Nutella.",
+    "Subsitutes": ["i10"],
+    "Image": "Not sure if we're having one of theses"
+  },
+    {
+    "ID": "i3",
+    "Name": "Animal Dairy--Comm.Produced",
+    "Rating": 46,
+    "Issues": "Animals are subjected to unnatural raising practices and over-exploitation in order to maximize production.",
+    "Subsitutes": ["i11"],
+    "Image": "Not sure if we're having one of theses"
+  },
+  {
+    "ID": "i4",
+    "Name": "Almonds",
+    "Rating": 33,
+    "Issues": "Uses 900 gallons of water to produce 1lb.",
+    "Subsitutes": ["i12"],
+    "Image": "Not sure if we're having one of theses"
+  },
+  {
+    "ID": "i5",
+    "Name": "Wheat Flour",
+    "Rating": 50,
+    "Issues": "Grown in a monocrop system and harvesting methods heavily contributes to carbon emissins.",
+    "Subsitutes": ["i13"],
+    "Image": "Not sure if we're having one of theses"
+  },
+  {
+    "ID": "i6",
+    "Name": "Eggs/ Egg Whites",
+    "Rating": 36,
+    "Issues": "Hens are raised in an inhumane environment.",
+    "Subsitutes": ["i14"],
+    "Image": "Not sure if we're having one of theses"
+  },
+  {
+    "ID": "i7",
+    "Name": "Sugar",
+    "Rating": "23",
+    "Issues": "Field burning to harvest sugarcane heavily contributes to greenhouse gases.",
+    "Subsitutes": ["i15"],
+    "Image": "Not sure if we're having one of theses"
+  },
+  {
+    "ID": "i8",
+    "Name": "Beef/Pork",
+    "Rating": 18,
+    "Issues": "Animals are subjected to unnatural raising practices and over-exploitation in order to maximize production.",
+    "Subsitutes": ["i16"],
+    "Image": "Not sure if we're having one of theses"
+  },
+  {
+    "ID": "i9",
+    "Name": "Albacore Tuna",
+    "Rating": 51,
+    "Issues": "Sustainably farmed Bluefin Tuna alternative.",
+    "Subsitutes": ["i1"],
+    "Image": "Not sure if we're having one of theses"
+  },
+  {
+    "ID": "i10",
+    "Name": "Nocciolata",
+    "Rating": 68,
+    "Issues": "Tastes similar to Nutella without the use of palm oil.",
+    "Subsitutes": ["i2"],
+    "Image": "Not sure if we're having one of theses"
+  },
+  {
+    "ID": "i11",
+    "Name": "Coconut Milk",
+    "Rating": 67,
+    "Issues": "Farms are eco-friendly and use small amounts of water to produce coconuts.",
+    "Subsitutes": ["i3"],
+    "Image": "Not sure if we're having one of theses"
+  },
+    {
+    "ID": "i12",
+    "Name": "Pumpkin Seeds",
+    "Rating": 54,
+    "Issues": "12 gallons of water is needed to produce 1lb.",
+    "Subsitutes": ["i4"],
+    "Image": "Not sure if we're having one of theses"
+  },
+    {
+    "ID": "i13",
+    "Name": "Buckwheat Flour",
+    "Rating": 53,
+    "Issues": "Life cycle restores degraded, sandy soils.",
+    "Subsitutes": ["i5"],
+    "Image": "Not sure if we're having one of theses"
+  },
+    {
+    "ID": "i14",
+    "Name": "Aquafaba",
+    "Rating": 91,
+    "Issues": "Made from the viscuous water in which legume seeds have been cooked.",
+    "Subsitutes": ["i6"],
+    "Image": "Not sure if we're having one of theses"
+  },
+    {
+    "ID": "i15",
+    "Name": "Coconut Palm Sugar",
+    "Rating": 66,
+    "Issues": "Higher yield per acre compared to sugarcane and harvesting method more sustainable.",
+    "Subsitutes": ["i7"],
+    "Image": "Not sure if we're having one of theses"
+  },
+    {
+    "ID": "i16",
+    "Name": "Mushrooms",
+    "Rating": 85,
+    "Issues": "Requires only 1.2 gallons of water to produce 1lb and up to 1million lbs can be produced per acre.",
+    "Subsitutes": ["i8"],
+    "Image": "Not sure if we're having one of theses"
+  },
+    {
+    "ID": "i17",
+    "Name": "Organic Fruits",
+    "Rating": 82,
+    "Issues": "High likelihood of being sustainably grown.",
+    "Subsitutes": [""],
+    "Image": "Not sure if we're having one of theses"
+  },
+    {
+    "ID": "i18",
+    "Name": "Organic Vegetables",
+    "Rating": 71,
+    "Issues": "High likelihood of being sustainably grown.",
+    "Subsitutes": [""],
     "Image": "Not sure if we're having one of theses"
   }
 ]
