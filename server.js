@@ -1,13 +1,14 @@
-// Authors: Adam Kerr
+// Authors: Adam Kerr, Christine Pham
 
 
 var path = require('path');
 var express = require('express');
 var exp_handle = require("express-handlebars");
-var mealData = require('./mealData');
-var ingredientData = require('./ingredientData');
-var userData = require('./userData')
+var mealData = require('./mealData.json');
+var ingredientData = require('./ingredientData.json');
+var userData = require('./userData.json')
 var fs = require('fs');
+const { isContext } = require('vm');
 
 var app = express();
 var port = process.env.PORT || 3000;
@@ -27,12 +28,48 @@ app.get('/', function(req, res, next) {
   });
 });
 
+var hbs = exp_handle.create({
+    helpers: {
+      addInput: function () {
+        getElementById('ingredient-box').innerHTML += 'works';
+      }
+    }
+})
+
 app.get('/build', function(req, res, next) {
   console.log("Serving the Build Recipe Page");
+  var context = {};
+  context.ingred = ingredientData; 
   res.status(200);
-  res.render("buildPage", {
+  res.render("buildPage", context)
+});
 
-  });
+app.get('/build/:id', function(req, res, next) {
+  console.log("Serving the Build Recipe Page");
+  var context = {};
+  context.recipe = [];
+  console.log(req.params.id);
+  var id = req.params.id; 
+  var recipeID;
+  //grab recipe by ingredient ids and store in object recipe = [{}]
+  context.ingred = ingredientData; 
+  for (var i=0; i < mealData.length; i++) {
+    if (id == mealData[i].ID) {
+      recipeID = mealData[i].Ingredients;
+      context.meal = mealData[i];
+    }
+  }
+  
+  for (var j=0; j < recipeID.length; j++) {
+    for (var k=0; k < ingredientData.length; k++) {
+      if (recipeID[j] == ingredientData[k].ID) {
+        context.recipe.push(ingredientData[k]);
+      }
+    }
+  }
+
+  res.status(200);
+  res.render("buildPageEdit", context)
 });
 
 app.get('/saved', function(req, res, next) {
