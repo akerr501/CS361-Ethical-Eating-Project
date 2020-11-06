@@ -44,7 +44,7 @@ app.get('/build', function(req, res, next) {
   res.render("buildPage", context)
 });
 
-app.put('/build/:id', function(req, res, next) {
+app.get('/buildEdit/:id', function(req, res, next) {
   console.log("Serving the Build Recipe Page");
   var context = {};
   context.recipe = [];
