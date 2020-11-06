@@ -1,5 +1,19 @@
-<p>Browse Page</p>
 <div name="body">
+  <h2 name="listTitle">
+    Meals
+  </h2>
+  <ul name="mList">
+    {{#each meals}}
+      <li>
+        <div class="result">
+          <a href="http://localhost:3000/meal?ID={{{ID}}}">{{Name}}</a>
+          <p>Ingredients: {{Ingredients}}</p>
+      </li>
+    {{/each}}
+  </ul>
+  <h2 name="listTitle">
+   Ingredients 
+  </h2>
   <ul name="iList">
     
     {{#each ingredients}}

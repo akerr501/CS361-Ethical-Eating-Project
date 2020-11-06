@@ -1,1 +1,18 @@
 <p>Build Page</p>
+<br>
+<div name="body">
+  <h1 name="mealName">{{meal.Name}}</h1>
+  <h2 name="mealRating">Ethical Rating: {{meal.er}}</h2>
+  <p>add or change ingredients here!</p>
+  <form id="mealForm">
+  {{#each ingredient}}
+    <input type="text" name="ingName" value={{Name}}></input>
+    <br>
+  {{/each}}
+  <input type="submit" value="Submit"></input>
+  </form>
+</div>
+
+{{!jQuery needed?
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>}}
+

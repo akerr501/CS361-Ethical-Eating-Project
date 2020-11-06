@@ -30,6 +30,12 @@ app.get('/', function(req, res, next) {
 
 app.get('/build', function(req, res, next) {
   console.log("Serving the Build Recipe Page");
+  helper.editMeal(req, res, next, ingredientData, mealData);  
+});
+
+app.post('/build', function(req, res, next){
+  console.log("Serving edit recipe page");
+  console.log(req.body);
   res.status(200);
   res.render("buildPage", {
 
@@ -53,7 +59,7 @@ app.get('/browse', function(req, res, next) {
   console.log("Serving the Browse Page");
   var context = {};
   context.ingredients= ingredientData;
-  console.log(context);
+  context.meals = mealData;
   res.status(200);
   res.render("browsePage", context);
 });

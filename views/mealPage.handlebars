@@ -1,32 +1,25 @@
 <div name="body">
-  <h1 name="mealName">
-    {{meal.Name}}
-  </h1>
-  <h2 name="mealRating">
-    {{meal.er}}
-  </h2>
+  <h1 name="mealName">{{meal.Name}}</h1>
+  <h2 name="mealRating">Ethical Rating: {{meal.er}}</h2>
+  <p>description to be added here</p>
   <table name="ingredientTable">
     <thead>
       <tr>
-      <th>
-        Ingredients
-      </th>
-      <th>
-        Ethical Rating
-      </th>
+      <th>Ingredients</th>
+      <th>Ethical Rating</th>
       </tr>
     </thead>
     <tbody>
       {{#each ingredient}}
         <tr>
-          <td>
-            {{Name}}
-          </td>
-          <td>
-            {{Rating}}
-          </td>
+          <td name="ingName">{{Name}}</td>
+          <td>{{Rating}}</td>
         </tr>
       {{/each}}
     </tbody>
   </table>
+  <a href="http://localhost:3000/build?ID={{meal.id}}">Edit Meal</a>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+{{!<script src="./js/editMeal.js"></script>}}
