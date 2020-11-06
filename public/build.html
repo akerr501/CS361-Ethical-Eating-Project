@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Ethical Eating</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <ul class="navlist">
+          <li class="navitem navlink">
+            <a href="/build">Build Meal</a>
+          </li>
+          <li class="navitem navlink">
+            <a href="/saved">Recipe Book</a>
+          </li>
+          <li class="navitem navlink">
+            <a href="/browse">Browse Meals</a>
+          </li>
+          <li class="navitem navlink">
+            <a href="/login">Login</a>
+          </li>
+          <li class="navitem navlink">
+            <a href="/signup">Sign up</a>
+          </li>
+
+        </ul>
+      </nav>
+    </header>
+  <div class="build-form">
+    <div class="inputs" id="recipe-name"><label for="title">RECIPE NAME</label><br>
+       <input type="text" id="recipeTitle" name="recipeTitle" placeholder="Enter name here" value="">
+    </div>
+    <br>
+    <label for="ingredients">INGREDIENTS</label>
+    <span class="inputs ingredients" id="ingredient-box">
+      <!---put ingredients here-->
+    </span>
+  <span><id="add"><input type="button" id="button-add" value="+"/></span>
+    <br><br>
+        <!---buttons--->
+    <div id="check-ingredients"><input type="button" id="verify" value="CHECK INGREDIENTS"/></div>
+      <!---toggle private------->
+<div class="custom-control custom-switch">
+  <input type="checkbox" class="custom-control-input input-private" id="customSwitch1">
+  <label class="custom-control-label" for="customSwitch1">Private</label>
+</div>
+      <!--check user logged in------>
+    <div class="save-buttons">
+      <input type="button" id="verify-login" value="SAVE RECIPE"/>
+    <input type="button" id="saved" value="SAVED &#10004" disabled/>
+    </div>
+  </div>
+    <script src="../public/build.js"></script>
+  </body>
+</html>
