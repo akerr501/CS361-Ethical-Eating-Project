@@ -1,4 +1,4 @@
-// Authors: Adam Kerr, Christine Pham
+// Authors: Adam Kerr
 
 
 var path = require('path');
@@ -114,3 +114,4 @@ app.get('*', function(req, res){
 app.listen(port, function(){
   console.log("Server is listening on this port: ", port);
 })
+
