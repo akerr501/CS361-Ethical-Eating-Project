@@ -28,12 +28,13 @@ app.get('/', function(req, res, next) {
   });
 });
 
+//These build routes are for testing, use Christines
 app.get('/build', function(req, res, next) {
   console.log("Serving the Build Recipe Page");
   helper.editMeal(req, res, next, ingredientData, mealData);  
 });
 
-app.post('/build', function(req, res, next){
+app.get('/buildEdit/:id', function(req, res, next){
   console.log("Serving edit recipe page");
   console.log(req.body);
   res.status(200);
@@ -41,6 +42,8 @@ app.post('/build', function(req, res, next){
 
   });
 });
+//End build routes
+
 
 app.get('/saved', function(req, res, next) {
   console.log("Serving the Saved Recipes Page");
