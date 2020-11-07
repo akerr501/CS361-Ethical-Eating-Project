@@ -4,9 +4,9 @@
 var path = require('path');
 var express = require('express');
 var exp_handle = require("express-handlebars");
-var mealData = require('./mealData');
-var ingredientData = require('./ingredientData');
-var userData = require('./userData')
+var mealData = require('./mealData.json');
+var ingredientData = require('./ingredientData.json');
+var userData = require('./userData.json')
 var fs = require('fs');
 
 var app = express();
@@ -66,6 +66,31 @@ app.get('/signup', function(req, res, next) {
 
   });
 });
+
+app.get('/ingredients/:IDs', function(req, res, next) {
+  console.log("Ingredients list page");
+  var IDs = JSON.parse(req.params.IDs);
+  ingredients = [];
+  if (IDs.length != 0){
+    for(var i = 0; i < IDs.length; i++){
+      var temp = false;
+      for (var k=0; k < ingredientData.length; k++) {
+        if (IDs[i] == ingredientData[k].ID) {
+          ingredients.push(ingredientData[k]);
+          temp = true;
+        }
+      }
+      if(!temp) res.status(400).send("Bad Ingredient ID");
+    }
+    if(temp){
+      res.status(200);
+      res.render('ingredientsPage', {
+        INGREDIENTS: ingredients,
+      });
+    }
+  }
+  else res.status(400).send("No IDs found in the array")
+})
 
 app.get('*', function(req, res){
   console.log("Serving the 404 Page");

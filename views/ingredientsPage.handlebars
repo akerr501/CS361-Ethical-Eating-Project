@@ -1,1 +1,14 @@
 <p>Ingredients List Page</p>
+
+<main class="ingredient-container">
+{{#each INGREDIENTS}}
+  <p><b>{{Name}}</b></p>
+  <p>{{Rating}}</p>
+  <p>{{Issues}}</p>
+  <ul>
+    {{#each Subsitutes}}
+      <li>{{this}}</li>
+      {{/each}}
+    </ul>
+{{/each}}
+</main>
