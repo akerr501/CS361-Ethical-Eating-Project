@@ -4,10 +4,10 @@
 This repository is for our Software Engineering I (CS 361) team project at Oregon State Univeristy! This project is designed to test the skills about front-end software engineering we will learn over the quarter.
 The Party Planning Committee consists of five team members:
 * [Adam Kerr](https://github.com/akerr501)
-* 
-*
-*
-*
+* [Christine Pham](https://github.com/cupham211) 
+* [Maddie Smith](https://github.com/smitmad9)
+* [Eric Sanchez](https://github.com/ericsanch)
+* [Danielle DuChene](https://github.com/aceDuChene)
 
 ## About the project
 
