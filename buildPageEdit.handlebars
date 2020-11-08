@@ -1,14 +1,16 @@
-
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
   <div class="build-form">
     <div class="inputs" id="recipe-name"><label for="title">RECIPE NAME</label><br>
-       <input type="text" id="recipeTitle" name="recipeTitle" placeholder="Enter name here" value="">
+    <input type="hidden" id="recipe-id" value="{{meal.ID}}">
+       <input type="text" id="recipeTitle" name="recipeTitle" placeholder="Enter name here" value="{{meal.Name}}">
     </div>
     <br>
     <label for="ingredients">INGREDIENTS</label>
     <span class="inputs ingredients" id="ingredient-box">
       <!---put ingredients here-->
- <br><input list="product"  class="ingredient-input" placeholder="Select Ingredient"/>
+      {{#each recipe}}
+ <br><input list="product"  class="ingredient-input" name="{{Name}}" placeholder="Select Ingredient" value="{{Name}}    {{Rating}}"/>
+ {{/each}}
   <datalist id="product">
     {{#each ingred}}
   <option value="{{Name}}    {{Rating}}" name="{{Name}}">
@@ -30,3 +32,4 @@
   </div>
 
     <script type="text/javascript" src="http://localhost:3000/build.js"></script>
+ 
