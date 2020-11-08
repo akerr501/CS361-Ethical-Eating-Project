@@ -1,15 +1,19 @@
 <link rel= "stylesheet" href = "/savedPage.css">
+{{!-- <script src="saved.js"></script> --}}
 
-<ul class = "recipeList">
+{{!-- is getting passed the context you made which has
+.userInfo which has the entire user json object hopefully
+and also has .savedRecipes which has the meal data --}}
+
+<ul class = "recipeList" id="recipeList">
     <lh id = "savedHeader">
         Saved Recipes
     </lh>
+    {{#each savedRecipes}}
     <li>
-        <button class = "recipeButton">Recipe Title</button>
+        <button class = "recipeButton">{{this.meal.Name}}</button>
     </li>
-    <li>
-        <button class = "recipeButton">Recipe Title</button>
-    </li>
+    {{/each}}
 </ul>
 
 <div class = "recipeInfo">
