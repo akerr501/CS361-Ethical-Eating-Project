@@ -43,7 +43,7 @@ app.get('/saved', function(req, res, next) {
 
   //this is wrong, bc uhhhh i think it is
   //var userIdNum = req.params.id;
-  var userIdNum = "1";
+  var userIdNum = "0";
   context.userInfo = userData[userIdNum];
   var recipeID;
   context.savedRecipes = [];
@@ -51,13 +51,9 @@ app.get('/saved', function(req, res, next) {
 
   for(var i in context.userInfo.Recipes){
     recipeID = context.userInfo.Recipes[i];
-    console.log(recipeID);
     //adding the meal objects to the context???
     context.savedRecipes[i] = {"meal": mealData[recipeID]};
-    count++;
   }
-
-  console.log(context.savedRecipes);
 
   res.status(200);
   res.render("savedPage", context);
