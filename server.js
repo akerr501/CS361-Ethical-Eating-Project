@@ -9,6 +9,7 @@ var ingredientData = require('./ingredientData.json');
 var userData = require('./userData.json')
 var fs = require('fs');
 const { isContext } = require('vm');
+var helper = require('./modules/helper.js');
 
 var app = express();
 var port = process.env.PORT || 3000;
@@ -70,17 +71,9 @@ app.get('/buildEdit/:id', function(req, res, next) {
   res.render("buildPageEdit", context)
 });
 
-app.get('/saved', function(req, res, next) {
-  console.log("Serving the Saved Recipes Page");
-  res.status(200);
-  res.render("savedPage", {
-
-  });
-});
-
 //req is going to be the user id maybe idk
 app.get('/saved', function(req, res, next) {
-  console.log("Serving the Saved Recipes Page hi");
+  console.log("Serving the Saved Recipes Page");
 
   var context = {};
 
@@ -100,6 +93,26 @@ app.get('/saved', function(req, res, next) {
   res.status(200);
   res.render("savedPage", context);
   // res.render("savedPage");
+});
+
+app.get('/meal', function(req, res, next){
+  console.log("serving meall page");
+  context = {};
+  helper.mealPage(req, res, next, ingredientData, mealData);
+});
+
+app.get('/search', function(req, res, next){
+  console.log("serving search results");
+  helper.search(req, res, next, ingredientData, mealData);
+});
+
+app.get('/browse', function(req, res, next) {
+  console.log("Serving the Browse Page");
+  var context = {};
+  context.ingredients = ingredientData;
+  context.meals = mealData;
+  res.status(200);
+  res.render("browsePage",context);
 });
 
 app.get('/login', function(req, res, next) {
