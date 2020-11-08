@@ -85,7 +85,7 @@ hr.gen {
 }
 
 .rating{
-    padding-left: 2vmin; 
+    padding-left: 2vmin;
 }
 
 /*For meal view page*/
@@ -105,7 +105,7 @@ table.ingredientTable{
     border-collapse:collapse;
     background-color: #fff;
 }
-  
+
 tr.ingredientTable{
   border: 1px solid #1111;
   height:48px;
@@ -140,7 +140,7 @@ a.tblLink{
   margin:0;
   width:100%;
   text-align:center;
-  vertical-align:bottom; 
+  vertical-align:bottom;
 }
 
 .mealRating{
@@ -176,4 +176,34 @@ a.tblLink{
 .mealBody{
     padding: 1vw 5vw;
     background-color: #dddddd;
+}
+
+/* Ingredients page */
+.header {
+  text-align: center;
+  font-size: 1.75em
+}
+
+.subheader {
+  text-align: center;
+  font-size: 1.25em
+}
+
+.subsitutes-container {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+}
+
+.subsitutes-button {
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+}
+
+.subsitutes-button:hover {
+  background-color: #C0C0C0;
 }

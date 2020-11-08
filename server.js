@@ -8,6 +8,7 @@ var mealData = require('./mealData.json');
 var ingredientData = require('./ingredientData.json');
 var userData = require('./userData.json')
 var fs = require('fs');
+const { isContext } = require('vm');
 var helper = require('./modules/helper.js');
 
 var app = express();
@@ -28,33 +29,63 @@ app.get('/', function(req, res, next) {
   });
 });
 
+//Route to get ingredients
+app.get('/ingredientData', function(req, res, next) {
+  res.status(200)
+  res.json({ingredientData});
+});
 
-//req is going to be the user id maybe idk
-app.get('/saved', function(req, res, next) {
-  console.log("Serving the Saved Recipes Page");
-
+app.get('/build', function(req, res, next) {
+  console.log("Serving the Build Recipe Page");
   var context = {};
+  context.ingred = ingredientData; 
+  res.status(200);
+  res.render("buildPage", context)
+});
 
-  //this is wrong, bc uhhhh i think it is
-  //var userIdNum = req.params.id;
-  var userIdNum = "0";
-  context.userInfo = userData[userIdNum];
+app.get('/buildEdit/:id', function(req, res, next) {
+  console.log("Serving the Build Recipe Page");
+  var context = {};
+  context.recipe = [];
+  console.log(req.params.id);
+  var id = req.params.id; 
   var recipeID;
-  context.savedRecipes = [];
-
-
-  for(var i in context.userInfo.Recipes){
-    recipeID = context.userInfo.Recipes[i];
-    //adding the meal objects to the context???
-    context.savedRecipes[i] = {"meal": mealData[recipeID]};
+  //grab recipe by ingredient ids and store in object recipe = [{}]
+  context.ingred = ingredientData; 
+  for (var i=0; i < mealData.length; i++) {
+    if (id == mealData[i].ID) {
+      recipeID = mealData[i].Ingredients;
+      context.meal = mealData[i];
+    }
+  }
+  
+  for (var j=0; j < recipeID.length; j++) {
+    for (var k=0; k < ingredientData.length; k++) {
+      if (recipeID[j] == ingredientData[k].ID) {
+        context.recipe.push(ingredientData[k]);
+      }
+    }
   }
 
   res.status(200);
-  res.render("savedPage", context);
-  // res.render("savedPage");
+  res.render("buildPageEdit", context)
 });
 
-app.get('/search', function(req, res, next) {
+app.get('/saved', function(req, res, next) {
+  console.log("Serving the Saved Recipes Page");
+  res.status(200);
+  res.render("savedPage", {
+
+  });
+});
+
+app.get('/meal', function(req, res, next){
+  console.log("serving meall page");
+  context = {};
+  helper.mealPage(req, res, next, ingredientData, mealData);
+});
+
+app.get('/search', function(req, res, next){
   console.log("serving search results");
   helper.search(req, res, next, ingredientData, mealData);
 });
@@ -62,16 +93,10 @@ app.get('/search', function(req, res, next) {
 app.get('/browse', function(req, res, next) {
   console.log("Serving the Browse Page");
   var context = {};
-  context.ingredients= ingredientData;
+  context.ingredients = ingredientData;
   context.meals = mealData;
   res.status(200);
-  res.render("browsePage", context);
-});
-
-app.get('/meal', function(req, res, next){
-  console.log("serving meal page");
-  context = {};
-  helper.mealPage(req, res, next, ingredientData, mealData);  
+  res.render("browsePage",context);
 });
 
 app.get('/login', function(req, res, next) {
@@ -89,6 +114,46 @@ app.get('/signup', function(req, res, next) {
 
   });
 });
+
+app.get('/ingredients/:IDs', function(req, res, next) {
+  console.log("Ingredients list page");
+  var IDs = JSON.parse(req.params.IDs);
+  ingredients = [];
+  if (IDs.length != 0){
+    for(var i = 0; i < IDs.length; i++){
+      subs = []
+      var temp = false;
+      for (var k=0; k < ingredientData.length; k++) {
+        if (IDs[i] == ingredientData[k].ID) {
+          ing = ingredientData[k];
+          console.log(ing)
+          s = ing.Subsitutes
+          for (var j = 0; j < s.length; j++){
+            if(typeof(s[j]) !== "object"){
+              ing.Subsitutes[j] = {
+                name: ingredientData[s[j]].Name,
+                rating: ingredientData[s[j]].Rating
+              }
+            }
+          }
+          ingredients.push(ing);
+          temp = true;
+        }
+      }
+      if(!temp) {
+        res.status(400).send("Bad Ingredient ID");
+        break;
+      }
+    }
+    if(temp){
+      res.status(200);
+      res.render('ingredientsPage', {
+        INGREDIENTS: ingredients,
+      });
+    }
+  }
+  else res.status(400).send("No IDs found in the array")
+})
 
 app.get('*', function(req, res){
   console.log("Serving the 404 Page");
