@@ -4,9 +4,9 @@
 var path = require('path');
 var express = require('express');
 var exp_handle = require("express-handlebars");
-var mealData = require('./mealData');
-var ingredientData = require('./ingredientData');
-var userData = require('./userData')
+var mealData = require('./mealData.json');
+var ingredientData = require('./ingredientData.json');
+var userData = require('./userData.json')
 var fs = require('fs');
 var helper = require('./modules/helper.js');
 
@@ -45,12 +45,29 @@ app.get('/buildEdit/:id', function(req, res, next){
 //End build routes
 
 
+//req is going to be the user id maybe idk
 app.get('/saved', function(req, res, next) {
   console.log("Serving the Saved Recipes Page");
-  res.status(200);
-  res.render("savedPage", {
 
-  });
+  var context = {};
+
+  //this is wrong, bc uhhhh i think it is
+  //var userIdNum = req.params.id;
+  var userIdNum = "0";
+  context.userInfo = userData[userIdNum];
+  var recipeID;
+  context.savedRecipes = [];
+
+
+  for(var i in context.userInfo.Recipes){
+    recipeID = context.userInfo.Recipes[i];
+    //adding the meal objects to the context???
+    context.savedRecipes[i] = {"meal": mealData[recipeID]};
+  }
+
+  res.status(200);
+  res.render("savedPage", context);
+  // res.render("savedPage");
 });
 
 app.get('/search', function(req, res, next) {

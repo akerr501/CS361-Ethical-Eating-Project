@@ -1,1 +1,73 @@
-<p>Saved Page</p>
+<link rel= "stylesheet" href = "/savedPage.css">
+{{!-- <script src="saved.js"></script> --}}
+
+{{!-- is getting passed the context you made which has
+.userInfo which has the entire user json object hopefully
+and also has .savedRecipes which has the meal data --}}
+<ul class = "recipeList" id="recipeList">
+    <lh id = "savedHeader">
+        Saved Recipes
+    </lh>
+    {{#each savedRecipes}}
+    <li>
+        <button class = "recipeButton">{{this.meal.Name}}</button>
+    </li>
+    {{/each}}
+</ul>
+
+<div class = "recipeInfo">
+    <h1 class = "recipeTitle">
+        <span class = "recipeName">Chicken Curry</span>
+        <span class = "ratingContainer">
+        Ethical Rating: 
+        <span class = "ratingNum">75</span>     
+        </span>   
+    </h1>
+
+
+    <div class = "recipeDescription">
+        i am writing a lot of stuff in English because I got tired of it asking me if I wanted to translate.
+    </div>
+
+    <table class = "ingredientTable">
+        <tr class = "tableHeaderRow">
+            <th>
+                Ingredients
+            </th>
+            <th>
+                Ethical Rating
+            </th>
+        </tr>
+        <tr class = "ingredientInfo">
+            <td class = "ingredientName">
+                Chicken
+            </td>
+            <td class = "ingredientRating">
+                50
+            </td>
+        </tr>
+        <tr class = "ingredientInfo">
+            <td class = "ingredientName">
+                Potatoes
+            </td>
+            <td class = "ingredientRating">
+                90
+            </td>
+        </tr>
+        <tr class = "IngredientInfo">
+            <td class = "ingredientName">
+                Onion
+            </td>
+            <td class = "ingredientRating">
+                85
+            </td>
+        </tr>
+    </table>
+
+    <button class = "nonRecipeButton" id = "editButton">
+            <a href="/build">Edit Recipe</a>
+    </button>
+    <button class = "nonRecipeButton" id = "deleteButton">
+        Delete from Recipe Book
+    </button>
+</div>  
