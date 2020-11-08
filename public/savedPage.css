@@ -1,0 +1,79 @@
+.recipeButton{
+    background-color: rgba(189, 180, 180, 0.76);
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    transition-duration: 0.3s;
+    border-radius: 5px;
+    font-size: 16px;
+    padding: 1px;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+.recipeButton:hover{
+    background-color: black;
+    color: white;
+}
+
+.recipeList{
+    list-style-type: none;
+    background-color: antiquewhite;
+    padding: 20px;
+    margin-left: 10%;
+    float: left;
+    width: 15%;
+    margin-top: 3%;
+    text-align: center;
+    font-size: 30px;
+    height: 600px;
+}
+
+.recipeInfo{
+    float: left;
+    width: 60%;
+    background-color: floralwhite;
+    padding: 20px;
+    margin-top: 3%;
+    height: 600px;
+}
+
+.tableHeaderRow{
+    background-color: tan;
+    font-size: 20px;
+}
+
+.ingredientTable tr:nth-of-type(even){
+    background-color: navajowhite;
+}
+
+.recipeDescription{
+    background-color: navajowhite;
+    margin: 2%;
+    margin-bottom: 20px;
+}
+
+.recipeTitle{
+    padding-left: 2%;
+    margin-top: 0px;
+}
+
+.ratingContainer{
+    float:right;
+    padding-right: 2%;
+}
+
+.nonRecipeButton{
+    background-color: rgba(189, 180, 180, 0.76);
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    transition-duration: 0.3s;
+    border-radius: 10px;   
+    margin-top: 20px;
+}
+
+.nonRecipeButton:hover{
+    background-color: black;
+    color: white;
+}

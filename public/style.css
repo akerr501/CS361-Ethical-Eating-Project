@@ -63,6 +63,121 @@ h3{
     text-decoration: none;
 }
 
+/* browse and search page styling*/
+div.body{
+    padding: 1vw 5vw;
+}
+
+hr.gen {
+    border: 0;
+    height: 1px;
+    background: #333;
+    background-image: linear-gradient(to right, #333, #d73f09);
+}
+
+.fList{
+    list-style-type: none;
+    padding-left: 2vmin;
+}
+
+.issues{
+    padding: 0px 5px;
+}
+
+.rating{
+    padding-left: 2vmin;
+}
+
+/*For meal view page*/
+.mealInfo{
+    padding-left: 5vmin;
+}
+
+tbody.ingredientTable tr.ingredientTable:nth-child(odd){
+    background-color: rgba(189, 180, 180, 0.76);
+    border: 1px solid #ccc;
+}
+
+table.ingredientTable{
+    margin-top:20px;
+    width:728px;
+    border: 1px solid #777;
+    border-collapse:collapse;
+    background-color: #fff;
+}
+
+tr.ingredientTable{
+  border: 1px solid #1111;
+  height:48px;
+}
+
+th.ingName{
+    text-align:left;
+    padding-left: 30px;
+}
+
+th.ingRating{
+    text-align:right;
+    padding-right: 30px;
+}
+
+td.ingName{
+    text-align:left;
+    padding-left: 30px;
+}
+
+td.ingRating{
+    text-align:right;
+    padding-right: 30px;
+}
+a.tblLink{
+    text-decoration: none;
+    color: #d73f09;
+}
+
+.mealName{
+  font-size: 48px;
+  margin:0;
+  width:100%;
+  text-align:center;
+  vertical-align:bottom;
+}
+
+.mealRating{
+    font-size: 36px;
+    margin:0;
+    width:100%;
+    text-align:center;
+    vertical-align:top;
+    /* make this equal to mealName font size - mealRating font size*/
+    margin-block-start: 12px;
+}
+.cardL{
+  text-align:justify;
+  display:inline-block;
+  width: 400px;
+  height: 56px;
+  margin-right: 10px;
+  background-color: #ffffff;
+  vertical-align:bottom;
+  border: 1px solid #ccc;
+}
+.cardR{
+  text-align:justify;
+  display:inline-block;
+  width: 300px;
+  height: 56px;
+  margin-left: 10px;
+  vertical-align:bottom;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+}
+
+.mealBody{
+    padding: 1vw 5vw;
+    background-color: #dddddd;
+}
+
 /* Ingredients page */
 .header {
   text-align: center;
