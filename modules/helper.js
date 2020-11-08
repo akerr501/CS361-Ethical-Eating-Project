@@ -40,7 +40,7 @@ const mealPage = (req, res, next, ingredientData, mealData) => {
   var ingredients = [];
   ingredients = mealData[ID].Ingredients;
   for (i in ingredients){
-    context.ingredient[i] = {"Name" : ingredientData[ingredients[i]].Name,
+    context.ingredient[i] = {"ID" : ingredientData[ingredients[i]].ID, "Name" : ingredientData[ingredients[i]].Name,
       "Rating" : ingredientData[ingredients[i]].Rating};
   }
   console.log(context.meal);
