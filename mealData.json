@@ -1,26 +1,2 @@
-[
-  {"ID": 0,
-  "Name": "Burrito",
-  "Ingredients": [2, 4, 5, 7],
-  "Rating": 38,
-  "Public": "True",
-  "Image": "Not sure if we're having one of theses"
-},
-{
-  "ID": 1,
-  "Name": "Chicken Caesar Salad",
-  "Ingredients": [2, 3, 17],
-  "Rating": 50,
-  "Public": "True",
-  "Image": "Not sure if we're having one of theses"
-},
-{
-  "ID": 2,
-  "Name": "Fruit Cake",
-  "Ingredients": [2, 4, 5, 6, 16],
-  "Rating": 47,
-  "Public": "True",
-  "Image": "Not sure if we're having one of theses"
-}
-]
+
 
