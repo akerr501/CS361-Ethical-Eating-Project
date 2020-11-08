@@ -73,14 +73,29 @@ app.get('/ingredients/:IDs', function(req, res, next) {
   ingredients = [];
   if (IDs.length != 0){
     for(var i = 0; i < IDs.length; i++){
+      subs = []
       var temp = false;
       for (var k=0; k < ingredientData.length; k++) {
         if (IDs[i] == ingredientData[k].ID) {
-          ingredients.push(ingredientData[k]);
+          ing = ingredientData[k];
+          console.log(ing)
+          s = ing.Subsitutes
+          for (var j = 0; j < s.length; j++){
+            if(typeof(s[j]) !== "object"){
+              ing.Subsitutes[j] = {
+                name: ingredientData[s[j]].Name,
+                rating: ingredientData[s[j]].Rating
+              }
+            }
+          }
+          ingredients.push(ing);
           temp = true;
         }
       }
-      if(!temp) res.status(400).send("Bad Ingredient ID");
+      if(!temp) {
+        res.status(400).send("Bad Ingredient ID");
+        break;
+      }
     }
     if(temp){
       res.status(200);

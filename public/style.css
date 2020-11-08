@@ -62,3 +62,33 @@ h3{
 .navlink a:hover{
     text-decoration: none;
 }
+
+/* Ingredients page */
+.header {
+  text-align: center;
+  font-size: 1.75em
+}
+
+.subheader {
+  text-align: center;
+  font-size: 1.25em
+}
+
+.subsitutes-container {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+}
+
+.subsitutes-button {
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+}
+
+.subsitutes-button:hover {
+  background-color: #C0C0C0;
+}
