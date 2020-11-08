@@ -28,13 +28,11 @@ app.get('/', function(req, res, next) {
   });
 });
 
-var hbs = exp_handle.create({
-    helpers: {
-      addInput: function () {
-        getElementById('ingredient-box').innerHTML += 'works';
-      }
-    }
-})
+//Route to get ingredients
+app.get('/ingredientData', function(req, res, next) {
+  res.status(200)
+  res.json({ingredientData});
+});
 
 app.get('/build', function(req, res, next) {
   console.log("Serving the Build Recipe Page");
@@ -114,4 +112,3 @@ app.get('*', function(req, res){
 app.listen(port, function(){
   console.log("Server is listening on this port: ", port);
 })
-
