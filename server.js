@@ -78,12 +78,28 @@ app.get('/saved', function(req, res, next) {
   });
 });
 
-app.get('/browse', function(req, res, next) {
-  console.log("Serving the Browse Page");
-  res.status(200);
-  res.render("browsePage", {
+//req is going to be the user id maybe idk
+app.get('/saved', function(req, res, next) {
+  console.log("Serving the Saved Recipes Page hi");
 
-  });
+  var context = {};
+
+  //this is wrong, bc uhhhh i think it is
+  //var userIdNum = req.params.id;
+  var userIdNum = "1";
+  context.userInfo = userData[userIdNum];
+  var recipeID;
+  context.savedRecipes = [];
+
+  for(var i in context.userInfo.Recipes){
+    recipeID = context.userInfo.Recipes[i];
+    //adding the meal objects to the context???
+    context.savedRecipes[i] = {"meal": mealData[recipeID]};
+  }
+
+  res.status(200);
+  res.render("savedPage", context);
+  // res.render("savedPage");
 });
 
 app.get('/login', function(req, res, next) {
