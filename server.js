@@ -8,7 +8,7 @@ var mealData = require('./mealData.json');
 var ingredientData = require('./ingredientData.json');
 var userData = require('./userData.json')
 var fs = require('fs');
-var helper = require('./modules/helper.js');
+const { isContext } = require('vm');
 
 var app = express();
 var port = process.env.PORT || 3000;
@@ -28,66 +28,62 @@ app.get('/', function(req, res, next) {
   });
 });
 
-//These build routes are for testing, use Christines
+//Route to get ingredients
+app.get('/ingredientData', function(req, res, next) {
+  res.status(200)
+  res.json({ingredientData});
+});
+
 app.get('/build', function(req, res, next) {
   console.log("Serving the Build Recipe Page");
-  helper.editMeal(req, res, next, ingredientData, mealData);  
-});
-
-app.get('/buildEdit/:id', function(req, res, next){
-  console.log("Serving edit recipe page");
-  console.log(req.body);
-  res.status(200);
-  res.render("buildPage", {
-
-  });
-});
-//End build routes
-
-
-//req is going to be the user id maybe idk
-app.get('/saved', function(req, res, next) {
-  console.log("Serving the Saved Recipes Page");
-
   var context = {};
+  context.ingred = ingredientData; 
+  res.status(200);
+  res.render("buildPage", context)
+});
 
-  //this is wrong, bc uhhhh i think it is
-  //var userIdNum = req.params.id;
-  var userIdNum = "0";
-  context.userInfo = userData[userIdNum];
+app.get('/buildEdit/:id', function(req, res, next) {
+  console.log("Serving the Build Recipe Page");
+  var context = {};
+  context.recipe = [];
+  console.log(req.params.id);
+  var id = req.params.id; 
   var recipeID;
-  context.savedRecipes = [];
-
-
-  for(var i in context.userInfo.Recipes){
-    recipeID = context.userInfo.Recipes[i];
-    //adding the meal objects to the context???
-    context.savedRecipes[i] = {"meal": mealData[recipeID]};
+  //grab recipe by ingredient ids and store in object recipe = [{}]
+  context.ingred = ingredientData; 
+  for (var i=0; i < mealData.length; i++) {
+    if (id == mealData[i].ID) {
+      recipeID = mealData[i].Ingredients;
+      context.meal = mealData[i];
+    }
+  }
+  
+  for (var j=0; j < recipeID.length; j++) {
+    for (var k=0; k < ingredientData.length; k++) {
+      if (recipeID[j] == ingredientData[k].ID) {
+        context.recipe.push(ingredientData[k]);
+      }
+    }
   }
 
   res.status(200);
-  res.render("savedPage", context);
-  // res.render("savedPage");
+  res.render("buildPageEdit", context)
 });
 
-app.get('/search', function(req, res, next) {
-  console.log("serving search results");
-  helper.search(req, res, next, ingredientData, mealData);
+app.get('/saved', function(req, res, next) {
+  console.log("Serving the Saved Recipes Page");
+  res.status(200);
+  res.render("savedPage", {
+
+  });
 });
 
 app.get('/browse', function(req, res, next) {
   console.log("Serving the Browse Page");
-  var context = {};
-  context.ingredients= ingredientData;
-  context.meals = mealData;
   res.status(200);
-  res.render("browsePage", context);
-});
+  res.render("browsePage", {
 
-app.get('/meal', function(req, res, next){
-  console.log("serving meal page");
-  context = {};
-  helper.mealPage(req, res, next, ingredientData, mealData);  
+  });
 });
 
 app.get('/login', function(req, res, next) {
