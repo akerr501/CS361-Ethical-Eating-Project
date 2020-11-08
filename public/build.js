@@ -1,4 +1,4 @@
-var ingredients; 
+var ingredients;
 //load up ingredient data from server
 window.onload = function() {
   req = new XMLHttpRequest();
@@ -6,8 +6,9 @@ window.onload = function() {
     if (req.status === 200) {
       ingredients = JSON.parse(this.responseText);
 
-        console.log(ingredients);
-        
+        ingredients=ingredients["ingredientData"];
+
+
       } else {
         console.log("Error in network request: " + req.statusText);}
     }
@@ -26,7 +27,7 @@ document.getElementById('verify').addEventListener('click', function(){
   function checkIngredients() {
     var toswap = [];
     var selected = document.getElementsByClassName('ingredient-input');
-    
+
     for (var k=0; k<selected.length; k++) {
     	let item = selected[k].value;
       item = item.slice(0, -3);
@@ -34,6 +35,7 @@ document.getElementById('verify').addEventListener('click', function(){
 
       var i = 0;
       while (i < ingredients.length) {
+
         if (item == ingredients[i].Name) {
           toswap.push(ingredients[i].ID)
           break;
@@ -43,21 +45,22 @@ document.getElementById('verify').addEventListener('click', function(){
     }
     //pass toswap to a method
     console.log(toswap);
+    url = "http://localhost:3000/ingredients/[" + toswap.toString() + "]";
+    window.location.href = url;
   }
-  
+
   function addIngredient() {
     var options = '';
     options += `<br><input list="product"  class="ingredient-input" placeholder="Select Ingredient"/>
         <datalist id="product">`;
-      
+
     for(var i=0; i<ingredients.length; i++){
       //iterate thru json ingredient list
-      options += `<option value="${ingredients[i].Name}    ${ingredients[i].Rating}" name="${ingredients[i].Name}">`; 
+      options += `<option value="${ingredients[i].Name}    ${ingredients[i].Rating}" name="${ingredients[i].Name}">`;
       };
       options += `</datalist>`;
     var node = document.createElement('span');
     node.innerHTML = options;
     document.getElementById("ingredient-box").appendChild(node);
-    
+
   }
-  

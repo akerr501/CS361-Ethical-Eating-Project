@@ -132,7 +132,7 @@
     "Name": "Organic Fruits",
     "Rating": 82,
     "Issues": "High likelihood of being sustainably grown.",
-    "Subsitutes": [""],
+    "Subsitutes": [],
     "Image": "Not sure if we're having one of theses"
   },
     {
@@ -140,7 +140,7 @@
     "Name": "Organic Vegetables",
     "Rating": 71,
     "Issues": "High likelihood of being sustainably grown.",
-    "Subsitutes": [""],
+    "Subsitutes": [],
     "Image": "Not sure if we're having one of theses"
   }
 ]
