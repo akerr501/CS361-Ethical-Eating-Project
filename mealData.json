@@ -1,26 +1,26 @@
 [
- {
-   "ID": 0,
-   "Name": "Chicken Curry",
-   "Ingredients": [1, 2, 3],
-   "Rating": 13,
-   "Public": "",
-   "Image": ""
- },
- {
-   "ID": 1,
-   "Name": "Cheese Pizza",
-   "Ingredients": [4],
-   "Rating": 15,
-   "Public": "",
-   "Image": ""
- },
- {
-   "ID": 2,
-   "Name": "Chicken Salad",
-   "Ingredients": [5, 6, 7],
-   "Rating": 26,
-   "Public": "",
-   "Image": ""
- }
+  {"ID": 0,
+  "Name": "Burrito",
+  "Ingredients": [2, 4, 5, 7],
+  "Rating": 38,
+  "Public": "True",
+  "Image": "Not sure if we're having one of theses"
+},
+{
+  "ID": 1,
+  "Name": "Chicken Caesar Salad",
+  "Ingredients": [2, 3, 17],
+  "Rating": 50,
+  "Public": "True",
+  "Image": "Not sure if we're having one of theses"
+},
+{
+  "ID": 2,
+  "Name": "Fruit Cake",
+  "Ingredients": [2, 4, 5, 6, 16],
+  "Rating": 47,
+  "Public": "True",
+  "Image": "Not sure if we're having one of theses"
+}
 ]
+
