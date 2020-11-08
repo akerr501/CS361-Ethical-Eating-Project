@@ -28,22 +28,6 @@ app.get('/', function(req, res, next) {
   });
 });
 
-//These build routes are for testing, use Christines
-app.get('/build', function(req, res, next) {
-  console.log("Serving the Build Recipe Page");
-  helper.editMeal(req, res, next, ingredientData, mealData);  
-});
-
-app.get('/buildEdit/:id', function(req, res, next){
-  console.log("Serving edit recipe page");
-  console.log(req.body);
-  res.status(200);
-  res.render("buildPage", {
-
-  });
-});
-//End build routes
-
 
 //req is going to be the user id maybe idk
 app.get('/saved', function(req, res, next) {
