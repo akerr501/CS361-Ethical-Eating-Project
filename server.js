@@ -8,6 +8,7 @@ var mealData = require('./mealData.json');
 var ingredientData = require('./ingredientData.json');
 var userData = require('./userData.json')
 var fs = require('fs');
+var helper = require('./modules/helper.js');
 
 var app = express();
 var port = process.env.PORT || 3000;
@@ -27,13 +28,22 @@ app.get('/', function(req, res, next) {
   });
 });
 
+//These build routes are for testing, use Christines
 app.get('/build', function(req, res, next) {
   console.log("Serving the Build Recipe Page");
+  helper.editMeal(req, res, next, ingredientData, mealData);  
+});
+
+app.get('/buildEdit/:id', function(req, res, next){
+  console.log("Serving edit recipe page");
+  console.log(req.body);
   res.status(200);
   res.render("buildPage", {
 
   });
 });
+//End build routes
+
 
 //req is going to be the user id maybe idk
 app.get('/saved', function(req, res, next) {
@@ -60,12 +70,24 @@ app.get('/saved', function(req, res, next) {
   // res.render("savedPage");
 });
 
+app.get('/search', function(req, res, next) {
+  console.log("serving search results");
+  helper.search(req, res, next, ingredientData, mealData);
+});
+
 app.get('/browse', function(req, res, next) {
   console.log("Serving the Browse Page");
+  var context = {};
+  context.ingredients= ingredientData;
+  context.meals = mealData;
   res.status(200);
-  res.render("browsePage", {
+  res.render("browsePage", context);
+});
 
-  });
+app.get('/meal', function(req, res, next){
+  console.log("serving meal page");
+  context = {};
+  helper.mealPage(req, res, next, ingredientData, mealData);  
 });
 
 app.get('/login', function(req, res, next) {
