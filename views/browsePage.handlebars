@@ -1,0 +1,26 @@
+<div class="body">
+  <p>Here you can browse all of the meals and ingredients. Select any to learn more about the meal or ingredient. You can also edit any meal here and add it to your recipe book!</p>
+  <hr class="gen">
+  <h2 class="listTitle">Meals</h2>
+  <ul class="fList">
+    {{#each meals}}
+      <li>
+        <div class="result">
+          <a href="http://localhost:3000/meal?ID={{{ID}}}">{{Name}}</a>
+          <p class="rating">Ethic Rating: {{Rating}}</p>
+      </li>
+    {{/each}}
+  </ul>
+  <h2 name="listTitle">Ingredients</h2>
+  <hr class="gen">
+  <ul class="fList">
+    {{#each ingredients}}
+      <li>
+        <div class="result">
+          <a href="http://localhost:3000/ingredient?ID={{{ID}}}">{{Name}}</a>
+          <p class="rating">Ethic rating: {{Rating}}</p>
+          <p> {{Issues}}</p>
+      </li>
+    {{/each}}
+  </ul>
+</div>
