@@ -27,11 +27,11 @@ submitSignup.addEventListener('click', function() {
 
     var username = n_usernameInput.value;
     var email = n_emailInput.value;
-    var password = n_passwordInput.value; 
-    //var v_password = nv_passwordInput.value; 
+    var password = n_passwordInput.value;
+    //var v_password = nv_passwordInput.value;
     var request = new XMLHttpRequest();
     var requestURL = "/newUser"; //+ name + "/" + email + "/" + message;
-    
+
     request.open('POST', requestURL);
 
     var newUser = {
@@ -52,7 +52,7 @@ submitSignup.addEventListener('click', function() {
         } else {
             console.log("Successfully stored in database!");
         }
-    })
+    });
 
     request.send(requestBody);
 
@@ -60,7 +60,7 @@ submitSignup.addEventListener('click', function() {
     n_passwordInput.value = "";
     nv_passwordInput.value = "";
     n_emailInput.value = "";
-    
+
     console.log('== n_usernameInput:', n_usernameInput.value);
     console.log('== n_passwordInput:', n_passwordInput.value);
     console.log('== nv_passwordInput:', nv_passwordInput.value);
@@ -78,7 +78,7 @@ class UserModel {
 		this.access = userModel.access;
         this.email = userModel.email;
     }
-}
+};
 
 //class User {
 
@@ -107,8 +107,8 @@ class UserModel {
                 console.log(err);
             }
         });
-    };        
-        
+    };
+
     //});
 //}
 
