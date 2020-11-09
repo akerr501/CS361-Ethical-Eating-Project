@@ -1,6 +1,5 @@
 // Authors: Adam Kerr
 
-
 var path = require('path');
 var express = require('express');
 var exp_handle = require("express-handlebars");
@@ -108,17 +107,6 @@ app.get('/search', function(req, res, next){
   helper.search(req, res, next, ingredientData, mealData);
 });
 
-app.get('/meal', function(req, res, next){
-  console.log("serving meall page");
-  context = {};
-  helper.mealPage(req, res, next, ingredientData, mealData);
-});
-
-app.get('/search', function(req, res, next){
-  console.log("serving search results");
-  helper.search(req, res, next, ingredientData, mealData);
-});
-
 app.get('/browse', function(req, res, next) {
   console.log("Serving the Browse Page");
   var context = {};
@@ -132,16 +120,53 @@ app.get('/login', function(req, res, next) {
   console.log("Serving the Login Page");
   res.status(200);
   res.render("loginPage", {
-
+    userData: userData
   });
 });
 
 app.get('/signup', function(req, res, next) {
   console.log("Serving the Sign Up Page");
   res.status(200);
+  //let context = {};
   res.render("signupPage", {
-
+    userData: userData
   });
+});
+
+app.post('/newUser', function(req, res, next) {
+
+  console.log("Adding new user...");
+  if (req.body && req.body.name && req.body.email && req.body.message) {
+    console.log("==Name: ", req.body.name);
+    console.log("==Email: ", req.body.email);
+    console.log("==Message: ", req.body.message);
+
+    res.status(200).send("Your information was saved.");
+
+    fs.appendFile('userData.json', req.body.username + "\n", function(err) {
+      if (err) {
+        return console.log(err);
+      }
+      console.log(req.body.username);
+    });
+
+    fs.appendFile('userData.json', req.body.password + "\n", function(err) {
+      if (err) {
+        return console.log(err);
+      }
+      console.log(req.body.password);
+    });
+
+    fs.appendFile('userData.json', req.body.email + "\n", function(err) {
+      if (err) {
+        return console.log(err);
+      }
+      console.log(req.body.email);
+    });
+  }
+  else {
+    res.status(400).send("You must fill out all fields.");
+  }
 });
 
 app.get('/ingredients/:IDs', function(req, res, next) {
@@ -190,6 +215,8 @@ app.get('*', function(req, res){
   res.render('404Page', {
   });
 });
+
+
 
 app.listen(port, function(){
   console.log("Server is listening on this port: ", port);
