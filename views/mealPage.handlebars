@@ -1,0 +1,29 @@
+<div class="mealBody">
+  <div class="cardL">
+  <p class="mealName">{{meal.Name}}</p>
+  </div>
+  <div class="cardR">
+  <p class="mealRating">Ethic Rating: {{meal.er}}</p>
+  </div>
+  <table class="ingredientTable">
+    <thead>
+      <tr class="ingredientTable">
+      <th class="ingName">Ingredients</th>
+      <th class="ingRating">Ethic Rating</th>
+      </tr>
+    </thead>
+    <tbody class="ingredientTable">
+      {{#each ingredient}}
+        <tr class="ingredientTable">
+          <td class="ingName"><a class="tblLink" href="http://localhost:3000/ingredients/[{{ID}}]">{{Name}}</a></td>
+          <td class="ingRating">{{Rating}}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  <p>Customize this meal to make it more responsible and save it to your meal book!</p>
+  <input type="button" class="edit" onclick="location.href='http://localhost:3000/buildEdit/{{meal.id}}';" value="Edit & Save" />
+  </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

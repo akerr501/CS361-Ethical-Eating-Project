@@ -1,0 +1,32 @@
+<div class="body">
+  <h1>Search Results: {{search}}</h1>
+  <hr class="gen">
+  <div class="ingredients">
+    <h2 class="sTitle">Ingredients</h2>
+    <ul class="fList">
+      {{#each ingredients}}
+      <li>
+        <div class="result">
+          <a href="http://localhost:3000/ingredients/[{{ID}}]">{{Name}}</a>
+          <p> Ethic Rating: {{Rating}}</p>
+          <p>{{Issues}}</p>
+        </div>
+      </li>
+    {{/each}}
+    </ul>
+  </div>
+  <hr class="gen">
+  <div class="meals">
+   <h2 class="sTitle">Meals</h2>
+   <ul class="fList">
+    {{#each meals}}
+      <li>
+        <div class="result">
+          <a href="http://localhost:3000/meal?ID={{{ID}}}">{{Name}}</a>
+          <p>Ethic Rating: {{Rating}}</p>
+        </div>
+      </li>
+    {{/each}}
+    </ul>
+  </div>
+</div>

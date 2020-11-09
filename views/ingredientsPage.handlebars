@@ -1,0 +1,32 @@
+<script type = "text/javascript" src="http://localhost:3000/ingredients.js"></script>
+<main>
+  <div class="header">Ingredients</div>
+  <div class="subheader">Read about the issues and select alternatives</div>
+
+  <div class = "ingredient-list-container">
+    {{#each INGREDIENTS}}
+    <div class = "ingredient-container">
+      <div><b>{{Name}}</b></div>
+      <div>{{Rating}}</div>
+      <div>{{Issues}}</div>
+
+      <button type = "button" class = "subsitutes-button">Show Alternatives</button>
+      <div class= "subsitutes-container">
+        {{#each Subsitutes}}
+        <div>{{this.name}} / {{this.rating}}</div>
+        {{/each}}
+      </div>
+
+    </div>
+    {{/each}}
+  </div>
+
+
+    <div class = "back-container">
+      <button type = "button" class = "back-button">Back</button>
+    </div>
+    <div class = "swap-container">
+      <button type = "button" class = "swap-button">Make Swaps!</button>
+    </div>
+
+</main>

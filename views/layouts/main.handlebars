@@ -1,0 +1,44 @@
+{{!Main Layout Template}}
+{{!Authors: }}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ethical Eating</title>
+    <link rel= "stylesheet" href = "/style.css">
+     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+
+    <header>
+      <nav class="navbar">
+        <ul class="navlist">
+          <li class="navitem searchbox">
+            <form action="/search"> 
+            <input type="text" name="q">
+            <button type="submit">Search</button>
+          </li>
+          <li class="navitem navlink">
+            <a href="/build">Build Meal</a>
+          </li>
+          <li class="navitem navlink">
+            <a href="/saved">Recipe Book</a>
+          </li>
+          <li class="navitem navlink">
+            <a href="/browse">Browse Meals</a>
+          </li>
+          <li class="navitem navlink">
+            <a href="/login">Login</a>
+          </li>
+          <li class="navitem navlink">
+            <a href="/signup">Sign up</a>
+          </li>
+
+        </ul>
+      </nav>
+    </header>
+    {{{body}}}
+  </body>
+
+</html>
