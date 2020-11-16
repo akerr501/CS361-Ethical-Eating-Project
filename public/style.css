@@ -207,3 +207,11 @@ a.tblLink{
 .subsitutes-button:hover {
   background-color: #C0C0C0;
 }
+
+/* home page */
+.homeimg{
+  width: 100vw;
+  height: 20vw;
+  object-fit: cover;
+  object-position: 50% 40%;
+}
