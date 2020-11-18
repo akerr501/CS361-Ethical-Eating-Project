@@ -64,6 +64,10 @@ h3{
 }
 
 /* browse and search page styling*/
+h3.filterTitle{
+  color: #212529;
+}
+
 div.body{
     padding: 1vw 5vw;
 }
@@ -80,6 +84,9 @@ hr.gen {
     padding-left: 2vmin;
 }
 
+.filterList{
+    list-style-type: none;
+}
 .issues{
     padding: 0px 5px;
 }
