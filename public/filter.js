@@ -1,67 +1,61 @@
-//var sct = document.currentScript;
-//var data = sct.getAttribute('var1');
-//console.log(sct);
-//console.log(data.Name);
-//var my_var = this_js_script.attr('var1');
+//Filters data in the contents of the browse page
+//-Create array of objects from the meals - tag encoded data
+//-Create array of objects from ingredients - tage encoded
+//-Set event listener on checkboxes for updating list
+//-Update displayed list by changing hidden state
 
-//populating from paged
+//Meal objects
 var mdata = [];
 $(".result.meals").each(function(){
   mdata.push({"id" : $(this).data("mealid"), "ingredients" : Array.from($(this).data("ing").split(','),Number)});
 });
+
+//Ingredient objects
 var idata = [];
 $(".result.ingredients").each(function(){
   idata.push({"id" : $(this).data("ingredientid"), "name": $(this).data("name")});
 });
-console.log(idata);
-console.log("testing");
-var temp = 0;
-for (i in mdata){
-  if (mdata[i].ingredients.includes(temp)){
-  console.log("found");
-  }
-}
+
+//filter keeps track of which checkboxes to display
 var filter = new Map();
-$("input[class=filterCheck]").change(function(){
+//set checkbox to the class of checkboxes to track
+var checkbox = "input[class=filterCheck]";
+//add or remove ingredient id to the filter when clicked
+$(checkbox).change(function(){
   var curId = $(this).data("ingredientid");
   if($(this).is(':checked')){
-    console.log(curId + "was selected");
+    console.log("ing: " + curId + " selected");
     filter.set(curId)
   }
   else{
-    console.log(curId + "was clocked off");
+    console.log(curId + " disabled");
     filter.delete(curId);
   }
-//  console.log(filter);
   filterMeals(filter);
 });
 
+//update the displayed meals each time an ingredient is selected
 function filterMeals(filter){
-  console.log("printing filter" + filter.size);
+  //case: no filters selected
   if (filter.size == 0){
     mdata.forEach(element => {
       $("[data-mealid=" + element.id + "]").show();
     });
-  } else {
+  } 
+  //case: some filters selected
+  else {
     mdata.forEach(element => {
       var status = false;
-      console.log(element.ingredients);
       filter.forEach(function(value,key){
-        console.log(element.ingredients);
         if (element.ingredients.includes(key)){
           status = true;
-          console.log("key = " + key + "element = " + element.ingredients);
         }
       });
       if (!status){
         $("[data-mealid=" + element.id + "]").hide();
-        console.log(element.id);
       } else {
         $("[data-mealid=" + element.id + "]").show();
       }
-      console.log(status);
     });
   }
 }
-//$("[data-id=" + temp+"]").hide();
-//$(".result.meals").data("id")
