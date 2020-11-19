@@ -167,16 +167,13 @@ function deleteIngredient(item) {
   }
 
   function shipRecipe(recipeObj) {
-    //need a user ID that will be a number
     var userID = getUser();
-    // send a post request to save/edit the new recipe
     var req = new XMLHttpRequest();
 
     req.onload = function() {
       if (req.status >= 200 && req.status < 400) {
         var response = req.responseText;
         if (response == true) {
-          //if it saved successfully show that the recipe was saved
           document.getElementById('verify-login').style.display = "none";
           document.getElementById('saved').style.display = "inline";
         }
@@ -187,7 +184,6 @@ function deleteIngredient(item) {
   };
   
       req.open('POST', 'http://localhost:3000/saveRecipe/' + userID, true);
-      // specify what kind of data is being sent to server
       req.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
       req.send(JSON.stringify(recipeObj));
       preventDefault();
