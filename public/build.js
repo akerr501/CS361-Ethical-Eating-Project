@@ -30,14 +30,13 @@ document.getElementById('reset').addEventListener('click', function(){
   formReset();
 })
 
-//working
 function deleteIngredient(item) {
   if (item.previousSibling == '<br>') {
     item.parentNode.previousSibling.remove();
   }
   item.parentNode.remove();
 }
-//working
+
   function checkIngredients(asMealObj = false) {
     var toswap = [];
     var selected = document.getElementsByClassName('ingredient-input');
@@ -65,19 +64,19 @@ function deleteIngredient(item) {
     window.location.href = url;
     
   }
-  //working
+
   function destroyIngredients() {
     var table = document.getElementById('ingredient-box');
     while (table.firstChild) {
       table.removeChild(table.firstChild);
     }
   }
-  //working
+
   function formReset() {
     document.getElementById('build-form').reset();
   }
 
-  //working
+
   function populateList(ingredientArr) {
     var table = document.getElementById('ingredient-box');
     var options = '';
@@ -99,13 +98,11 @@ function deleteIngredient(item) {
     }
   }
 
-  //working
   function swap(ingredientArr) {
     destroyIngredients();
     populateList(ingredientArr);
   }
 
-  //working
   function addIngredient() {
     //displays the delete button for first item once an additional ingredient is added
     var first = document.getElementById("delete0");
@@ -127,7 +124,7 @@ function deleteIngredient(item) {
     document.getElementById("ingredient-box").appendChild(node);
 
   }
-  // creates a rating for the new recipe based on average score of ingredients
+
   function getRating(arr){
     total = 0;
     for (var i=0; i< arr.length; i++){
