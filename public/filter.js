@@ -20,16 +20,16 @@ $(".result.ingredients").each(function(){
 var filter = new Map();
 //set checkbox to the class of checkboxes to track
 var checkbox = "input[class=filterCheck]";
+
 //add or remove ingredient id to the filter when clicked
 $(checkbox).change(function(){
-  var curId = $(this).data("ingredientid");
   if($(this).is(':checked')){
-    console.log("ing: " + curId + " selected");
-    filter.set(curId)
+    console.log("ing: " + $(this).data('ingredientid') + " selected");
+    filter.set($(this).data('ingredientid'))
   }
   else{
-    console.log(curId + " disabled");
-    filter.delete(curId);
+    console.log($(this).data('ingredientid') + " disabled");
+    filter.delete($(this).data('ingredientid'));
   }
   filterMeals(filter);
 });
