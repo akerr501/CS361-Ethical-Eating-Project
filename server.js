@@ -28,10 +28,9 @@ app.get('/', function(req, res, next) {
   });
 });
 
-//Route to get ingredients
+//Route to get  all ingredients
 app.get('/ingredientData', function(req, res, next) {
   console.log("transmitting ingredient data");
-  console.log(ingredientData);
   res.status(200)
   res.json({ingredientData});
 });
@@ -71,7 +70,12 @@ app.get('/buildEdit/:id', function(req, res, next) {
   res.status(200);
   res.render("buildPageEdit", context)
 });
-
+// new----------------------------------------------------------------------
+app.post('/saveRecipe/:userID', function(req, res, next) {
+  console.log(req.body);
+  res.status(200);
+})
+// new-----------------------------------------------------------------------
 //req is going to be the user id maybe idk
 app.get('/saved', function(req, res, next) {
   console.log("Serving the Saved Recipes Page");
