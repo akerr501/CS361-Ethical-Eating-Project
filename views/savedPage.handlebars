@@ -8,26 +8,21 @@ and also has .savedRecipes which has the meal data --}}
     <lh id = "savedHeader">
         Saved Recipes
     </lh>
-    {{#each savedRecipes}}
+    {{#each savedMealsInfo}}
     <li>
-        <button class = "recipeButton">{{this.meal.Name}}</button>
+        <button class = "recipeButton">{{this.Name}}</button>
     </li>
     {{/each}}
 </ul>
 
 <div class = "recipeInfo">
     <h1 class = "recipeTitle">
-        <span class = "recipeName">Chicken Curry</span>
+        <span class = "recipeName">{{allMeals.curMeal.Name}}</span>
         <span class = "ratingContainer">
         Ethical Rating: 
         <span class = "ratingNum">75</span>     
         </span>   
     </h1>
-
-
-    <div class = "recipeDescription">
-        i am writing a lot of stuff in English because I got tired of it asking me if I wanted to translate.
-    </div>
 
     <table class = "ingredientTable">
         <tr class = "tableHeaderRow">

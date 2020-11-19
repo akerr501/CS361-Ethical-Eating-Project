@@ -9,6 +9,8 @@ var userData = require('./userData.json')
 var fs = require('fs');
 const { isContext } = require('vm');
 var helper = require('./modules/helper.js');
+var saved = require('./modules/saved.js');
+
 
 var app = express();
 var port = process.env.PORT || 3000;
@@ -72,27 +74,11 @@ app.get('/buildEdit/:id', function(req, res, next) {
   res.render("buildPageEdit", context)
 });
 
-//req is going to be the user id maybe idk
 app.get('/saved', function(req, res, next) {
   console.log("Serving the Saved Recipes Page");
 
   var context = {};
-
-  //this is wrong, bc uhhhh i think it is
-  //var userIdNum = req.params.id;
-  var userIdNum = "1";
-  context.userInfo = userData[userIdNum];
-  var recipeID;
-  context.savedRecipes = [];
-
-  for(var i in context.userInfo.Recipes){
-    recipeID = context.userInfo.Recipes[i];
-    //adding the meal objects to the context???
-    context.savedRecipes[i] = {"meal": mealData[recipeID]};
-  }
-
-  res.status(200);
-  res.render("savedPage", context);
+  saved.getInfo(req, res, next, ingredientData, mealData, userData);
   // res.render("savedPage");
 });
 
