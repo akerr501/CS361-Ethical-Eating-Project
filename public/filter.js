@@ -23,13 +23,14 @@ var checkbox = "input[class=filterCheck]";
 
 //add or remove ingredient id to the filter when clicked
 $(checkbox).change(function(){
+  var curId = $(this).data("ingredientid");
   if($(this).is(':checked')){
-    console.log("ing: " + $(this).data('ingredientid') + " selected");
-    filter.set($(this).data('ingredientid'))
+    console.log("ing: " + curId + " selected");
+    filter.set(curId)
   }
   else{
-    console.log($(this).data('ingredientid') + " disabled");
-    filter.delete($(this).data('ingredientid'));
+    console.log(curId + " disabled");
+    filter.delete(curId);
   }
   filterMeals(filter);
 });
