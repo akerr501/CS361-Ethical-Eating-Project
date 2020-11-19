@@ -1,11 +1,11 @@
 <div class="mealBody">
-  <div class="cardL">
+  <div class="mcard L shadow p-3 mb-3 bg-white rounded">
   <p class="mealName">{{meal.Name}}</p>
   </div>
-  <div class="cardR">
+  <div class="mcard R shadow p-3 mb-3 bg-white rounded">
   <p class="mealRating">Ethic Rating: {{meal.er}}</p>
   </div>
-  <table class="ingredientTable">
+  <table class="ingredientTable shadow p-3 mb-3 bg-white rounded">
     <thead>
       <tr class="ingredientTable">
       <th class="ingName">Ingredients</th>
@@ -21,7 +21,7 @@
       {{/each}}
     </tbody>
   </table>
-  <p>Customize this meal to make it more responsible and save it to your meal book!</p>
+  <p class="mealInstructions">Customize this meal to make it more responsible and save it to your meal book!</p>
   <input type="button" class="edit" onclick="location.href='http://localhost:3000/buildEdit/{{meal.id}}';" value="Edit & Save" />
   </div>
 </div>
