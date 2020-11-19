@@ -1,3 +1,5 @@
+//Author: Christine Pham
+
 var ingredients;
 //load up ingredient data from server
 window.onload = function() {
@@ -24,12 +26,23 @@ document.getElementById('verify').addEventListener('click', function(){
   checkIngredients();
 })
 
-  function checkIngredients() {
+document.getElementById('reset').addEventListener('click', function(){
+  formReset();
+})
+
+//working
+function deleteIngredient(item) {
+  if (item.previousSibling == '<br>') {
+    item.parentNode.previousSibling.remove();
+  }
+  item.parentNode.remove();
+}
+//working
+  function checkIngredients(asMealObj = false) {
     var toswap = [];
     var selected = document.getElementsByClassName('ingredient-input');
-
     for (var k=0; k<selected.length; k++) {
-    	let item = selected[k].value;
+      let item = selected[k].value;
       item = item.slice(0, -3);
       item = item.trim();
 
@@ -43,15 +56,65 @@ document.getElementById('verify').addEventListener('click', function(){
         i++
       }
     }
-    //pass toswap to a method
-    console.log(toswap);
+    //use method to grab meal data instead
+    if (asMealObj == true) {
+      return toswap;
+    } 
+
     url = "http://localhost:3000/ingredients/[" + toswap.toString() + "]";
     window.location.href = url;
+    
+  }
+  //working
+  function destroyIngredients() {
+    var table = document.getElementById('ingredient-box');
+    while (table.firstChild) {
+      table.removeChild(table.firstChild);
+    }
+  }
+  //working
+  function formReset() {
+    document.getElementById('build-form').reset();
   }
 
-  function addIngredient() {
+  //working
+  function populateList(ingredientArr) {
+    var table = document.getElementById('ingredient-box');
     var options = '';
-    options += `<br><input list="product"  class="ingredient-input" placeholder="Select Ingredient"/>
+
+    for (var i=0; i < ingredientArr.length; i++) {
+      options += `<br><input type="button" class="delete" value="X" onClick="deleteIngredient(this)" style="display:inline;"/>
+    <input list="product"  class="ingredient-input" placeholder="Select Ingredient" 
+    value="${ingredients[ingredientArr[i]].Name}    ${ingredients[ingredientArr[i]].Rating}" autocomplete="on"/>
+        <datalist id="product">`;
+      for(var j=0; j<ingredients.length; j++){
+        //iterate thru json ingredient list
+        options += `<option value="${ingredients[j].Name}    ${ingredients[j].Rating}" name="${ingredients[j].Name}">`;
+        };
+      options += `</datalist>`;  
+      var node = document.createElement('span');
+      node.innerHTML = options;
+      table.appendChild(node);
+      options = '';
+    }
+  }
+
+  //working
+  function swap(ingredientArr) {
+    destroyIngredients();
+    populateList(ingredientArr);
+  }
+
+  //working
+  function addIngredient() {
+    //displays the delete button for first item once an additional ingredient is added
+    var first = document.getElementById("delete0");
+    if (first) {
+    first.style.display = "inline";}
+
+    var options = '';
+    options += `<br><input type="button" class="delete" value="X" onClick="deleteIngredient(this)" style="display:inline;"/>
+    <input list="product"  class="ingredient-input" placeholder="Select Ingredient" autocomplete="on"/>
         <datalist id="product">`;
 
     for(var i=0; i<ingredients.length; i++){
@@ -63,4 +126,69 @@ document.getElementById('verify').addEventListener('click', function(){
     node.innerHTML = options;
     document.getElementById("ingredient-box").appendChild(node);
 
+  }
+  // creates a rating for the new recipe based on average score of ingredients
+  function getRating(arr){
+    total = 0;
+    for (var i=0; i< arr.length; i++){
+      total += ingredients[arr[i]].Rating;
+    }
+    return Math.round(total/arr.length);
+  }
+  //untested-- package a new recipe object--value verification will be on server
+  function pkgRecipe() {
+    let id = document.getElementById('recipe-id').value
+    if (id != '') {
+      id = Number(id);
+    }else {id = -1}
+
+    let ingred = checkIngredients(true);
+
+    var newRecipe = {
+      ID: id,
+      Name: document.getElementById('recipeTitle').value,
+      Ingredients: ingred,
+      Rating: getRating(ingred),
+      Public: document.getElementById('customSwitch1').checked
+    }
+
+    shipRecipe(newRecipe);
+  }
+
+  function checkLogin() {
+    let logged = false;
+    //goes to localStorage an checks if there the user is online
+    return logged;
+  } 
+
+  function getUser() {
+    //goes to localStorage and extracts the userID from the value object
+    return userid;
+  }
+
+  function shipRecipe(recipeObj) {
+    //need a user ID that will be a number
+    var userID = getUser();
+    // send a post request to save/edit the new recipe
+    var req = new XMLHttpRequest();
+
+    req.onload = function() {
+      if (req.status >= 200 && req.status < 400) {
+        var response = req.responseText;
+        if (response == true) {
+          //if it saved successfully show that the recipe was saved
+          document.getElementById('verify-login').style.display = "none";
+          document.getElementById('saved').style.display = "inline";
+        }
+  
+      } else {
+          console.log("Error in network request: " + req.statusText);
+      }
+  };
+  
+      req.open('POST', 'http://localhost:3000/saveRecipe/' + userID, true);
+      // specify what kind of data is being sent to server
+      req.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+      req.send(JSON.stringify(recipeObj));
+      preventDefault();
   }
