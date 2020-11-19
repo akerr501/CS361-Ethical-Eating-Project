@@ -16,7 +16,7 @@ const search = (req, res, next) => {
       context.meals.push(meal[j]);
     }
   }
-  console.log(context);
+  //console.log(context);
   res.status(200);
   res.render("searchPage", context);
 
@@ -35,8 +35,8 @@ const mealPage = (req, res, next) => {
     context.ingredient[i] = {"Name" : ingredientData[ingredients[i]].Name,
       "Rating" : ingredientData[ingredients[i]].Rating};
   }
-  console.log(context.meal);
-  console.log(context.ingredient);
+  //console.log(context.meal);
+  //console.log(context.ingredient);
   res.render("mealPage", context);
 }
 
