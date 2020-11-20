@@ -10,9 +10,9 @@ list.forEach(el => el.addEventListener('click', event => {
 
 var submitSignup = document.querySelector('.submit');
 console.log("submit:\n", submitSignup);
-var n_usernameInput = document.querySelector('#new-usr');
-var n_passwordInput = document.querySelector('#new-pwd');
-//var nv_passwordInput = document.querySelector('#new-pwd-verify');
+var n_usernameInput = document.querySelector('#usr');
+var n_passwordInput = document.querySelector('#pwd');
+var nv_passwordInput = document.querySelector('#new-pwd-verify');
 var n_emailInput  = document.querySelector('#new-email');
 
 console.log("ENTERED USER.JS\n");
@@ -28,7 +28,7 @@ submitSignup.addEventListener('click', function() {
     var username = n_usernameInput.value;
     var email = n_emailInput.value;
     var password = n_passwordInput.value;
-    //var v_password = nv_passwordInput.value;
+    var v_password = nv_passwordInput.value;
     var request = new XMLHttpRequest();
     var requestURL = "/newUser"; //+ name + "/" + email + "/" + message;
 
@@ -80,7 +80,7 @@ class UserModel {
     }
 };
 
-//class User {
+class User {
 
     verifyPassword(password, v_password) {
 
@@ -108,9 +108,7 @@ class UserModel {
             }
         });
     };
-
-    //});
-//}
+};
 
 
 /*

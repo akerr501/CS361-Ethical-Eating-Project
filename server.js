@@ -135,11 +135,12 @@ app.get('/signup', function(req, res, next) {
 
 app.post('/newUser', function(req, res, next) {
 
+  console.log(req.body);
   console.log("Adding new user...");
-  if (req.body && req.body.name && req.body.email && req.body.message) {
-    console.log("==Name: ", req.body.name);
+  if (req.body && req.body.username && req.body.email && req.body.password) {
+    console.log("==Username: ", req.body.username);
     console.log("==Email: ", req.body.email);
-    console.log("==Message: ", req.body.message);
+    console.log("==Password: ", req.body.password);
 
     res.status(200).send("Your information was saved.");
 
