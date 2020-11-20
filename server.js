@@ -76,6 +76,7 @@ app.get('/buildEdit/:id', function(req, res, next) {
 
 app.get('/saved', function(req, res, next) {
   console.log("Serving the Saved Recipes Page");
+  //current url syntax: http://localhost:3000/saved/?ID=0&userID=1
 
   var context = {};
   saved.getInfo(req, res, next, ingredientData, mealData, userData);

@@ -1,26 +1,24 @@
 <link rel= "stylesheet" href = "/savedPage.css">
-{{!-- <script src="saved.js"></script> --}}
 
-{{!-- is getting passed the context you made which has
-.userInfo which has the entire user json object hopefully
-and also has .savedRecipes which has the meal data --}}
 <ul class = "recipeList" id="recipeList">
     <lh id = "savedHeader">
         Saved Recipes
     </lh>
     {{#each savedMealsInfo}}
     <li>
-        <button class = "recipeButton">{{this.Name}}</button>
+        <a href="http://localhost:3000/saved/?ID={{this.ID}}&userID={{@root.curUserInfo.ID}}">
+            <button class = "recipeButton">{{this.Name}}</button>
+        </a>
     </li>
     {{/each}}
 </ul>
 
 <div class = "recipeInfo">
     <h1 class = "recipeTitle">
-        <span class = "recipeName">{{allMeals.curMeal.Name}}</span>
+        <span class = "recipeName">{{curMealInfo.Name}}</span>
         <span class = "ratingContainer">
         Ethical Rating: 
-        <span class = "ratingNum">75</span>     
+        <span class = "ratingNum">{{curMealInfo.Rating}}</span>     
         </span>   
     </h1>
 
@@ -33,14 +31,17 @@ and also has .savedRecipes which has the meal data --}}
                 Ethical Rating
             </th>
         </tr>
+
+        {{#each curMealInfo.Ingredients}}
         <tr class = "ingredientInfo">
             <td class = "ingredientName">
-                Chicken
+                {{Name}}
             </td>
             <td class = "ingredientRating">
-                50
+                {{this}}
             </td>
         </tr>
+        {{/each}}
         <tr class = "ingredientInfo">
             <td class = "ingredientName">
                 Potatoes
@@ -66,3 +67,5 @@ and also has .savedRecipes which has the meal data --}}
         Delete from Recipe Book
     </button>
 </div>  
+
+<script src="http://localhost:3000/savedScripts.js"></script>

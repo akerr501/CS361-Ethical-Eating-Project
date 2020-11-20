@@ -24,6 +24,8 @@ const getInfo = (req, res, next, ingredientData, mealData, userData) =>{
         context.savedMealsInfo.push(meal[savedIDs[k]]);
     }
 
+    context.curMealInfo = meal[context.curMeal];
+
     res.status(200);
     res.render("savedPage", context);
 }
