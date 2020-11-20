@@ -19,7 +19,6 @@ console.log("ENTERED USER.JS\n");
 
 submitSignup.addEventListener('click', function() {
 
-
     console.log('== n_usernameInput:', n_usernameInput.value);
     console.log('== n_passwordInput:', n_passwordInput.value);
     console.log('== nv_passwordInput:', nv_passwordInput.value);
@@ -61,10 +60,10 @@ submitSignup.addEventListener('click', function() {
     nv_passwordInput.value = "";
     n_emailInput.value = "";
 
-    console.log('== n_usernameInput:', n_usernameInput.value);
-    console.log('== n_passwordInput:', n_passwordInput.value);
-    console.log('== nv_passwordInput:', nv_passwordInput.value);
-    console.log('== emailInput:', n_emailInput.value);
+    //console.log('== n_usernameInput:', n_usernameInput.value);
+    //console.log('== n_passwordInput:', n_passwordInput.value);
+    //console.log('== nv_passwordInput:', nv_passwordInput.value);
+    //console.log('== emailInput:', n_emailInput.value);
 
 });
 
@@ -111,8 +110,7 @@ class User {
 };
 
 
-/*
-module.exports = {
-    User: User,
-    UserModel: UserModel
+/*module.exports = {
+    UserModel: UserModel,
+    User: User
 };*/

@@ -9,6 +9,7 @@ var userData = require('./userData.json')
 var fs = require('fs');
 const { isContext } = require('vm');
 var helper = require('./modules/helper.js');
+//var UserModel = require('./public/user.js');
 
 var app = express();
 var port = process.env.PORT || 3000;
@@ -135,23 +136,32 @@ app.get('/signup', function(req, res, next) {
 
 app.post('/newUser', function(req, res, next) {
 
-  console.log(req.body);
+  //console.log(req.body);
+  
   console.log("Adding new user...");
   if (req.body && req.body.username && req.body.email && req.body.password) {
+    req.body.access = 0;
+    var user = new UserModel(req.body);
     console.log("==Username: ", req.body.username);
     console.log("==Email: ", req.body.email);
     console.log("==Password: ", req.body.password);
+    console.log("==Access: ", req.body.access);
+
+    console.log("==U Username: ", user.username);
+    console.log("==U Email: ", user.email);
+    console.log("==U Password: ", user.password);
+    console.log("==U Access: ", user.email);
 
     res.status(200).send("Your information was saved.");
 
-    fs.appendFile('userData.json', req.body.username + "\n", function(err) {
+    fs.appendFile('userData.json', req.body + "\n", function(err) {
       if (err) {
         return console.log(err);
       }
-      console.log(req.body.username);
+      console.log(req.body);
     });
 
-    fs.appendFile('userData.json', req.body.password + "\n", function(err) {
+    /*fs.appendFile('userData.json', req.body.password + "\n", function(err) {
       if (err) {
         return console.log(err);
       }
@@ -163,7 +173,7 @@ app.post('/newUser', function(req, res, next) {
         return console.log(err);
       }
       console.log(req.body.email);
-    });
+    });*/
   }
   else {
     res.status(400).send("You must fill out all fields.");
