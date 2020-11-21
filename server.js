@@ -91,8 +91,6 @@ app.post('/saveRecipe/:userID', function(req, res, next) {
   }
     //check if any ingredients were changed
     if (OGmeal == rIngred) {
-      //if nothing was altered keep meal as public
-      req.body.Public = true;
       //save meal to userID
       userD[userID].Recipes.push(recipeId);
       //remove double entries of same meal
