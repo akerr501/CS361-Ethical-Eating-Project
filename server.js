@@ -28,10 +28,9 @@ app.get('/', function(req, res, next) {
   });
 });
 
-//Route to get ingredients
+//Route to get  all ingredients
 app.get('/ingredientData', function(req, res, next) {
   console.log("transmitting ingredient data");
-  console.log(ingredientData);
   res.status(200)
   res.json({ingredientData});
 });
@@ -48,7 +47,7 @@ app.get('/buildEdit/:id', function(req, res, next) {
   console.log("Serving the Build Recipe Page");
   var context = {};
   context.recipe = [];
-  console.log(req.params.id);
+
   var id = req.params.id;
   var recipeID;
   //grab recipe by ingredient ids and store in object recipe = [{}]
@@ -71,7 +70,50 @@ app.get('/buildEdit/:id', function(req, res, next) {
   res.status(200);
   res.render("buildPageEdit", context)
 });
+// new----------------------------------------------------------------------
+app.post('/saveRecipe/:userID', function(req, res, next) {
+  var userID = req.params.userID;
+  let userdata = fs.readFileSync('userData.json');
+  let userD = JSON.parse(userdata);
 
+  var recipeId = req.body.ID, name = req.body.Name, rIngred = req.body.Ingredients;
+  
+  let mealdata = fs.readFileSync('mealData.json');
+  let mealD = JSON.parse(mealdata);
+  
+  //check if meal already exists
+  if (mealD[recipeId] && mealD[recipeId].ID == recipeId 
+    && mealD[recipeId].Name == name) {
+    //check if the recipe name was changed
+    var OGmeal = mealD[recipeId].Ingredients;
+    OGmeal = OGmeal.sort().toString();
+    rIngred = rIngred.sort().toString();
+  }
+    //check if any ingredients were changed
+    if (OGmeal == rIngred) {
+      //save meal to userID
+      userD[userID].Recipes.push(recipeId);
+      //remove double entries of same meal
+      let deldoubles = new Set(userD[userID].Recipes);
+      userD[userID].Recipes = Array.from(deldoubles);
+      let udata = JSON.stringify(userD, null, 1);
+      fs.writeFileSync('userData.json', udata);
+
+      res.status(200).send({"result":true});
+    } else {
+        req.body.ID = mealD.length;
+        mealD.push(req.body);
+        let data = JSON.stringify(mealD, null, 1);
+        fs.writeFileSync('mealData.json', data);
+
+        userD[userID].Recipes.push(req.body.ID);
+        let udata = JSON.stringify(userD, null, 1);
+        fs.writeFileSync('userData.json', udata);
+
+        res.status(200).send({"result":true});
+  }
+})
+// new-----------------------------------------------------------------------
 //req is going to be the user id maybe idk
 app.get('/saved', function(req, res, next) {
   console.log("Serving the Saved Recipes Page");
