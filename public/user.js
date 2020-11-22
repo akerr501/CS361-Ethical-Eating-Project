@@ -2,17 +2,13 @@
 
 //var userData = require('./userData')
 //var fs = require('fs');
-/*var list = document.getElementsByClassName("recipeButton");
 
-list.forEach(el => el.addEventListener('click', event => {
-    console.log(event.target.classList[1])
-}));*/
 
 var submitSignup = document.querySelector('.submit');
 console.log("submit:\n", submitSignup);
-var n_usernameInput = document.querySelector('#usr');
-var n_passwordInput = document.querySelector('#pwd');
-var nv_passwordInput = document.querySelector('#new-pwd-verify');
+var n_usernameInput = document.querySelector('#new-usr');
+var n_passwordInput = document.querySelector('#new-pwd');
+//var nv_passwordInput = document.querySelector('#new-pwd-verify');
 var n_emailInput  = document.querySelector('#new-email');
 
 console.log("ENTERED USER.JS\n");
@@ -28,44 +24,94 @@ submitSignup.addEventListener('click', function() {
     var email = n_emailInput.value;
     var password = n_passwordInput.value;
     var v_password = nv_passwordInput.value;
-    var request = new XMLHttpRequest();
-    var requestURL = "/newUser"; //+ name + "/" + email + "/" + message;
 
-    request.open('POST', requestURL);
+    if (verifyPassword(password, v_password)) {
+        var request = new XMLHttpRequest();
+        var requestURL = "/newUser"; //+ name + "/" + email + "/" + message;
 
-    var newUser = {
-        username: username,
-        password: password,
-        email: email
-    };
-    var requestBody = JSON.stringify(newUser);
+        request.open('POST', requestURL);
 
-    request.setRequestHeader(
-        'Content-Type', 'application/json'
-    );
+        var newUser = {
+            username: username,
+            password: password,
+            email: email
+        };
+        var requestBody = JSON.stringify(newUser);
 
-    request.addEventListener('load', function(event) {
-        if (event.target.status !== 200) {
-            var responseToUser = event.target.response;
-            alert("Error storing in database! " + responseToUser);
-        } else {
-            console.log("Successfully stored in database!");
-        }
-    });
+        request.setRequestHeader(
+            'Content-Type', 'application/json'
+        );
 
-    request.send(requestBody);
+        request.addEventListener('load', function(event) {
+            if (event.target.status !== 200) {
+                var responseToUser = event.target.response;
+                alert("Error storing in database! " + responseToUser);
+            } else {
+                console.log("Successfully stored in database!");
+            }
+        });
 
+        request.send(requestBody);
+    }
+
+    
     n_usernameInput.value = "";
     n_passwordInput.value = "";
     nv_passwordInput.value = "";
     n_emailInput.value = "";
 
-    //console.log('== n_usernameInput:', n_usernameInput.value);
-    //console.log('== n_passwordInput:', n_passwordInput.value);
-    //console.log('== nv_passwordInput:', nv_passwordInput.value);
-    //console.log('== emailInput:', n_emailInput.value);
+});
+
+changePassword.addEventListener('click', function() {
+
+    console.log('== o_passwordInput:', o_passwordInput.value);
+    console.log('== n_passwordInput:', n_passwordInput.value);
+    console.log('== nv_passwordInput:', nv_passwordInput.value);
+    console.log('== emailInput:', n_emailInput.value);
+
+    var username = n_usernameInput.value;
+    var email = n_emailInput.value;
+    var password = n_passwordInput.value;
+    var v_password = nv_passwordInput.value;
+
+    if (verifyPassword(password, v_password)) {
+        var request = new XMLHttpRequest();
+        var requestURL = "/newUser"; //+ name + "/" + email + "/" + message;
+
+        request.open('POST', requestURL);
+
+        var newUser = {
+            username: username,
+            password: password,
+            email: email
+        };
+        var requestBody = JSON.stringify(newUser);
+
+        request.setRequestHeader(
+            'Content-Type', 'application/json'
+        );
+
+        request.addEventListener('load', function(event) {
+            if (event.target.status !== 200) {
+                var responseToUser = event.target.response;
+                alert("Error storing in database! " + responseToUser);
+            } else {
+                console.log("Successfully stored in database!");
+            }
+        });
+
+        request.send(requestBody);
+    }
+
+    
+    n_usernameInput.value = "";
+    n_passwordInput.value = "";
+    nv_passwordInput.value = "";
+    n_emailInput.value = "";
 
 });
+
+
 
 /**
  * Model for User object, used to create new User
@@ -84,12 +130,21 @@ class User {
     verifyPassword(password, v_password) {
 
         if (password === v_password) {
-            console.log("passwords match!\n");
+            console.log("Passwords match!\n");
             if (password.length >= 8) {
-                console.log("password is at least 8 char\n");
+                console.log("Password is at least 8 char\n");
+                return 1;
+            }
+            else {
+                console.log("Password must be at least 8 characters\n");
+                return 0;
             }
         }
     };
+
+    updatePassword(user, newPassword) {
+        user.password = newPassword;
+    }
 
     // Create a new User
     createAccount(userModel) {
@@ -110,7 +165,5 @@ class User {
 };
 
 
-/*module.exports = {
-    UserModel: UserModel,
-    User: User
-};*/
+//module.exports = User;
+//export const UserModel = UserModel;

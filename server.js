@@ -1,4 +1,4 @@
-// Authors: Adam Kerr
+// Authors: Adam Kerr, Maddie Smith
 
 var path = require('path');
 var express = require('express');
@@ -9,7 +9,7 @@ var userData = require('./userData.json')
 var fs = require('fs');
 const { isContext } = require('vm');
 var helper = require('./modules/helper.js');
-//var UserModel = require('./public/user.js');
+//const User = require('./public/user.js');
 
 var app = express();
 var port = process.env.PORT || 3000;
@@ -141,25 +141,65 @@ app.post('/newUser', function(req, res, next) {
   console.log("Adding new user...");
   if (req.body && req.body.username && req.body.email && req.body.password) {
     req.body.access = 0;
-    var user = new UserModel(req.body);
+    //var User = new User;
+    
     console.log("==Username: ", req.body.username);
     console.log("==Email: ", req.body.email);
     console.log("==Password: ", req.body.password);
     console.log("==Access: ", req.body.access);
 
+    var user = {
+      username: req.body.username,
+      password: req.body.password,
+      email: req.body.email,
+      access: req.body.access
+    };
+
     console.log("==U Username: ", user.username);
     console.log("==U Email: ", user.email);
     console.log("==U Password: ", user.password);
-    console.log("==U Access: ", user.email);
+    console.log("==U Access: ", user.access);
 
-    res.status(200).send("Your information was saved.");
+    fs.readFile('userData.json', (err, data) => {
+      if (err) {
+        console.log(err);
+      }
+      let jsonData = JSON.parse(data);
+      console.log("jsonData: ", jsonData);
 
-    fs.appendFile('userData.json', req.body + "\n", function(err) {
+      jsonData.newUser = user;
+      console.log("jsonData: ", jsonData);
+    });
+
+    //let json = JSON.stringify(user);
+    // userData
+    /*
+    
+    var js = JSON.parse(userData);
+
+    let jsondata = JSON.stringify(js);
+    console.log("jsonData: ", jsondata);
+
+    fs.writeFile('userData.json', jsonData, function(err) {
+      if (err) {
+        return console.log(err);
+      }
+    });*/
+
+    /*fs.appendFile('userData.json', ",\n", function(err) {
+      if (err) {
+        return console.log(err);
+      }
+    });
+
+    fs.appendFile('userData.json', json + "\n", function(err) {
       if (err) {
         return console.log(err);
       }
       console.log(req.body);
-    });
+    });*/
+
+    res.status(200).send("Your information was saved.");
 
     /*fs.appendFile('userData.json', req.body.password + "\n", function(err) {
       if (err) {
