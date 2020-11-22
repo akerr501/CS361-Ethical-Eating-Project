@@ -5,7 +5,15 @@
     "Ingredients": [],
     "Rating": 0,
     "Public": "False",
-    "Image": "Not sure if we're having one of theses"
+    "Image": "Not sure if we're having one of theses",
+    "Error": "You can make an account to save your recipes to view later. It's easy!",
+    "ErrorButtons": [{
+      "Name":"Sign Up",
+      "Redirect": "/signup"
+     },
+     {"Name": "Login",
+      "Redirect": "/login"
+     }]
   },  
   {
     "ID": 1,
@@ -13,7 +21,15 @@
     "Ingredients": [],
     "Rating": 0,
     "Public": "False",
-    "Image": "Not sure if we're having one of theses"
+    "Image": "Not sure if we're having one of theses",
+    "Error": "Looks like you don't have any saved Recipes. You can go to a recipe page and click the save button to view it later when you come back to this page.",
+    "ErrorButtons": [{
+      "Name": "Build Meal",
+      "Redirect": "/build"
+     },
+     {"Name": "Browse Meals",
+      "Redirect": "/browse"
+     }]
   },  
   {
     "ID": 2,

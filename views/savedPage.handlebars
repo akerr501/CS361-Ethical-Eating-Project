@@ -16,6 +16,16 @@
 <div class = "recipeInfo">
     <h1 class = "recipeTitle">
         <span class = "recipeName">{{curMealInfo.Name}}</span>
+    {{#if curMealInfo.Error}}
+        </h1>
+        <span>{{curMealInfo.Error}}</span>
+        <br>
+        {{#each curMealInfo.ErrorButtons}}
+            <button class = "nonRecipeButton">
+                <a href="{{this.Redirect}}">{{this.Name}}</a>
+            </button>
+        {{/each}}
+    {{else}}
         <span class = "ratingContainer">
         Ethical Rating: 
         <span class = "ratingNum">{{curMealInfo.Rating}}</span>     
@@ -32,40 +42,27 @@
             </th>
         </tr>
 
-        {{#each curMealInfo.Ingredients}}
+        {{!-- referenced from the mealPage --}}
+        {{#each curIngredients}}
         <tr class = "ingredientInfo">
             <td class = "ingredientName">
-                {{Name}}
+                <a class="tblLink" href="/ingredients/[{{ID}}]">{{Name}}</a>
             </td>
             <td class = "ingredientRating">
-                {{this}}
+                {{Rating}}
             </td>
         </tr>
         {{/each}}
-        <tr class = "ingredientInfo">
-            <td class = "ingredientName">
-                Potatoes
-            </td>
-            <td class = "ingredientRating">
-                90
-            </td>
-        </tr>
-        <tr class = "IngredientInfo">
-            <td class = "ingredientName">
-                Onion
-            </td>
-            <td class = "ingredientRating">
-                85
-            </td>
-        </tr>
     </table>
 
+    {{#if curMeal}}
     <button class = "nonRecipeButton" id = "editButton">
-            <a href="/build">Edit Recipe</a>
+            <a href="/buildEdit/{{curMeal}}">Edit Recipe</a>
     </button>
-    <button class = "nonRecipeButton" id = "deleteButton">
+    {{/if}}
+    {{/if}}
+    {{!-- <button class = "nonRecipeButton" id = "deleteButton">
         Delete from Recipe Book
-    </button>
+    </button> --}}
 </div>  
 
-<script src="http://localhost:3000/savedScripts.js"></script>

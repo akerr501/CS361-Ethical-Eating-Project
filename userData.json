@@ -4,7 +4,7 @@
       "Name": "Guest",
       "Email": "Email here",
       "Password": "Password here",
-      "Recipes": ["0"],
+      "Recipes": [],
       "Settings": "False",
       "Avatar": "not sure what goes here"
   },
@@ -22,7 +22,7 @@
     "Name": "Ringo Starr",
     "Email": "Email here",
     "Password": "Password here",
-    "Recipes": ["1"],
+    "Recipes": [],
     "Settings": "True",
     "Avatar": "not sure what goes here"
   },
