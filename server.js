@@ -140,7 +140,7 @@ app.get('/browse', function(req, res, next) {
   console.log("Serving the Browse Page");
   var context = {};
   context.ingredients = ingredientData;
-  context.meals = mealData;
+  context.meals = mealData.slice(2);
   res.status(200);
   res.render("browsePage",context);
 });
