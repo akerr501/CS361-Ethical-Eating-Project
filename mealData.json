@@ -8,11 +8,8 @@
     "Image": "Not sure if we're having one of theses",
     "Error": "You can make an account to save your recipes to view later. It's easy!",
     "ErrorButtons": [{
-      "Name":"Sign Up",
+      "Name":"Sign Up or Login",
       "Redirect": "/signup"
-     },
-     {"Name": "Login",
-      "Redirect": "/login"
      }]
   },  
   {

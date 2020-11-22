@@ -6,7 +6,7 @@
     </lh>
     {{#each savedMealsInfo}}
     <li>
-        <a href="http://localhost:3000/saved/?ID={{this.ID}}&userID={{@root.curUserInfo.ID}}">
+        <a href="/saved/?ID={{this.ID}}&userID={{@root.curUserInfo.ID}}">
             <button class = "recipeButton">{{this.Name}}</button>
         </a>
     </li>
@@ -30,9 +30,9 @@
         Ethical Rating: 
         <span class = "ratingNum">{{curMealInfo.Rating}}</span>     
         </span>   
-    </h1>
+        </h1>
 
-    <table class = "ingredientTable">
+        <table class = "ingredientTable">
         <tr class = "tableHeaderRow">
             <th>
                 Ingredients
@@ -44,22 +44,22 @@
 
         {{!-- referenced from the mealPage --}}
         {{#each curIngredients}}
-        <tr class = "ingredientInfo">
-            <td class = "ingredientName">
-                <a class="tblLink" href="/ingredients/[{{ID}}]">{{Name}}</a>
-            </td>
-            <td class = "ingredientRating">
-                {{Rating}}
-            </td>
-        </tr>
+            <tr class = "ingredientInfo">
+                <td class = "ingredientName">
+                    <a class="tblLink" href="/ingredients/[{{ID}}]">{{Name}}</a>
+                </td>
+                <td class = "ingredientRating">
+                    {{Rating}}
+                </td>
+            </tr>
         {{/each}}
-    </table>
+        </table>
 
-    {{#if curMeal}}
-    <button class = "nonRecipeButton" id = "editButton">
-            <a href="/buildEdit/{{curMeal}}">Edit Recipe</a>
-    </button>
-    {{/if}}
+        {{#if curMeal}}
+            <button class = "nonRecipeButton" id = "editButton">
+                    <a href="/buildEdit/{{curMeal}}">Edit Recipe</a>
+            </button>
+        {{/if}}
     {{/if}}
     {{!-- <button class = "nonRecipeButton" id = "deleteButton">
         Delete from Recipe Book
