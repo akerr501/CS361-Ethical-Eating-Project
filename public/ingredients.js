@@ -25,7 +25,7 @@ function assign_listeners(){
     for(var j = 1; j <sub_children.length; j++){
       let sub = sub_children[j];
       sub.addEventListener('click', function(){
-        subs(sub); // actual color swapping occurs here
+        subsitutionSwapListener(sub);
       });
     }
   }
@@ -33,7 +33,7 @@ function assign_listeners(){
   assignPageButtonListeners();
 }
 
-function subs(sub){
+function subsitutionSwapListener(sub){
   let container = sub.parentElement.children;
   let clear = false; // used if the user wants to deselect swap
   for(var i = 1; i < container.length; i++){
