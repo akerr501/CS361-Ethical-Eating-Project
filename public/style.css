@@ -91,6 +91,20 @@ hr.gen {
     padding: 0px 5px;
 }
 
+.dropdown.filter{
+    display:inline-block;
+}
+
+.dropdown-menu{
+    width: 300px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.ratingfilter{
+  display:inline-block;
+}
+/*WATCH OUT FOR OTHERS USING .rating!*/
 .rating{
     padding-left: 2vmin;
 }
