@@ -29,6 +29,14 @@ document.getElementById('verify').addEventListener('click', function(){
 document.getElementById('reset').addEventListener('click', function(){
   formReset();
 })
+//testing
+document.getElementById('verify-login').addEventListener('click', function() {
+  //testing
+  let result = checkLogin();
+  if (result == false) {promptLogin();} 
+  else {pkgRecipe();}
+})
+
 
 function deleteIngredient(item) {
   if (item.previousSibling == '<br>') {
@@ -36,6 +44,7 @@ function deleteIngredient(item) {
   }
   item.parentNode.remove();
 }
+
 
   function checkIngredients(asMealObj = false) {
     var toswap = [];
@@ -64,6 +73,7 @@ function deleteIngredient(item) {
     window.location.href = url;
     
   }
+  
 
   function destroyIngredients() {
     var table = document.getElementById('ingredient-box');
@@ -72,11 +82,13 @@ function deleteIngredient(item) {
     }
   }
 
+
   function formReset() {
-    document.getElementById('build-form').reset();
+    location.reload();
+    return false;
   }
 
-
+ 
   function populateList(ingredientArr) {
     var table = document.getElementById('ingredient-box');
     var options = '';
@@ -98,10 +110,12 @@ function deleteIngredient(item) {
     }
   }
 
+
   function swap(ingredientArr) {
     destroyIngredients();
     populateList(ingredientArr);
   }
+
 
   function addIngredient() {
     //displays the delete button for first item once an additional ingredient is added
@@ -124,15 +138,16 @@ function deleteIngredient(item) {
     document.getElementById("ingredient-box").appendChild(node);
 
   }
-
+  // creates a rating for the new recipe based on average score of ingredients
   function getRating(arr){
     total = 0;
     for (var i=0; i< arr.length; i++){
-      total += ingredients[arr[i]].Rating;
+      total += Number(ingredients[arr[i]].Rating);
     }
     return Math.round(total/arr.length);
   }
-  //untested-- package a new recipe object--value verification will be on server
+
+  //package a new recipe object--value verification will be on server
   function pkgRecipe() {
     let id = document.getElementById('recipe-id').value
     if (id != '') {
@@ -146,31 +161,34 @@ function deleteIngredient(item) {
       Name: document.getElementById('recipeTitle').value,
       Ingredients: ingred,
       Rating: getRating(ingred),
-      Public: document.getElementById('customSwitch1').checked
+      Public: document.getElementById('customSwitch1').checked,
+      Image: ''
     }
-
+    console.log(newRecipe);
     shipRecipe(newRecipe);
   }
 
   function checkLogin() {
     let logged = false;
-    //goes to localStorage an checks if there the user is online
+    //checks if userID from global object is not default
     return logged;
   } 
 
   function getUser() {
-    //goes to localStorage and extracts the userID from the value object
+    //extracts userID from global object on user.js
     return userid;
   }
 
   function shipRecipe(recipeObj) {
-    var userID = getUser();
+    //need a user ID that will be a number
+    var userID = 1 //<-- placeholder --change to getUser();
     var req = new XMLHttpRequest();
 
     req.onload = function() {
       if (req.status >= 200 && req.status < 400) {
-        var response = req.responseText;
-        if (response == true) {
+        var response = JSON.parse(req.responseText);
+        console.log(response);
+        if (response.result == true) {
           document.getElementById('verify-login').style.display = "none";
           document.getElementById('saved').style.display = "inline";
         }
@@ -183,5 +201,7 @@ function deleteIngredient(item) {
       req.open('POST', 'http://localhost:3000/saveRecipe/' + userID, true);
       req.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
       req.send(JSON.stringify(recipeObj));
-      preventDefault();
+      event.preventDefault();
   }
+
+  function promptLogin(){}
