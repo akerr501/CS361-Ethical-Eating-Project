@@ -6,7 +6,12 @@ assign_listeners();
 
 
 function assign_listeners(){
-  // assign listeners to expand collapsed subsitutions, user wants to see what they can swap with
+  assignCollapseListeners();
+  assignSubsitutionListeners();
+  assignPageButtonListeners();
+}
+
+function assignCollapseListeners(){
   for (var i = 0; i < buttons.length; i++) {
     buttons[i].addEventListener("click", function() {
       this.classList.toggle("active");
@@ -18,8 +23,9 @@ function assign_listeners(){
       }
     });
   }
+}
 
-  // assign listeners for each of the subsitutions, swapping the colors of elements
+function assignSubsitutionListeners(){
   for (i = 0; i < subsitutes.length; i++){
     var sub_children = subsitutes[i].children;
     for(var j = 1; j <sub_children.length; j++){
@@ -29,9 +35,8 @@ function assign_listeners(){
       });
     }
   }
-
-  assignPageButtonListeners();
 }
+
 
 function subsitutionSwapListener(sub){
   let container = sub.parentElement.children;
@@ -49,20 +54,21 @@ function subsitutionSwapListener(sub){
 function assignPageButtonListeners(){
   var swap = document.querySelector('.swap-button');
   var back = document.querySelector('.back-button');
-
   // assign listener for the swap button
-  swap.addEventListener('click', function(){
-    for (i = 0; i < subsitutes.length; i++){
-      sub_children = subsitutes[i].children;
-      IDs[i] = sub_children[0].innerHTML;
-      for(var j = 1; j <sub_children.length; j++){
-        if(sub_children[j].style.backgroundColor == "darkseagreen") IDs[i] = sub_children[j].children[0].innerHTML;
-      }
-    }
-    console.log(IDs); // actually go back to build recipe page from here
-  });
+  swap.addEventListener('click', swapListener);
   // assign listener for the back button
   back.addEventListener('click', function(){
     console.log("back clicked");
   });
+}
+
+function swapListener(){
+  for (i = 0; i < subsitutes.length; i++){
+    sub_children = subsitutes[i].children;
+    IDs[i] = sub_children[0].innerHTML;
+    for(var j = 1; j <sub_children.length; j++){
+      if(sub_children[j].style.backgroundColor == "darkseagreen") IDs[i] = sub_children[j].children[0].innerHTML;
+    }
+  }
+  console.log(IDs); // actually go back to build recipe page from here
 }
