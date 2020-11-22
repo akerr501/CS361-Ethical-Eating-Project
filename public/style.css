@@ -258,6 +258,10 @@ a.tblLink{
   overflow: hidden;
 }
 
+.id {
+  display: none;
+}
+
 .subsitutes-button {
   cursor: pointer;
   padding: 18px;

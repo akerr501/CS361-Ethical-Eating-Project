@@ -1,4 +1,3 @@
-<script type = "text/javascript" src="http://localhost:3000/ingredients.js"></script>
 <main>
   <div class="header">Ingredients</div>
   <div class="subheader">Read about the issues and select alternatives</div>
@@ -12,8 +11,12 @@
 
       <button type = "button" class = "subsitutes-button">Show Alternatives</button>
       <div class= "subsitutes-container">
+        <div class = "id">{{ID}}</div>
         {{#each Subsitutes}}
-        <div>{{this.name}} / {{this.rating}}</div>
+        <button class ="subs-button">
+          <div class = "id">{{this.ID}}</div>
+          {{this.name}} / {{this.rating}}
+        </button>
         {{/each}}
       </div>
 
@@ -30,3 +33,5 @@
     </div>
 
 </main>
+
+<script type = "text/javascript" src="http://localhost:3000/ingredients.js"></script>

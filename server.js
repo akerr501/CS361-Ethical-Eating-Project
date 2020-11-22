@@ -209,13 +209,13 @@ app.get('/ingredients/:IDs', function(req, res, next) {
       for (var k=0; k < ingredientData.length; k++) {
         if (IDs[i] == ingredientData[k].ID) {
           ing = ingredientData[k];
-          console.log(ing)
           s = ing.Subsitutes
           for (var j = 0; j < s.length; j++){
             if(typeof(s[j]) !== "object"){
               ing.Subsitutes[j] = {
                 name: ingredientData[s[j]].Name,
-                rating: ingredientData[s[j]].Rating
+                rating: ingredientData[s[j]].Rating,
+                ID: s[j],
               }
             }
           }
