@@ -3,13 +3,19 @@
 var ingredients;
 //load up ingredient data from server
 window.onload = function() {
+
   req = new XMLHttpRequest();
   req.onload = function() {
     if (req.status === 200) {
       ingredients = JSON.parse(this.responseText);
 
-        ingredients=ingredients["ingredientData"];
-
+      ingredients=ingredients["ingredientData"];
+        //check if any swap items stores in localStorage to populate
+      if (localStorage.getItem('swap')){
+        var arr = JSON.parse(localStorage.getItem('swap')).map(Number);
+        swap(arr);
+        localStorage.removeItem('swap');
+      }
 
       } else {
         console.log("Error in network request: " + req.statusText);}
@@ -17,6 +23,7 @@ window.onload = function() {
   req.open("GET", "http://localhost:3000/ingredientData", true);
   req.send();
 }
+
 
 document.getElementById('button-add').addEventListener('click', function(){
     addIngredient();
@@ -36,7 +43,6 @@ document.getElementById('verify-login').addEventListener('click', function() {
   if (result == false) {promptLogin();} 
   else {pkgRecipe();}
 })
-
 
 function deleteIngredient(item) {
   if (item.previousSibling == '<br>') {
@@ -89,14 +95,16 @@ function deleteIngredient(item) {
   }
 
  
-  function populateList(ingredientArr) {
+  function populateList(inArr) {
+
     var table = document.getElementById('ingredient-box');
     var options = '';
 
-    for (var i=0; i < ingredientArr.length; i++) {
+    for (var i=0; i < inArr.length; i++) {
+
       options += `<br><input type="button" class="delete" value="X" onClick="deleteIngredient(this)" style="display:inline;"/>
     <input list="product"  class="ingredient-input" placeholder="Select Ingredient" 
-    value="${ingredients[ingredientArr[i]].Name}    ${ingredients[ingredientArr[i]].Rating}" autocomplete="on"/>
+    value="${ingredients[inArr[i]].Name}    ${ingredients[inArr[i]].Rating}" autocomplete="on"/>
         <datalist id="product">`;
       for(var j=0; j<ingredients.length; j++){
         //iterate thru json ingredient list
