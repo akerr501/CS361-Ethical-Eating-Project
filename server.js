@@ -1,4 +1,4 @@
-// Authors: Adam Kerr
+// Authors: Adam Kerr, Maddie Smith
 
 var path = require('path');
 var express = require('express');
@@ -9,6 +9,8 @@ var userData = require('./userData.json')
 var fs = require('fs');
 const { isContext } = require('vm');
 var helper = require('./modules/helper.js');
+
+//const User = require('./public/user.js');
 var saved = require('./modules/saved.js');
 
 
@@ -164,34 +166,24 @@ app.get('/signup', function(req, res, next) {
 
 app.post('/newUser', function(req, res, next) {
 
-  console.log("Adding new user...");
-  if (req.body && req.body.name && req.body.email && req.body.message) {
-    console.log("==Name: ", req.body.name);
-    console.log("==Email: ", req.body.email);
-    console.log("==Message: ", req.body.message);
+  let userData = fs.readFileSync('userData.json');
+  let jUserData = JSON.parse(userData);
 
+  var user = {
+    Username: req.body.username,
+    Password: req.body.password,
+    Email: req.body.email,
+    Recipes: [],
+    Settings: 0,
+    Access: 1
+  };
+  
+  if (req.body.username && req.body.email && req.body.password) {
+    jUserData.push(user);
+    let data = JSON.stringify(jUserData);
+
+    fs.writeFileSync('userData.json', data);
     res.status(200).send("Your information was saved.");
-
-    fs.appendFile('userData.json', req.body.username + "\n", function(err) {
-      if (err) {
-        return console.log(err);
-      }
-      console.log(req.body.username);
-    });
-
-    fs.appendFile('userData.json', req.body.password + "\n", function(err) {
-      if (err) {
-        return console.log(err);
-      }
-      console.log(req.body.password);
-    });
-
-    fs.appendFile('userData.json', req.body.email + "\n", function(err) {
-      if (err) {
-        return console.log(err);
-      }
-      console.log(req.body.email);
-    });
   }
   else {
     res.status(400).send("You must fill out all fields.");
