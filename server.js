@@ -9,7 +9,10 @@ var userData = require('./userData.json')
 var fs = require('fs');
 const { isContext } = require('vm');
 var helper = require('./modules/helper.js');
+
 //const User = require('./public/user.js');
+var saved = require('./modules/saved.js');
+
 
 var app = express();
 var port = process.env.PORT || 3000;
@@ -29,10 +32,9 @@ app.get('/', function(req, res, next) {
   });
 });
 
-//Route to get ingredients
+//Route to get  all ingredients
 app.get('/ingredientData', function(req, res, next) {
   console.log("transmitting ingredient data");
-  console.log(ingredientData);
   res.status(200)
   res.json({ingredientData});
 });
@@ -49,7 +51,7 @@ app.get('/buildEdit/:id', function(req, res, next) {
   console.log("Serving the Build Recipe Page");
   var context = {};
   context.recipe = [];
-  console.log(req.params.id);
+
   var id = req.params.id;
   var recipeID;
   //grab recipe by ingredient ids and store in object recipe = [{}]
@@ -73,28 +75,56 @@ app.get('/buildEdit/:id', function(req, res, next) {
   res.render("buildPageEdit", context)
 });
 
-//req is going to be the user id maybe idk
+// new----------------------------------------------------------------------
+app.post('/saveRecipe/:userID', function(req, res, next) {
+  var userID = req.params.userID;
+  let userdata = fs.readFileSync('userData.json');
+  let userD = JSON.parse(userdata);
+
+  var recipeId = req.body.ID, name = req.body.Name, rIngred = req.body.Ingredients;
+  
+  let mealdata = fs.readFileSync('mealData.json');
+  let mealD = JSON.parse(mealdata);
+  
+  //check if meal already exists
+  if (mealD[recipeId] && mealD[recipeId].ID == recipeId 
+    && mealD[recipeId].Name == name) {
+    //check if the recipe name was changed
+    var OGmeal = mealD[recipeId].Ingredients;
+    OGmeal = OGmeal.sort().toString();
+    rIngred = rIngred.sort().toString();
+  }
+    //check if any ingredients were changed
+    if (OGmeal == rIngred) {
+      //save meal to userID
+      userD[userID].Recipes.push(recipeId);
+      //remove double entries of same meal
+      let deldoubles = new Set(userD[userID].Recipes);
+      userD[userID].Recipes = Array.from(deldoubles);
+      let udata = JSON.stringify(userD, null, 1);
+      fs.writeFileSync('userData.json', udata);
+
+      res.status(200).send({"result":true});
+    } else {
+        req.body.ID = mealD.length;
+        mealD.push(req.body);
+        let data = JSON.stringify(mealD, null, 1);
+        fs.writeFileSync('mealData.json', data);
+
+        userD[userID].Recipes.push(req.body.ID);
+        let udata = JSON.stringify(userD, null, 1);
+        fs.writeFileSync('userData.json', udata);
+
+        res.status(200).send({"result":true});
+  }
+})
+// new-----------------------------------------------------------------------
+
 app.get('/saved', function(req, res, next) {
   console.log("Serving the Saved Recipes Page");
+  //current url syntax: http://localhost:3000/saved/?ID=0&userID=1
 
-  var context = {};
-
-  //this is wrong, bc uhhhh i think it is
-  //var userIdNum = req.params.id;
-  var userIdNum = "1";
-  context.userInfo = userData[userIdNum];
-  var recipeID;
-  context.savedRecipes = [];
-
-  for(var i in context.userInfo.Recipes){
-    recipeID = context.userInfo.Recipes[i];
-    //adding the meal objects to the context???
-    context.savedRecipes[i] = {"meal": mealData[recipeID]};
-  }
-
-  res.status(200);
-  res.render("savedPage", context);
-  // res.render("savedPage");
+  saved.getInfo(req, res, next, ingredientData, mealData, userData);
 });
 
 app.get('/meal', function(req, res, next){
@@ -112,7 +142,7 @@ app.get('/browse', function(req, res, next) {
   console.log("Serving the Browse Page");
   var context = {};
   context.ingredients = ingredientData;
-  context.meals = mealData;
+  context.meals = mealData.slice(2);
   res.status(200);
   res.render("browsePage",context);
 });
@@ -171,13 +201,13 @@ app.get('/ingredients/:IDs', function(req, res, next) {
       for (var k=0; k < ingredientData.length; k++) {
         if (IDs[i] == ingredientData[k].ID) {
           ing = ingredientData[k];
-          console.log(ing)
           s = ing.Subsitutes
           for (var j = 0; j < s.length; j++){
             if(typeof(s[j]) !== "object"){
               ing.Subsitutes[j] = {
                 name: ingredientData[s[j]].Name,
-                rating: ingredientData[s[j]].Rating
+                rating: ingredientData[s[j]].Rating,
+                ID: s[j],
               }
             }
           }

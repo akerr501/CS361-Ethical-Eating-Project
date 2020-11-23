@@ -9,16 +9,40 @@ const search = (req, res, next, ingredientData, mealData) => {
   var search = context.search.toLowerCase();
   var meal = mealData;
   var ing = ingredientData;
-  for (i in ing){
-    if (ing[i].Name.toLowerCase().includes(search)){
-      context.ingredients.push(ing[i]);
+  var ingArr = [];
+  var mealArr = [];
+  //handles empty search input
+  if (context.search == ""){
+    console.log("nothing");
+  } else {
+    //find ingredients which match search term
+    for (i in ing){
+      if (ing[i].Name.toLowerCase().includes(search)){
+        context.ingredients.push(ing[i]);
+        ingArr.push(ing[i]);
+      }
+    }
+    //find meals containing ingredients matching the search term
+    for (i in ingArr){
+      id = ingArr[i].ID;
+      for (j in meal){
+        if(meal[j].Ingredients.includes(id)){
+          mealArr.push(meal[j]);
+          console.log("*** ID: " +id);
+        }
+      }
+    }
+    //find meals which match the search term, but there were not matching
+    //ingredients
+    for (j in meal){
+      if (meal[j].Name.toLowerCase().includes(search)){
+        if (!mealArr.includes(meal[j])){
+        mealArr.push(meal[j]);
+        }
+      }
     }
   }
-  for (j in meal){
-    if (meal[j].Name.toLowerCase().includes(search)){
-      context.meals.push(meal[j]);
-    }
-  }
+  context.meals = mealArr;
   console.log(context);
   res.status(200);
   res.render("searchPage", context);
@@ -79,7 +103,7 @@ const editMeal = (req, res, next, ingredientData, mealData) => {
   }
 }
 
-//exported function names, could these be named better?
+//exported function names
 exports.search = search;
 exports.mealPage = mealPage;
 exports.editMeal = editMeal;
