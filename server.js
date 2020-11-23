@@ -136,84 +136,22 @@ app.get('/signup', function(req, res, next) {
 
 app.post('/newUser', function(req, res, next) {
 
-  //console.log(req.body);
+  let userData = fs.readFileSync('userData.json');
+  let jUserData = JSON.parse(userData);
+
+  var user = {
+    Username: req.body.username,
+    Password: req.body.password,
+    Email: req.body.email,
+    Access: 1
+  };
   
-  console.log("Adding new user...");
-  if (req.body && req.body.username && req.body.email && req.body.password) {
-    req.body.access = 0;
-    //var User = new User;
-    
-    console.log("==Username: ", req.body.username);
-    console.log("==Email: ", req.body.email);
-    console.log("==Password: ", req.body.password);
-    console.log("==Access: ", req.body.access);
+  if (req.body.username && req.body.email && req.body.password) {
+    jUserData.push(user);
+    let data = JSON.stringify(jUserData);
 
-    var user = {
-      username: req.body.username,
-      password: req.body.password,
-      email: req.body.email,
-      access: req.body.access
-    };
-
-    console.log("==U Username: ", user.username);
-    console.log("==U Email: ", user.email);
-    console.log("==U Password: ", user.password);
-    console.log("==U Access: ", user.access);
-
-    fs.readFile('userData.json', (err, data) => {
-      if (err) {
-        console.log(err);
-      }
-      let jsonData = JSON.parse(data);
-      console.log("jsonData: ", jsonData);
-
-      jsonData.newUser = user;
-      console.log("jsonData: ", jsonData);
-    });
-
-    //let json = JSON.stringify(user);
-    // userData
-    /*
-    
-    var js = JSON.parse(userData);
-
-    let jsondata = JSON.stringify(js);
-    console.log("jsonData: ", jsondata);
-
-    fs.writeFile('userData.json', jsonData, function(err) {
-      if (err) {
-        return console.log(err);
-      }
-    });*/
-
-    /*fs.appendFile('userData.json', ",\n", function(err) {
-      if (err) {
-        return console.log(err);
-      }
-    });
-
-    fs.appendFile('userData.json', json + "\n", function(err) {
-      if (err) {
-        return console.log(err);
-      }
-      console.log(req.body);
-    });*/
-
+    fs.writeFileSync('userData.json', data);
     res.status(200).send("Your information was saved.");
-
-    /*fs.appendFile('userData.json', req.body.password + "\n", function(err) {
-      if (err) {
-        return console.log(err);
-      }
-      console.log(req.body.password);
-    });
-
-    fs.appendFile('userData.json', req.body.email + "\n", function(err) {
-      if (err) {
-        return console.log(err);
-      }
-      console.log(req.body.email);
-    });*/
   }
   else {
     res.status(400).send("You must fill out all fields.");
