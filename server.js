@@ -143,6 +143,8 @@ app.post('/newUser', function(req, res, next) {
     Username: req.body.username,
     Password: req.body.password,
     Email: req.body.email,
+    Recipes: [],
+    Settings: 0,
     Access: 1
   };
   
