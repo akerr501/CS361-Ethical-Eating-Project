@@ -1,6 +1,35 @@
 [
   {
     "ID": 0,
+    "Name": "Not logged in",
+    "Ingredients": [],
+    "Rating": 0,
+    "Public": "False",
+    "Image": "Not sure if we're having one of theses",
+    "Error": "You can make an account to save your recipes to view later. It's easy!",
+    "ErrorButtons": [{
+      "Name":"Sign Up or Login",
+      "Redirect": "/signup"
+     }]
+  },  
+  {
+    "ID": 1,
+    "Name": "No saved recipes",
+    "Ingredients": [],
+    "Rating": 0,
+    "Public": "False",
+    "Image": "Not sure if we're having one of theses",
+    "Error": "Looks like you don't have any saved Recipes. You can go to a recipe page and click the save button to view it later when you come back to this page.",
+    "ErrorButtons": [{
+      "Name": "Build Meal",
+      "Redirect": "/build"
+     },
+     {"Name": "Browse Meals",
+      "Redirect": "/browse"
+     }]
+  },  
+  {
+    "ID": 2,
     "Name": "Burrito",
     "Ingredients": [2, 4, 5, 7],
     "Rating": 38,
@@ -8,7 +37,7 @@
     "Image": "Not sure if we're having one of theses"
   },
   {
-    "ID": 1,
+    "ID": 3,
     "Name": "Chicken Caesar Salad",
     "Ingredients": [2, 3, 17],
     "Rating": 50,
@@ -16,7 +45,7 @@
     "Image": "Not sure if we're having one of theses"
   },
   {
-    "ID": 2,
+    "ID": 4,
     "Name": "Fruit Cake",
     "Ingredients": [2, 4, 5, 6, 16],
     "Rating": 47,
