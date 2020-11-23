@@ -117,28 +117,4 @@ class UserModel {
     }
 };
 
-class User {
-
-    // Create a new User
-    createAccount(userModel) {
-
-        let new_user = new UserModel({
-			username: n_usernameInput,
-            password: n_passwordInput,
-            email: n_emailInput,
-			access: 1
-		});
-
-        fs.writeFile("userData.json", userModel, function(err) {
-            if (err) {
-                console.log(err);
-            }
-        });
-    };
-};
-
-
-module.exports = {
-    User: User,
-    UserModel: UserModel
-}
+module.exports = UserModel;
