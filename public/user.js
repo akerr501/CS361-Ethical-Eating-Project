@@ -1,6 +1,7 @@
 // Authors: Maddie Smith
 
 // Require fs to be able to read and write with userData.json
+var path = require('path');
 var fs = require('fs');
 
 // Get the submit button to add a new user
@@ -10,7 +11,6 @@ var submitSignup = document.querySelector('.submit');
 var n_usernameInput = document.querySelector('#new-usr');
 var n_passwordInput = document.querySelector('#new-pwd');
 var nv_passwordInput = document.querySelector('#new-pwd-verify');
-var n_emailInput  = document.querySelector('#new-email');
 
 console.log("ENTERED USER.JS\n");
 
@@ -18,14 +18,13 @@ submitSignup.addEventListener('click', function() {
 
     // Store the values from the input boxes in variables
     var username = n_usernameInput.value;
-    var email = n_emailInput.value;
     var password = n_passwordInput.value;
     var v_password = nv_passwordInput.value;
 
     addUser(username, password, v_password);
 
     // Reset the input values to be used for the next time
-    resetInputs(n_usernameInput, n_passwordInput, nv_passwordInput, n_emailInput);
+    resetInputs(n_usernameInput, n_passwordInput, nv_passwordInput);
 });
 
 function addUser(username, password, v_password) {
@@ -40,7 +39,6 @@ function addUser(username, password, v_password) {
         var newUser = {
             Username: username,
             Password: password,
-            Email: email,
             Access: 1
         };
         var requestBody = JSON.stringify(newUser);
@@ -49,11 +47,10 @@ function addUser(username, password, v_password) {
     }
 }
 
-function resetInputs(user, pass, vpass, email) {
+function resetInputs(user, pass, vpass) {
     user.value = "";
     pass.value = "";
     vpass.value = "";
-    email.value = "";
 }
 
 function sendResponseAndRequest(event, request, requestBody) {
@@ -86,7 +83,15 @@ function verifyUser(username) {
             return 0;
         }
     }
-    return 1;
+
+    if (username.length >= 8) {
+        console.log("Password is at least 8 char\n");
+        return 1;
+    }
+    else {
+        console.log("Password must be at least 8 characters\n");
+        return 0;
+    }
 };
 
 // Make sure that the passwords match and are at least 8 characters long
@@ -113,8 +118,7 @@ class UserModel {
 		this.username = userModel.username;
 		this.password = userModel.password;
 		this.access = userModel.access;
-        this.email = userModel.email;
     }
 };
 
-module.exports = UserModel;
+//module.exports = UserModel;
