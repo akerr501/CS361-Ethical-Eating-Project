@@ -74,10 +74,14 @@ function verifyUser(username) {
     for (i = 0; i < jUserData.length; i++) {
         console.log("Stored: ",jUserData[i].Username);
         if (jUserData[i].Username == username) {
-            console.log("USER EXISTS!", username);
-            return 0;
+            console.log("USERNAME EXISTS!", username);
+            if (jUserData[i].Password == password) {
+                console.log("LOGIN SUCCESSFUL!");
+                return 1;
+            }
         }
     }
+    return 0;
 };
 
 // Make sure that the username or password is at least 8 characters long
