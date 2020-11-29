@@ -16,10 +16,10 @@ function assignCollapseListeners(){
     buttons[i].addEventListener("click", function() {
       this.classList.toggle("active");
       var content = this.nextElementSibling;
-      if (content.style.display === "block") { // swap visibility state of container
+      if (content.style.display === "flex") { // swap visibility state of container
         content.style.display = "none";
       } else {
-        content.style.display = "block";
+        content.style.display = "flex";
       }
     });
   }
@@ -43,23 +43,24 @@ function subsitutionSwapListener(sub){
   let clear = false; // used if the user wants to deselect swap
   for(var i = 1; i < container.length; i++){
     tempSub = container[i];
-    if(tempSub.style.backgroundColor == "darkseagreen"){
+    console.log(tempSub.style.backgroundColor);
+    if(tempSub.style.backgroundColor == "rgb(183, 206, 168)"){
       container[i].style.backgroundColor = "";
       if(tempSub == sub) clear = true;
     }
   }
-  if(!clear) sub.style.backgroundColor = "darkseagreen";
+  if(!clear) sub.style.backgroundColor = "rgb(183, 206, 168)";
 }
 
 function assignPageButtonListeners(){
   var swap = document.querySelector('.swap-button');
-  var back = document.querySelector('.back-button');
+  //var back = document.querySelector('.back-button');
   // assign listener for the swap button
   swap.addEventListener('click', swapListener);
   // assign listener for the back button
-  back.addEventListener('click', function(){
-    console.log("back clicked");
-  });
+  //back.addEventListener('click', function(){
+  //  console.log("back clicked");
+  //});
 }
 
 function swapListener(){
@@ -67,7 +68,7 @@ function swapListener(){
     sub_children = subsitutes[i].children;
     IDs[i] = sub_children[0].innerHTML;
     for(var j = 1; j <sub_children.length; j++){
-      if(sub_children[j].style.backgroundColor == "darkseagreen") IDs[i] = sub_children[j].children[0].innerHTML;
+      if(sub_children[j].style.backgroundColor == "rgb(183, 206, 168)") IDs[i] = sub_children[j].children[0].innerHTML;
     }
   }
   console.log(IDs); // actually go back to build recipe page from here

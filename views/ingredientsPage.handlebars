@@ -1,4 +1,4 @@
-<main>
+<main class="ingredient-body">
   <div class="header">Ingredients</div>
   <div class="subheader">Read about the issues and select alternatives</div>
 
@@ -15,7 +15,7 @@
         {{#each Subsitutes}}
         <button class ="subs-button">
           <div class = "id">{{this.ID}}</div>
-          {{this.name}} / {{this.rating}}
+          <div>{{this.name}} - {{this.rating}}</div>
         </button>
         {{/each}}
       </div>
@@ -25,9 +25,9 @@
   </div>
 
 
-    <div class = "back-container">
+    {{!-- <div class = "back-container">
       <button type = "button" class = "back-button">Back</button>
-    </div>
+    </div> --}}
     <div class = "swap-container">
       <button type = "button" class = "swap-button">Make Swaps!</button>
     </div>
