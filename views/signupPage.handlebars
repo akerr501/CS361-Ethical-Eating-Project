@@ -1,25 +1,26 @@
-<script src = "/user.js"></script>
-
 <form style="border:1px solid">
   <div class="container">
     <h1>Welcome to EthicalEating! </h1>
     <p>Please create an account to save meals.</p>
+    <p>Password must be at least 8 characters.</p>
     <hr>
 
     <label for="new-usr"><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="usr" required>
+    <input type="text" placeholder="Enter Username" id = "new-usr" name="usr" required>
 
     <label for="new-pwd"><b>Password</b></label>
-    <input type="text" placeholder="Enter Password" name="pwd" required>
+    <input type="text" placeholder="Enter Password" id = "new-pwd" name="pwd" required>
 
     <label for="new-pwd-verify"><b>Verify Password</b></label>
-    <input type="text" placeholder="Repeat Password" name="pwd-repeat" required>
+    <input type="text" placeholder="Repeat Password" id = "new-pwd-verify" name="pwd-repeat" required>
 
     <label for="new-email"><b>Email</b></label>
-    <input type="email" placeholder="Enter Email" name="email" required>
+    <input type="email" placeholder="Enter Email" id = "new-email" name="email" required>
 
     <div class="submit">
-      <button type="button" class="signupbtn">Sign Up</button>
+      <button type="submit" class="signupbtn">Sign Up</button>
     </div>
   </div>
 </form>
+
+<script src = "/user.js"></script>
