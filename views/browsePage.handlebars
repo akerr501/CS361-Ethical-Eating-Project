@@ -1,7 +1,7 @@
 <div class="body">
   <p>Here you can browse all of the meals and ingredients. Select any to learn more about the meal or ingredient. You can also edit any meal here and add it to your recipe book!</p>
   <hr class="gen">
-  <h3 class="filterTitle">Filter Meals by Ingredients and Rating</h3>
+  <h3 class="filterTitle">Filter by Ingredients and Rating</h3>
   <div class="dropdown filter">
     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Meals including:
@@ -27,8 +27,9 @@
       </ul>
     </div>
   </div>
+  <br>
   <div class="ratingfilter">
-    <label for="rMin">Rating at least:</label>
+    <label for="rMin">Meals and ingredients with rating at least:</label>
     <input class="rMin" id="rMin" type="number" min="0" max="100" value="36">
   </div>
   <div class="ratingfilter">
@@ -51,7 +52,7 @@
   <ul class="fList">
     {{#each ingredients}}
       <li>
-        <div class="result ingredients" data-ingredientid={{ID}} data-name={{Name}}>
+        <div class="result ingredients" data-ingredientid={{ID}} data-ingrating={{Rating}} data-name={{Name}}>
           <a href="http://localhost:3000/ingredients/[{{{ID}}}]">{{Name}}</a>
           <p class="rating">Ethic rating: {{Rating}}</p>
           <p> {{Issues}}</p>

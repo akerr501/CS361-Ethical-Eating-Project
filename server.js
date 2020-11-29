@@ -111,7 +111,13 @@ app.get('/browse', function(req, res, next) {
   console.log("Serving the Browse Page");
   var context = {};
   context.ingredients = ingredientData;
-  context.meals = mealData;
+  context.meals = [];
+  //only get public meals
+  for (i in mealData){
+    if (mealData[i].Public == "True"){
+      context.meals.push(mealData[i]);
+    }
+  }
   res.status(200);
   res.render("browsePage",context);
 });

@@ -14,7 +14,7 @@ $(".result.meals").each(function(){
 //Ingredient objects
 var idata = [];
 $(".result.ingredients").each(function(){
-  idata.push({"id" : $(this).data("ingredientid"), "name": $(this).data("name")});
+  idata.push({"id" : $(this).data("ingredientid"), "rating":$(this).data("ingrating"), "name": $(this).data("name")});
 });
 
 //set cboxIn to the class of checkboxes to include
@@ -49,13 +49,14 @@ $(cboxOut).change(function(){
 //Filter class, keeps track of selections and provides functions
 //for setting and applying filter
 class mfilter{
-  constructor(cboxI, cboxO){
+  constructor(cboxI, cboxO, min, max){
     this.in = new Map();
     this.out = new Map();
-    this.rMax = 100;
-    this.rMin = 0;
+    this.rMax = max;
+    this.rMin = min;
     this.cboxO = cboxO;
     this.cboxI = cboxI;
+    this.apply();
   }
   setIn(option, curId){
     if ($(option).is(':checked')){
@@ -129,10 +130,20 @@ class mfilter{
         $("[data-mealid=" + element.id + "]").hide();
       }
     });
+    //remove ingredients exceeding the rating range
+    idata.forEach(element =>{
+      if (element.rating < this.rMin || element.rating > this.rMax){
+        console.log("rating = " + element.rating);
+        $("[data-ingredientid=" + element.id + "]").hide();
+      } else {
+        $("[data-ingredientid=" + element.id + "]").show();
+
+      }
+    });
     console.log("filter updated");
   }
 }
 
 
 //filter keeps track of which ingredients are displayed
-let mealFilter = new mfilter(cboxIn, cboxOut);
+let mealFilter = new mfilter(cboxIn, cboxOut, $(minInput).val(), $(maxInput).val());
