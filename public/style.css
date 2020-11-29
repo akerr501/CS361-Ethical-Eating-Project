@@ -253,7 +253,7 @@ a.tblLink{
 }
 
 .subsitutes-container {
-  padding: 0 18px;
+  padding: 18px;
   display: none;
   overflow: hidden;
   flex-direction:column;
@@ -301,7 +301,7 @@ C0C7C8
   text-align: left;
   outline: none;
   border-radius: 25px;
-  margin: 10px;
+  margin: 10px 10px 0px 10px;
   text-align: center;
 }
 
@@ -314,6 +314,8 @@ C0C7C8
   padding: 10px 10px 10px 10px;
   background-color: #E4E3E6;
   border-radius: 25px;
+  outline: none;
+  border: none;
 }
 
 /* home page */
