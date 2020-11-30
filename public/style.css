@@ -283,15 +283,6 @@ a.tblLink{
   background-color: #E4E3E6;
 }
 
-/*
-6B8C8E
-B7CEA8
-FFFDF8
-E4E3E6
-C0C7C8
-4D3942
-*/
-
 .subsitutes-button {
   cursor: pointer;
   padding: 18px;
@@ -310,11 +301,19 @@ C0C7C8
 }
 
 .subs-button{
-  margin: 10px 10px 10px 10px;
-  padding: 10px 10px 10px 10px;
+  margin: 10px;
+  padding: 10px;
   background-color: #E4E3E6;
   border-radius: 25px;
   outline: none;
+  border: none;
+}
+
+.swap-button{
+  margin: 20px 20px 20px 80%;
+  border-radius:25px;
+  padding: 10px;
+  background-color: #FFFDF8;
   border: none;
 }
 
