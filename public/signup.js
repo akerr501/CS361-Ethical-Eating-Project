@@ -1,8 +1,8 @@
 // Authors: Maddie Smith
 
 // Require fs to be able to read and write with userData.json
-var path = require('path');
-var fs = require('fs');
+//var path = require('path');
+//var fs = require('fs');
 
 // Get the submit button to add a new user
 var submitSignup = document.querySelector('.submit');
@@ -27,10 +27,10 @@ submitSignup.addEventListener('click', function() {
     resetInputs(n_usernameInput, n_passwordInput, nv_passwordInput);
 });
 
-function addUser(username, password, v_password) {
+function addUser(username, password) {
     
     // Only add a user if the username and passwords meet the criteria
-    if (verifyUser(username) && verifyPassword(password, v_password)) {
+    if (verifyPassword(password, v_password)) {
 
         var request = new XMLHttpRequest();
         var requestURL = "/newUser";
@@ -38,13 +38,12 @@ function addUser(username, password, v_password) {
 
         var newUser = {
             Username: username,
-            Password: password,
-            Access: 1
+            Password: password
         };
         var requestBody = JSON.stringify(newUser);
 
         sendResponseAndRequest(event, request, requestBody);
-    }
+}
 }
 
 function resetInputs(user, pass, vpass) {
@@ -65,34 +64,9 @@ function sendResponseAndRequest(event, request, requestBody) {
     request.setRequestHeader(
         'Content-Type', 'application/json'
     );
+    console.log(requestBody);
     request.send(requestBody);
 }
-
-// Make sure that the username is unique and not taken
-function verifyUser(username) {
-    console.log("verifying username");
-    let userData = fs.readFileSync('userData.json');
-    let jUserData = JSON.parse(userData);
-
-    var i = 0;
-
-    for (i = 0; i < jUserData.length; i++) {
-        console.log(jUserData[i].Username);
-        if (jUserData[i].Username == username) {
-            console.log("DUPLICATE!", username);
-            return 0;
-        }
-    }
-
-    if (username.length >= 8) {
-        console.log("Username is at least 8 char\n");
-        return 1;
-    }
-    else {
-        console.log("Username must be at least 8 characters\n");
-        return 0;
-    }
-};
 
 // Make sure that the passwords match and are at least 8 characters long
 function verifyPassword(password, v_password) {

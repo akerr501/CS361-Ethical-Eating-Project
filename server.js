@@ -168,17 +168,33 @@ app.post('/newUser', function(req, res, next) {
 
   let userData = fs.readFileSync('userData.json');
   let jUserData = JSON.parse(userData);
+  var good = 1;
+  var i = 0;
+
+  //console.log("U: ", req.body.Username);
+  //console.log("u: ", req.body.username);
+  for (i = 0; i < jUserData.length; i++) {
+      console.log(jUserData[i].Username, req.body.Username);
+      if (jUserData[i].Username == req.body.Username) {
+          good = 0;
+      }
+  }
+
+  if (req.body.Username.length >= 8) {
+      console.log("Username is at least 8 char\n");
+  }
+  else {
+      good = 0;
+  };
 
   var user = {
-    Username: req.body.username,
-    Password: req.body.password,
-    Email: req.body.email,
+    Username: req.body.Username,
+    Password: req.body.Password,
     Recipes: [],
-    Settings: 0,
     Access: 1
   };
   
-  if (req.body.username && req.body.email && req.body.password) {
+  if (req.body.Username && req.body.Password && good) {
     jUserData.push(user);
     let data = JSON.stringify(jUserData);
 
