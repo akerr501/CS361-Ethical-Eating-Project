@@ -64,6 +64,7 @@ function assignPageButtonListeners(){
 }
 
 function swapListener(){
+  IDs = [];
   for (i = 0; i < subsitutes.length; i++){
     sub_children = subsitutes[i].children;
     var og = true;
