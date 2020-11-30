@@ -32,6 +32,7 @@ app.get('/', function(req, res, next) {
   });
 });
 
+// build page----------------------------------------------------------------------
 //Route to get  all ingredients
 app.get('/ingredientData', function(req, res, next) {
   console.log("transmitting ingredient data");
@@ -75,7 +76,12 @@ app.get('/buildEdit/:id', function(req, res, next) {
   res.render("buildPageEdit", context)
 });
 
-// new----------------------------------------------------------------------
+app.get('/popuplog', function(req, res, next) {
+  console.log("Opened login popup window");
+  res.status(200);
+  res.sendFile(__dirname + '/public/login\ popup/loginPop.html'); 
+});
+
 app.post('/saveRecipe/:userID', function(req, res, next) {
   var userID = req.params.userID;
   let userdata = fs.readFileSync('userData.json');
@@ -96,6 +102,7 @@ app.post('/saveRecipe/:userID', function(req, res, next) {
   }
     //check if any ingredients were changed
     if (OGmeal == rIngred) {
+      req.body.Public = true;
       //save meal to userID
       userD[userID].Recipes.push(recipeId);
       //remove double entries of same meal
@@ -118,7 +125,7 @@ app.post('/saveRecipe/:userID', function(req, res, next) {
         res.status(200).send({"result":true});
   }
 })
-// new-----------------------------------------------------------------------
+// build page-----------------------------------------------------------------------
 
 app.get('/saved', function(req, res, next) {
   console.log("Serving the Saved Recipes Page");
@@ -146,7 +153,7 @@ app.get('/browse', function(req, res, next) {
   res.status(200);
   res.render("browsePage",context);
 });
-
+// Login routes ---------------------------------------------------------------
 app.get('/login', function(req, res, next) {
   console.log("Serving the Login Page");
   res.status(200);
@@ -155,6 +162,25 @@ app.get('/login', function(req, res, next) {
   });
 });
 
+app.post('/checkLogin', function(req, res, next) {
+  let userdata = fs.readFileSync('userData.json');
+  let userD = JSON.parse(userdata);
+  let found = false;
+  for (var i=0; i < userD.length; i++){
+    if (userD[i].Username == req.body.Username 
+      && userD[i].Password == req.body.Password){
+      found = true;
+      userD[i].Access = req.body.Access;
+      let udata = JSON.stringify(userD, null, 1);
+      fs.writeFileSync('userData.json', udata);
+      res.status(200).json(userD[i]);
+      break;
+    } else {continue;}
+  }
+  if (found == false) {res.status(200).send('false');}
+  
+});
+// Login routes ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 app.get('/signup', function(req, res, next) {
   console.log("Serving the Sign Up Page");
   res.status(200);
@@ -168,35 +194,17 @@ app.post('/newUser', function(req, res, next) {
 
   let userData = fs.readFileSync('userData.json');
   let jUserData = JSON.parse(userData);
-  var good = 1;
-  var i = 0;
-
-  //console.log("U: ", req.body.Username);
-  //console.log("u: ", req.body.username);
-  for (i = 0; i < jUserData.length; i++) {
-      console.log(jUserData[i].Username, req.body.Username);
-      if (jUserData[i].Username == req.body.Username) {
-          good = 0;
-      }
-  }
-
-  if (req.body.Username.length >= 8) {
-      console.log("Username is at least 8 char\n");
-  }
-  else {
-      good = 0;
-  };
 
   var user = {
+    ID: jUserData.length,
     Username: req.body.Username,
     Password: req.body.Password,
     Recipes: [],
-    Access: 1
   };
   
-  if (req.body.Username && req.body.Password && good) {
+  if (req.body.Username && req.body.Password) {
     jUserData.push(user);
-    let data = JSON.stringify(jUserData);
+    let data = JSON.stringify(jUserData, null, 1);
 
     fs.writeFileSync('userData.json', data);
     res.status(200).send("Your information was saved.");
