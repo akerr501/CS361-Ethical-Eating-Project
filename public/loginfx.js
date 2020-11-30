@@ -1,31 +1,33 @@
 //author: Christine Pham
 
-function checkUser(username, pw){
-    //for POST only
+//takes the username value, pw value, and the function used to process the user if logged in successfully
+function checkUser(username, pw, urFunc){
+
     var loginObj = {
         Username: username,
-        Password: pw
+        Password: pw,
+        Access: 1
        }
-    // ^^^^^^^^^^
+
     var req = new XMLHttpRequest();
     req.onload = function() {
         if (req.status >= 200 && req.status <400){
             var res = req.responseText;
             
-            if (res == 'false') {return false;}
-            else {
+            if (res != 'false')
+            {
+                console.log(res);
                 localStorage.setItem('user', res);
-                return true;
+                //callback to process result inside async
+                urFunc();
             }
         } else {
             console.log("Error in network request: " + req.statusText);}
     }
-    //req.open("GET", "http://localhost:3000/checkLogin ... username + password, true);
-    //req.send();
 
-    //req.open("POST", 'http://localhost:3000/checkLogin ...', true);          <---hypothetical route
-    //req.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-    //req.send(JSON.stringify(loginObj));
+    req.open("POST", 'http://localhost:3000/checkLogin', true); 
+    req.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+    req.send(JSON.stringify(loginObj));
     //event.preventDefault();
 }
 
