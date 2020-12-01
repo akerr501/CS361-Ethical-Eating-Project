@@ -111,7 +111,7 @@ app.post('/saveRecipe/:userID', function(req, res, next) {
       let udata = JSON.stringify(userD, null, 1);
       fs.writeFileSync('userData.json', udata);
 
-      res.status(200).send({"result":true});
+      res.status(200).send({"result":true, "data":userData[userID]});
     } else {
         req.body.ID = mealD.length;
         mealD.push(req.body);
@@ -122,7 +122,7 @@ app.post('/saveRecipe/:userID', function(req, res, next) {
         let udata = JSON.stringify(userD, null, 1);
         fs.writeFileSync('userData.json', udata);
 
-        res.status(200).send({"result":true});
+        res.status(200).send({"result":true, "data":userData[userID]});
   }
 })
 // build page-----------------------------------------------------------------------
@@ -149,6 +149,7 @@ app.get('/browse', function(req, res, next) {
   console.log("Serving the Browse Page");
   var context = {};
   context.ingredients = ingredientData;
+
   context.meals = [];
   //only get public meals
   for (i in mealData){
@@ -156,6 +157,7 @@ app.get('/browse', function(req, res, next) {
       context.meals.push(mealData[i]);
     }
   }
+
   res.status(200);
   res.render("browsePage",context);
 });
@@ -169,17 +171,14 @@ app.get('/login', function(req, res, next) {
 });
 
 app.post('/checkLogin', function(req, res, next) {
-  let userdata = fs.readFileSync('userData.json');
-  let userD = JSON.parse(userdata);
+
   let found = false;
-  for (var i=0; i < userD.length; i++){
-    if (userD[i].Username == req.body.Username 
-      && userD[i].Password == req.body.Password){
+  for (var i=0; i < userData.length; i++){
+    if (userData[i].Username == req.body.Username 
+      && userData[i].Password == req.body.Password){
       found = true;
-      userD[i].Access = req.body.Access;
-      let udata = JSON.stringify(userD, null, 1);
-      fs.writeFileSync('userData.json', udata);
-      res.status(200).json(userD[i]);
+      res.status(200).json(userData[i]);
+
       break;
     } else {continue;}
   }

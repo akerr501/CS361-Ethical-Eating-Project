@@ -1,10 +1,10 @@
 body{
   font-family: 'Open Sans', sans-serif;
-  background: #f3cb65;
-  margin: 0 auto 0 auto;
-  width:100%;
+  background: #c0c7c8;
+  margin: 0 auto 0 auto;  
+  width:100%; 
   text-align:center;
-  margin: 20px 0px 20px 0px;
+  margin: 20px 0px 20px 0px;   
 }
 
 p{
@@ -19,16 +19,16 @@ h1{
 }
 
 .box{
-  background: #f2fbe0;
+  background: rgba(255, 253, 248, 0.7);
   width:300px;
   border-radius:6px;
   margin: 0 auto 0 auto;
   padding:0px 0px 70px 0px;
-  border: #7b5b09 4px solid;
+  border: #4d3942 4px solid; 
 }
 
 .username{
-  background:#ecf0f1;
+  background:ecf0f1;
   border: #ccc 1px solid;
   border-bottom: #ccc 2px solid;
   padding: 8px;
@@ -49,14 +49,14 @@ h1{
 }
 
 .btn{
-  background:#495c28;
+  background:#b7cea8;
   width:125px;
   padding-top:5px;
   padding-bottom:5px;
-  color:white;
+  color:black;
   border-radius:14px;
-  border: #495c28 1px solid;
-
+  border: #b7cea9 1px solid;
+  
   margin-top:20px;
   margin-bottom:20px;
   float:left;
@@ -66,18 +66,18 @@ h1{
 }
 
 .btn:hover{
-  background:#2CC06B;
+  background:#2CC06B; 
 }
 
 #signup{
   float:left;
-  background:#7b5b09;
+  background:#6b8c8e;
   width:125px;  padding-top:5px;
   padding-bottom:5px;
   color:white;
   border-radius:4px;
-  border: #2980b9 1px solid;
-
+  border: #6b8c8e 1px solid;
+  
   margin-top:20px;
   margin-bottom:20px;
   margin-left:10px;
@@ -85,6 +85,10 @@ h1{
   font-size:0.8em;
 }
 
-#signup:hover{
-background:#3594D2;
+#signup:hover{ 
+background:#3594D2; 
+}
+
+#close {
+  width: 265px;
 }

@@ -1,0 +1,133 @@
+body{
+  font-family: 'Open Sans', sans-serif;
+  background: #c0c7c8;
+  box-sizing: border-box;
+  margin: 0 auto 0 auto;
+  width:100%;
+  margin: 20px 0px 20px 0px;
+}
+
+#build-form{
+  background: rgba(255, 253, 248, 0.7);
+  max-width:800px;
+  min-height: 300px;
+  border-radius:6px;
+  margin: 0 auto 0 auto;
+  margin-top: 30px;
+  padding:0px 0px 70px 0px;
+  border: #4d3942 4px solid;
+}
+
+.ingredient-input, #recipeTitle{
+  width: 300px;
+}
+
+.inputs{
+  text-align: center;
+}
+
+#label-ingred{
+  padding-bottom: 0;
+}
+
+label {
+  font-weight: bold;
+}
+#ingredient-box{
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+}
+#check-ingredients, #save-buttons {
+  display: inline-flex;
+}
+
+#verify {
+  display:inline-block;
+}
+
+#verify, #reset{
+  background:#b7cea8;
+  width:150px;
+  padding-top:5px;
+  padding-bottom:5px;
+  height: 40px;
+  color:black;
+  border-radius:14px;
+  border: #6b8c8e 2px solid;
+  margin-top:20px;
+  margin-bottom:20px;
+  float:left;
+  margin-left:16px;
+  font-weight:800;
+  font-size:0.8em;
+}
+
+#verify:hover, #reset:hover{
+  background:#2CC06B;
+}
+
+#verify-login{
+  float:left;
+  background:#6b8c8e;
+  width:125px;  padding-top:5px;
+  padding-bottom:5px;
+  height: 40px;
+  color:white;
+  border-radius:4px;
+  border: #6b8c8e 1px solid;
+  margin-top:20px;
+  margin-bottom:20px;
+  margin-left: 0px;
+  font-weight:800;
+  font-size:0.8em;
+}
+
+#verify-login:hover{
+background:#3594D2;
+}
+
+#saved {
+  float:left;
+  background: white;
+  width:125px;  padding-top:5px;
+  padding-bottom:5px;
+  height: 40px;
+  color: darkolivegreen;
+  border-radius:4px;
+  border: #6b8c8e 1px solid;
+
+  margin-top:20px;
+  margin-bottom:20px;
+  margin-left:10px;
+  font-weight:800;
+  font-size:0.8em;
+}
+
+#button-add {
+  position: relative;
+  left: 150px;
+  background-color: #B7cea8;
+  border-radius: 18px;
+  border: 2px solid #63b7af;
+  display: inline;
+  width: 45px;
+  color: #555555;
+  font-family: Arial;
+  font-size: 22px;
+  font-weight: bold;
+  padding: 2px 14px;
+  margin-top: 10px;
+  text-decoration: none;
+  outline: none;
+}
+
+#button-add:hover {
+  background-color: #63b7af;
+  cursor: pointer;
+}
+
+#button-add:active {
+  position: relative;
+  top: 1px;
+}
