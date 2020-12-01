@@ -6,7 +6,6 @@ function checkUser(username, pw, urFunc){
     var loginObj = {
         Username: username,
         Password: pw,
-        Access: 1
        }
 
     var req = new XMLHttpRequest();
@@ -41,11 +40,6 @@ function getUserRecipes(){
     let uobj = JSON.parse(localStorage.getItem('user'));
     let arr = uobj.Recipes.map(Number);
     return arr;
-}
-
-function getAccess(){
-    let uobj = JSON.parse(localStorage.getItem('user'));
-    return Number(uobj.Access);
 }
 
 function signOut(){
