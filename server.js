@@ -111,7 +111,7 @@ app.post('/saveRecipe/:userID', function(req, res, next) {
       let udata = JSON.stringify(userD, null, 1);
       fs.writeFileSync('userData.json', udata);
 
-      res.status(200).send({"result":true});
+      res.status(200).send({"result":true, "data":userData[userID]});
     } else {
         req.body.ID = mealD.length;
         mealD.push(req.body);
@@ -122,7 +122,7 @@ app.post('/saveRecipe/:userID', function(req, res, next) {
         let udata = JSON.stringify(userD, null, 1);
         fs.writeFileSync('userData.json', udata);
 
-        res.status(200).send({"result":true});
+        res.status(200).send({"result":true, "data":userData[userID]});
   }
 })
 // build page-----------------------------------------------------------------------
@@ -163,17 +163,12 @@ app.get('/login', function(req, res, next) {
 });
 
 app.post('/checkLogin', function(req, res, next) {
-  let userdata = fs.readFileSync('userData.json');
-  let userD = JSON.parse(userdata);
   let found = false;
-  for (var i=0; i < userD.length; i++){
-    if (userD[i].Username == req.body.Username 
-      && userD[i].Password == req.body.Password){
+  for (var i=0; i < userData.length; i++){
+    if (userData[i].Username == req.body.Username 
+      && userData[i].Password == req.body.Password){
       found = true;
-      userD[i].Access = req.body.Access;
-      let udata = JSON.stringify(userD, null, 1);
-      fs.writeFileSync('userData.json', udata);
-      res.status(200).json(userD[i]);
+      res.status(200).json(userData[i]);
       break;
     } else {continue;}
   }
@@ -196,17 +191,15 @@ app.post('/newUser', function(req, res, next) {
   let jUserData = JSON.parse(userData);
 
   var user = {
-    Username: req.body.username,
-    Password: req.body.password,
-    Email: req.body.email,
+    ID: jUserData.length,
+    Username: req.body.Username,
+    Password: req.body.Password,
     Recipes: [],
-    Settings: 0,
-    Access: 1
   };
   
-  if (req.body.username && req.body.email && req.body.password) {
+  if (req.body.Username && req.body.Password) {
     jUserData.push(user);
-    let data = JSON.stringify(jUserData);
+    let data = JSON.stringify(jUserData, null, 1);
 
     fs.writeFileSync('userData.json', data);
     res.status(200).send("Your information was saved.");
