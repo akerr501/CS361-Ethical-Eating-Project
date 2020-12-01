@@ -28,8 +28,9 @@
     </div>
   </div>
   <br>
+  <p class = "ratingnote">Meals and ingredients with rating</p>
   <div class="ratingfilter">
-    <label for="rMin">Meals and ingredients with rating at least:</label>
+    <label for="rMin">At least:</label>
     <input class="rMin" id="rMin" type="number" min="0" max="100" value="36">
   </div>
   <div class="ratingfilter">
@@ -41,8 +42,8 @@
   <ul class="fList">
     {{#each meals}}
       <li>
-        <div class="result meals" data-mealid={{ID}} data-ing={{Ingredients}} data-mealrating="{{Rating}}">
-          <a href="http://localhost:3000/meal?ID={{{ID}}}">{{Name}}</a>
+        <div class="result meals shadow" data-mealid={{ID}} data-ing={{Ingredients}} data-mealrating="{{Rating}}">
+          <a href="/meal?ID={{{ID}}}">{{Name}}</a>
           <p class="rating">Ethic Rating: {{Rating}}</p>
       </li>
     {{/each}}
@@ -52,17 +53,14 @@
   <ul class="fList">
     {{#each ingredients}}
       <li>
-        <div class="result ingredients" data-ingredientid={{ID}} data-ingrating={{Rating}} data-name={{Name}}>
-          <a href="http://localhost:3000/ingredients/[{{{ID}}}]">{{Name}}</a>
-          <p class="rating">Ethic rating: {{Rating}}</p>
-          <p> {{Issues}}</p>
+        <div class="result shadow ingredients" data-ingredientid={{ID}} data-ingrating={{Rating}} data-name={{Name}}>
+          <a href="/ingredients/[{{{ID}}}]">{{Name}}</a>
+          <p class="rating">Ethic rating: {{Rating}}
+          <p class="rating"> {{Issues}}</p>
       </li>
     {{/each}}
   </ul>
 </div>
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script type="text/javascript" var1="{{meals}}" src="/filter.js"></script>

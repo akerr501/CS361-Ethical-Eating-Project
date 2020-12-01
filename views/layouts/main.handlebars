@@ -5,16 +5,22 @@
 <html>
   <head>
     <title>Ethical Eating</title>
-    <link rel= "stylesheet" href = "/style.css">
      <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel= "stylesheet" href = "/style.css">
   </head>
 
   <body>
 
     <header>
-      <nav class="navbar">
-        <ul class="navlist">
-          <li class="navitem searchbox">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="/">Ethical Eating</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navlist navbar-nav">
+          <li class="navitem searchbox nav-item">
             <form action="/search" class="input-group mb-3">
             <input type="text" class="form-control" name="q">
             <button type="submit" class="btn btn-primary input-group-append">Search</button>
@@ -37,9 +43,12 @@
           </li>
 
         </ul>
+        </div>
       </nav>
     </header>
     {{{body}}}
   </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 </html>

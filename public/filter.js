@@ -134,9 +134,9 @@ class mfilter{
     idata.forEach(element =>{
       if (element.rating < this.rMin || element.rating > this.rMax){
         console.log("rating = " + element.rating);
-        $("[data-ingredientid=" + element.id + "]").hide();
+        $(".fList [data-ingredientid=" + element.id + "]").hide();
       } else {
-        $("[data-ingredientid=" + element.id + "]").show();
+        $(".fList [data-ingredientid=" + element.id + "]").show();
 
       }
     });

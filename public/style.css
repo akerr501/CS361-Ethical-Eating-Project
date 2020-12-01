@@ -5,14 +5,24 @@
 
 /* General Setup */
 
+:root{
+  --color-blue: #6B8C8E;
+  --color-green: #B7CEA8;
+  --color-white: #FFFDF8;
+  --color-light-gray: #E4E3E6;
+  --color-light-blue: #C0C7C8;
+  --color-purple: #4D3942;
+}
+
 header{
-    background-color: rgba(189, 180, 180, 0.76);
+    background-color:var(--color-purple);
+  /*  background-color: rgba(189, 180, 180, 0.76);*/
     color: black;
 
 }
 
 body{
-    background-color: white;
+    background-color: var(--color-light-gray);
     color: black;
     margin: 0;
     font-size: large;
@@ -21,13 +31,13 @@ body{
 
 a{
     text-decoration: none;
-    color: #d73f09;
+    color: var(--color-blue);
 
 }
 
 a:hover{
     text-decoration: underline;
-
+    color: var(--color-blue);
 }
 
 h3{
@@ -43,19 +53,36 @@ h3{
 
 .navlist{
     margin: 0;
-    padding: 10px 30px;
+/*    padding: 10px 30px;*/
 
 }
 
+
+
 .navitem{
     display: inline-block;
+    line-height:20px;
+}
 
+.navbar-toggler{
+  border:black;
+  background-color:var(--color-white);
+  opacity:0.8;
+}
+
+.navbar-light .navbar-brand {
+  color:var(--color-white);
+}
+
+.navbar .navbar-brand:hover{
+  text-decoration:none;
+  color:var(--color-white);
 }
 
 .navlink a{
     padding: 8px 10px;
     display: inline-block;
-    color: white;
+    color: var(--color-white);
 
 }
 
@@ -74,10 +101,26 @@ div.body{
 
 hr.gen {
     border: 0;
-    height: 1px;
-    background: #333;
-    background-image: linear-gradient(to right, #333, #d73f09);
+    height: 2px;
+    background: var(--color-purple);
+/*    background-image: linear-gradient(to right, #333, #d73f09);*/
 }
+
+.result{
+    border: 1px solid var(--color-light-blue);
+    border-radius: 5px;
+    margin-bottom: 5px;
+    max-width: 700px;
+    background-color: var(--color-white);
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.result a{
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
 
 .fList{
     list-style-type: none;
@@ -105,8 +148,13 @@ hr.gen {
   display:inline-block;
 }
 /*WATCH OUT FOR OTHERS USING .rating!*/
+.ratingnote{
+  margin-bottom:0;
+}
 .rating{
-    padding-left: 2vmin;
+    margin-bottom:0;
+    padding-left: 4vmin;
+    font-size: medium;
 }
 
 /*For meal view page*/
@@ -115,9 +163,14 @@ hr.gen {
 }
 
 tbody.ingredientTable tr.ingredientTable:nth-child(odd){
-    background-color: rgba(189, 180, 180, 0.76);
-    border: 1px solid #ccc;
+/*    background-color: rgba(189, 180, 180, 0.76);*/
+    background-color:var(--color-light-gray);
 }
+
+tbody .ingredientTable tr.ingredientTable:nth-child(even){
+  background-color:var(--color-white);
+}
+
 
 table.ingredientTable{
     margin-top:20px;
@@ -152,7 +205,6 @@ td.ingRating{
 }
 a.tblLink{
     text-decoration: none;
-    color: #d73f09;
 }
 
 .mealName{
@@ -179,7 +231,7 @@ a.tblLink{
 .mcard{
   text-align:justify;
   display:inline-block;
-  background-color: #ffffff;
+  background-color: var(--color-white);
   vertical-align:middle;
   border: 1px solid #ccc;
 }
@@ -277,4 +329,8 @@ a.tblLink{
   height: 20vw;
   object-fit: cover;
   object-position: 50% 40%;
+}
+
+.jumbotron{
+  background-color:var(--color-light-gray);
 }
