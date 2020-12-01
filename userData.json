@@ -1,1 +1,35 @@
-[{"ID":"0","Username":"Username","Password":"Password","Email":"Email","Recipes":["1"],"Settings":0, "Access": 0},{"Username":"asdf","Password":"asdfasdf","Email":"asdf@yahoo.com","Recipes":[],"Settings":0,"Access":1}]
+[
+ {
+  "ID": 0,
+  "Username": "Username",
+  "Password": "Password",
+  "Recipes": [
+   1,
+   5
+  ]
+ },
+ {
+  "ID": 1,
+  "Username": "asdf",
+  "Password": "asdfasdf",
+  "Recipes": []
+ },
+ {
+  "ID": 2,
+  "Username": "turbo",
+  "Password": "crushers",
+  "Recipes": []
+ },
+ {
+  "ID": 3,
+  "Username": "awesome",
+  "Password": "blossoms",
+  "Recipes": []
+ },
+ {
+  "ID": 4,
+  "Username": "agentScarn",
+  "Password": "cookamunga",
+  "Recipes": []
+ }
+]
