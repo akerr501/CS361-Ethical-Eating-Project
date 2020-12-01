@@ -5,14 +5,24 @@
 
 /* General Setup */
 
+:root{
+  --color-blue: #6B8C8E;
+  --color-green: #B7CEA8;
+  --color-white: #FFFDF8;
+  --color-light-gray: #E4E3E6;
+  --color-light-blue: #C0C7C8;
+  --color-purple: #4D3942;
+}
+
 header{
-    background-color: rgba(189, 180, 180, 0.76);
+    background-color:var(--color-purple);
+  /*  background-color: rgba(189, 180, 180, 0.76);*/
     color: black;
 
 }
 
 body{
-    background-color: white;
+    background-color: var(--color-light-gray);
     color: black;
     margin: 0;
     font-size: large;
@@ -21,13 +31,13 @@ body{
 
 a{
     text-decoration: none;
-    color: #d73f09;
+    color: var(--color-blue);
 
 }
 
 a:hover{
     text-decoration: underline;
-
+    color: var(--color-blue);
 }
 
 h3{
@@ -43,19 +53,36 @@ h3{
 
 .navlist{
     margin: 0;
-    padding: 10px 30px;
+/*    padding: 10px 30px;*/
 
 }
 
+
+
 .navitem{
     display: inline-block;
+    line-height:20px;
+}
 
+.navbar-toggler{
+  border:black;
+  background-color:var(--color-white);
+  opacity:0.8;
+}
+
+.navbar-light .navbar-brand {
+  color:var(--color-white);
+}
+
+.navbar .navbar-brand:hover{
+  text-decoration:none;
+  color:var(--color-white);
 }
 
 .navlink a{
     padding: 8px 10px;
     display: inline-block;
-    color: white;
+    color: var(--color-white);
 
 }
 
@@ -64,28 +91,70 @@ h3{
 }
 
 /* browse and search page styling*/
+h3.filterTitle{
+  color: #212529;
+}
+
 div.body{
     padding: 1vw 5vw;
 }
 
 hr.gen {
     border: 0;
-    height: 1px;
-    background: #333;
-    background-image: linear-gradient(to right, #333, #d73f09);
+    height: 2px;
+    background: var(--color-purple);
+/*    background-image: linear-gradient(to right, #333, #d73f09);*/
 }
+
+.result{
+    border: 1px solid var(--color-light-blue);
+    border-radius: 5px;
+    margin-bottom: 5px;
+    max-width: 700px;
+    background-color: var(--color-white);
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.result a{
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
 
 .fList{
     list-style-type: none;
     padding-left: 2vmin;
 }
 
+.filterList{
+    list-style-type: none;
+}
 .issues{
     padding: 0px 5px;
 }
 
+.dropdown.filter{
+    display:inline-block;
+}
+
+.dropdown-menu{
+    width: 300px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.ratingfilter{
+  display:inline-block;
+}
+/*WATCH OUT FOR OTHERS USING .rating!*/
+.ratingnote{
+  margin-bottom:0;
+}
 .rating{
-    padding-left: 2vmin;
+    margin-bottom:0;
+    padding-left: 4vmin;
+    font-size: medium;
 }
 
 /*For meal view page*/
@@ -94,13 +163,17 @@ hr.gen {
 }
 
 tbody.ingredientTable tr.ingredientTable:nth-child(odd){
-    background-color: rgba(189, 180, 180, 0.76);
-    border: 1px solid #ccc;
+/*    background-color: rgba(189, 180, 180, 0.76);*/
+    background-color:var(--color-light-gray);
 }
+
+tbody .ingredientTable tr.ingredientTable:nth-child(even){
+  background-color:var(--color-white);
+}
+
 
 table.ingredientTable{
     margin-top:20px;
-    width:728px;
     border: 1px solid #777;
     border-collapse:collapse;
     background-color: #fff;
@@ -132,51 +205,93 @@ td.ingRating{
 }
 a.tblLink{
     text-decoration: none;
-    color: #d73f09;
 }
 
 .mealName{
-  font-size: 48px;
-  margin:0;
+  position:relative;
+  top:50%;
+  transform: translatey(-50%);
+  margin:auto;
+  display: inline-block;
   width:100%;
   text-align:center;
-  vertical-align:bottom;
+  vertical-align:middle;
 }
 
 .mealRating{
-    font-size: 36px;
-    margin:0;
-    width:100%;
-    text-align:center;
-    vertical-align:top;
-    /* make this equal to mealName font size - mealRating font size*/
-    margin-block-start: 12px;
+  position:relative;
+  top:50%;
+  transform: translatey(-50%);
+  margin:0;
+  width:100%;
+  text-align:center;
+  vertical-align:top;
 }
-.cardL{
+
+.mcard{
   text-align:justify;
   display:inline-block;
-  width: 400px;
-  height: 56px;
-  margin-right: 10px;
-  background-color: #ffffff;
-  vertical-align:bottom;
+  background-color: var(--color-white);
+  vertical-align:middle;
   border: 1px solid #ccc;
 }
-.cardR{
-  text-align:justify;
-  display:inline-block;
-  width: 300px;
-  height: 56px;
-  margin-left: 10px;
-  vertical-align:bottom;
-  background-color: #ffffff;
-  border: 1px solid #ccc;
+
+.mcard.L{
+  margin-right:1vw;
 }
 
 .mealBody{
     padding: 1vw 5vw;
     background-color: #dddddd;
 }
+
+@media all and (max-width: 799px){
+ .mealName{
+    font-size: 8vw;
+  }
+
+  .mealRating{
+    font-size: 6vw;
+  }
+
+  .mcard{
+    width: 40vw;
+    height: 40vw;
+  }
+
+  table.ingredientTable{
+    width:82vw;
+  }
+
+  .mealInstructions{
+    width:82vw;
+  }
+}
+
+@media all and (min-width: 800px){
+  .mealName{
+    font-size: 64px;
+  }
+
+  .mealInstructions{
+    width:650px;
+  }
+
+  .mealRating{
+    font-size: 48px;
+  }
+  .mcard{
+    display: inline-block;
+    width: 320px;
+    height: 320px;
+  }
+
+  table.ingredientTable{
+    width:650px;
+  }
+}
+
+
 
 /* Ingredients page */
 .header {
@@ -190,20 +305,78 @@ a.tblLink{
 }
 
 .subsitutes-container {
-  padding: 0 18px;
+  padding: 18px;
   display: none;
   overflow: hidden;
+  flex-direction:column;
+  max-width: 350px;
+}
+
+.ingredient-list-container {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 250px 0px 250px;
+  padding: 20px 20px 20px 20px;
+  border-radius: 25px;
+}
+
+.ingredient-container{
+  margin: 20px 0px 0px 0px;
+  padding: 20px 20px 20px 20px;
+  border-radius: 25px;
+  background-color: #FFFDF8;
+}
+
+.id {
+  display: none;
+}
+
+.ingredient-body{
+  background-color: #E4E3E6;
 }
 
 .subsitutes-button {
   cursor: pointer;
   padding: 18px;
-  width: 100%;
+  width: 50%;
+  background-color: #C0C7C8;
   border: none;
   text-align: left;
   outline: none;
+  border-radius: 25px;
+  margin: 10px 10px 0px 10px;
+  text-align: center;
 }
 
 .subsitutes-button:hover {
-  background-color: #C0C0C0;
+  background-color: #6B8C8E;
+}
+
+.subs-button{
+  margin: 10px;
+  padding: 10px;
+  background-color: #E4E3E6;
+  border-radius: 25px;
+  outline: none;
+  border: none;
+}
+
+.swap-button{
+  margin: 20px 20px 20px 80%;
+  border-radius:25px;
+  padding: 10px;
+  background-color: #FFFDF8;
+  border: none;
+}
+
+/* home page */
+.homeimg{
+  width: 100vw;
+  height: 20vw;
+  object-fit: cover;
+  object-position: 50% 40%;
+}
+
+.jumbotron{
+  background-color:var(--color-light-gray);
 }

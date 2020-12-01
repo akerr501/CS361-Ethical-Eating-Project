@@ -88,12 +88,12 @@ app.post('/saveRecipe/:userID', function(req, res, next) {
   let userD = JSON.parse(userdata);
 
   var recipeId = req.body.ID, name = req.body.Name, rIngred = req.body.Ingredients;
-  
+
   let mealdata = fs.readFileSync('mealData.json');
   let mealD = JSON.parse(mealdata);
-  
+
   //check if meal already exists
-  if (mealD[recipeId] && mealD[recipeId].ID == recipeId 
+  if (mealD[recipeId] && mealD[recipeId].ID == recipeId
     && mealD[recipeId].Name == name) {
     //check if the recipe name was changed
     var OGmeal = mealD[recipeId].Ingredients;
@@ -149,7 +149,15 @@ app.get('/browse', function(req, res, next) {
   console.log("Serving the Browse Page");
   var context = {};
   context.ingredients = ingredientData;
-  context.meals = mealData.slice(2);
+
+  context.meals = [];
+  //only get public meals
+  for (i in mealData){
+    if (mealData[i].Public == "True"){
+      context.meals.push(mealData[i]);
+    }
+  }
+
   res.status(200);
   res.render("browsePage",context);
 });
@@ -163,12 +171,14 @@ app.get('/login', function(req, res, next) {
 });
 
 app.post('/checkLogin', function(req, res, next) {
+
   let found = false;
   for (var i=0; i < userData.length; i++){
     if (userData[i].Username == req.body.Username 
       && userData[i].Password == req.body.Password){
       found = true;
       res.status(200).json(userData[i]);
+
       break;
     } else {continue;}
   }
@@ -243,11 +253,42 @@ app.get('/ingredients/:IDs', function(req, res, next) {
       res.status(200);
       res.render('ingredientsPage', {
         INGREDIENTS: ingredients,
+        swap: true
       });
     }
   }
   else res.status(400).send("No IDs found in the array")
-})
+});
+
+app.get('/ingredient/:ID', function(req, res, next) {
+  var id = req.params.ID;
+  var ingredients = [];
+  for (var k=0; k < ingredientData.length; k++) {
+    if (id == ingredientData[k].ID) {
+      ing = ingredientData[k];
+      s = ing.Subsitutes
+      for (var j = 0; j < s.length; j++){
+        if(typeof(s[j]) !== "object"){
+          ing.Subsitutes[j] = {
+            name: ingredientData[s[j]].Name,
+            rating: ingredientData[s[j]].Rating,
+            ID: s[j],
+          }
+        }
+      }
+      ingredients = [ing];
+    }
+  }
+
+  if(ingredients.length > 0){
+    res.status(200);
+    res.render('ingredientsPage', {
+      INGREDIENTS: ingredients,
+      swap: false
+    });
+  }
+  else res.render('404Page', {});
+});
 
 app.get('*', function(req, res){
   console.log("Serving the 404 Page");

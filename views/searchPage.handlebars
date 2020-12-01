@@ -1,32 +1,41 @@
 <div class="body">
-  <h1>Search Results: {{search}}</h1>
-  <hr class="gen">
-  <div class="ingredients">
-    <h2 class="sTitle">Ingredients</h2>
-    <ul class="fList">
-      {{#each ingredients}}
-      <li>
-        <div class="result">
-          <a href="http://localhost:3000/ingredients/[{{ID}}]">{{Name}}</a>
-          <p> Ethic Rating: {{Rating}}</p>
-          <p>{{Issues}}</p>
-        </div>
-      </li>
-    {{/each}}
-    </ul>
-  </div>
+  <h1>Search Results:</h1>
   <hr class="gen">
   <div class="meals">
+   {{#if meals}}
    <h2 class="sTitle">Meals</h2>
    <ul class="fList">
     {{#each meals}}
       <li>
-        <div class="result">
+        <div class="result shadow">
           <a href="http://localhost:3000/meal?ID={{{ID}}}">{{Name}}</a>
-          <p>Ethic Rating: {{Rating}}</p>
+          <p class="rating">Ethic Rating: {{Rating}}</p>
         </div>
       </li>
     {{/each}}
     </ul>
+    {{else}}
+      <h2 class="sTitle">No meal results found for {{search}}</h2>
+    {{/if}}
   </div>
+  <hr class="gen">
+  <div class="ingredients">
+    {{#if ingredients}}
+    <h2 class="sTitle">Ingredients:</h2>
+    <ul class="fList">
+      {{#each ingredients}}
+      <li>
+        <div class="result shadow">
+          <a href="http://localhost:3000/ingredients/[{{ID}}]">{{Name}}</a>
+          <p class="rating"> Ethic Rating: {{Rating}}</p>
+          <p class="rating">{{Issues}}</p>
+        </div>
+      </li>
+    {{/each}}
+    </ul>
+  {{else}}
+    <h2 class="sTitle">No ingredients results found for {{search}}</h2>
+  {{/if}}
+  </div>
+
 </div>

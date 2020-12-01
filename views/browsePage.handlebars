@@ -1,12 +1,49 @@
 <div class="body">
   <p>Here you can browse all of the meals and ingredients. Select any to learn more about the meal or ingredient. You can also edit any meal here and add it to your recipe book!</p>
   <hr class="gen">
+  <h3 class="filterTitle">Filter by Ingredients and Rating</h3>
+  <div class="dropdown filter">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Meals including:
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <ul class="filterList">
+        {{#each ingredients}}
+          <li><input data-ingredientid={{ID}} class="filterIn" type="checkbox">{{Name}}</li> 
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+
+  <div class="dropdown filter">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Meals excluding:
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <ul class="filterList">
+        {{#each ingredients}}
+          <li><input data-ingredientid={{ID}} class="filterOut" type="checkbox">{{Name}}</li> 
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+  <br>
+  <p class = "ratingnote">Meals and ingredients with rating</p>
+  <div class="ratingfilter">
+    <label for="rMin">At least:</label>
+    <input class="rMin" id="rMin" type="number" min="0" max="100" value="36">
+  </div>
+  <div class="ratingfilter">
+    <label for"rMax">Up to:</label>
+    <input class="rMax" id="rMax" type="number" min="0" max="100" value="51">
+  </div>
+  <hr class="gen">
   <h2 class="listTitle">Meals</h2>
   <ul class="fList">
     {{#each meals}}
       <li>
-        <div class="result">
-          <a href="http://localhost:3000/meal?ID={{{ID}}}">{{Name}}</a>
+        <div class="result meals shadow" data-mealid={{ID}} data-ing={{Ingredients}} data-mealrating="{{Rating}}">
+          <a href="/meal?ID={{{ID}}}">{{Name}}</a>
           <p class="rating">Ethic Rating: {{Rating}}</p>
       </li>
     {{/each}}
@@ -16,11 +53,14 @@
   <ul class="fList">
     {{#each ingredients}}
       <li>
-        <div class="result">
-          <a href="http://localhost:3000/ingredients/[{{{ID}}}]">{{Name}}</a>
-          <p class="rating">Ethic rating: {{Rating}}</p>
-          <p> {{Issues}}</p>
+        <div class="result shadow ingredients" data-ingredientid={{ID}} data-ingrating={{Rating}} data-name={{Name}}>
+          <a href="/ingredients/[{{{ID}}}]">{{Name}}</a>
+          <p class="rating">Ethic rating: {{Rating}}
+          <p class="rating"> {{Issues}}</p>
       </li>
     {{/each}}
   </ul>
 </div>
+
+
+<script type="text/javascript" var1="{{meals}}" src="/filter.js"></script>
