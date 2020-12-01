@@ -88,12 +88,12 @@ app.post('/saveRecipe/:userID', function(req, res, next) {
   let userD = JSON.parse(userdata);
 
   var recipeId = req.body.ID, name = req.body.Name, rIngred = req.body.Ingredients;
-  
+
   let mealdata = fs.readFileSync('mealData.json');
   let mealD = JSON.parse(mealdata);
-  
+
   //check if meal already exists
-  if (mealD[recipeId] && mealD[recipeId].ID == recipeId 
+  if (mealD[recipeId] && mealD[recipeId].ID == recipeId
     && mealD[recipeId].Name == name) {
     //check if the recipe name was changed
     var OGmeal = mealD[recipeId].Ingredients;
@@ -248,11 +248,42 @@ app.get('/ingredients/:IDs', function(req, res, next) {
       res.status(200);
       res.render('ingredientsPage', {
         INGREDIENTS: ingredients,
+        swap: true
       });
     }
   }
   else res.status(400).send("No IDs found in the array")
-})
+});
+
+app.get('/ingredient/:ID', function(req, res, next) {
+  var id = req.params.ID;
+  var ingredients = [];
+  for (var k=0; k < ingredientData.length; k++) {
+    if (id == ingredientData[k].ID) {
+      ing = ingredientData[k];
+      s = ing.Subsitutes
+      for (var j = 0; j < s.length; j++){
+        if(typeof(s[j]) !== "object"){
+          ing.Subsitutes[j] = {
+            name: ingredientData[s[j]].Name,
+            rating: ingredientData[s[j]].Rating,
+            ID: s[j],
+          }
+        }
+      }
+      ingredients = [ing];
+    }
+  }
+
+  if(ingredients.length > 0){
+    res.status(200);
+    res.render('ingredientsPage', {
+      INGREDIENTS: ingredients,
+      swap: false
+    });
+  }
+  else res.render('404Page', {});
+});
 
 app.get('*', function(req, res){
   console.log("Serving the 404 Page");

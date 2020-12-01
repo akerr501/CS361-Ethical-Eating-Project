@@ -253,26 +253,68 @@ a.tblLink{
 }
 
 .subsitutes-container {
-  padding: 0 18px;
+  padding: 18px;
   display: none;
   overflow: hidden;
+  flex-direction:column;
+  max-width: 350px;
+}
+
+.ingredient-list-container {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 250px 0px 250px;
+  padding: 20px 20px 20px 20px;
+  border-radius: 25px;
+}
+
+.ingredient-container{
+  margin: 20px 0px 0px 0px;
+  padding: 20px 20px 20px 20px;
+  border-radius: 25px;
+  background-color: #FFFDF8;
 }
 
 .id {
   display: none;
 }
 
+.ingredient-body{
+  background-color: #E4E3E6;
+}
+
 .subsitutes-button {
   cursor: pointer;
   padding: 18px;
-  width: 100%;
+  width: 50%;
+  background-color: #C0C7C8;
   border: none;
   text-align: left;
   outline: none;
+  border-radius: 25px;
+  margin: 10px 10px 0px 10px;
+  text-align: center;
 }
 
 .subsitutes-button:hover {
-  background-color: #C0C0C0;
+  background-color: #6B8C8E;
+}
+
+.subs-button{
+  margin: 10px;
+  padding: 10px;
+  background-color: #E4E3E6;
+  border-radius: 25px;
+  outline: none;
+  border: none;
+}
+
+.swap-button{
+  margin: 20px 20px 20px 80%;
+  border-radius:25px;
+  padding: 10px;
+  background-color: #FFFDF8;
+  border: none;
 }
 
 /* home page */
