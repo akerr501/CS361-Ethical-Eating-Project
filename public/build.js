@@ -1,6 +1,6 @@
 //Author: Christine Pham
 
-var ingredients;
+var ingredients, loginPopup;
 //load up ingredient data from server
 window.onload = function() {
 
@@ -24,25 +24,31 @@ window.onload = function() {
   req.send();
 }
 
-
-document.getElementById('button-add').addEventListener('click', function(){
+var add = document.getElementById('button-add');
+if (add){
+  add.addEventListener('click', function(){
     addIngredient();
-})
+})}
 
-document.getElementById('verify').addEventListener('click', function(){
-  checkIngredients();
-})
+var checkRecipe = document.getElementById('verify');
+if (checkRecipe){
+  checkRecipe.addEventListener('click', function(){
+    checkIngredients();
+})}
 
-document.getElementById('reset').addEventListener('click', function(){
-  formReset();
-})
-//testing
-document.getElementById('verify-login').addEventListener('click', function() {
-  //testing
-  let result = checkLogin();
-  if (result == false) {promptLogin();} 
-  else {pkgRecipe();}
-})
+var resetButton = document.getElementById('reset');
+if (resetButton){
+  resetButton.addEventListener('click', function(){
+    formReset();
+})}
+
+var saveButton = document.getElementById('verify-login');
+if (saveButton){
+  saveButton.addEventListener('click', function() {
+    let result = checkLogin(); //done
+    if (result == false) {promptLogin();} //done
+    else {pkgRecipe();} //done
+})}
 
 function deleteIngredient(item) {
   if (item.previousSibling == '<br>') {
@@ -167,29 +173,25 @@ function deleteIngredient(item) {
     var newRecipe = {
       ID: id,
       Name: document.getElementById('recipeTitle').value,
-      Ingredients: ingred,
+      Ingredients: ingred.map(Number),
       Rating: getRating(ingred),
       Public: document.getElementById('customSwitch1').checked,
       Image: ''
     }
-    console.log(newRecipe);
     shipRecipe(newRecipe);
   }
 
   function checkLogin() {
     let logged = false;
-    //checks if userID from global object is not default
+    if (localStorage.getItem('user')){
+      logged = true;
+    }
     return logged;
   } 
 
-  function getUser() {
-    //extracts userID from global object on user.js
-    return userid;
-  }
-
   function shipRecipe(recipeObj) {
     //need a user ID that will be a number
-    var userID = 1 //<-- placeholder --change to getUser();
+    var userID = getID();
     var req = new XMLHttpRequest();
 
     req.onload = function() {
@@ -199,6 +201,7 @@ function deleteIngredient(item) {
         if (response.result == true) {
           document.getElementById('verify-login').style.display = "none";
           document.getElementById('saved').style.display = "inline";
+          localStorage.setItem('user', JSON.stringify(response.data));
         }
   
       } else {
@@ -206,10 +209,14 @@ function deleteIngredient(item) {
       }
   };
   
-      req.open('POST', 'http://localhost:3000/saveRecipe/' + userID, true);
+      req.open("POST", 'http://localhost:3000/saveRecipe/'+ userID, true);
       req.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+      console.log(recipeObj);
       req.send(JSON.stringify(recipeObj));
       event.preventDefault();
   }
 
-  function promptLogin(){}
+  function promptLogin(){
+    loginPopup = window.open("http://localhost:3000/popuplog", 
+    "_blank", "width=350, height=300");
+  }
