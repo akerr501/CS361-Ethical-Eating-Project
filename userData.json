@@ -1,20 +1,35 @@
 [
-  {
-      "ID": "0",
-      "Name": "Paul McCartney",
-      "Email": "Email here",
-      "Password": "Password here",
-      "Recipes": ["2"],
-      "Settings": "True or False",
-      "Avatar": "not sure what goes here"
-  },
-  {
-      "ID": "1",
-      "Name": "George Harrison",
-      "Email": "Email here",
-      "Password": "Password here",
-      "Recipes": ["1", "0"],
-      "Settings": "True or False",
-      "Avatar": "not sure what goes here"
-  }
+ {
+  "ID": 0,
+  "Username": "Username",
+  "Password": "Password",
+  "Recipes": [
+   1,
+   5
+  ]
+ },
+ {
+  "ID": 1,
+  "Username": "asdf",
+  "Password": "asdfasdf",
+  "Recipes": []
+ },
+ {
+  "ID": 2,
+  "Username": "turbo",
+  "Password": "crushers",
+  "Recipes": []
+ },
+ {
+  "ID": 3,
+  "Username": "awesome",
+  "Password": "blossoms",
+  "Recipes": []
+ },
+ {
+  "ID": 4,
+  "Username": "agentScarn",
+  "Password": "cookamunga",
+  "Recipes": []
+ }
 ]

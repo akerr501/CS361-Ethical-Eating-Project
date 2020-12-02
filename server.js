@@ -1,4 +1,4 @@
-// Authors: Adam Kerr
+// Authors: Adam Kerr, Maddie Smith
 
 var path = require('path');
 var express = require('express');
@@ -9,6 +9,10 @@ var userData = require('./userData.json')
 var fs = require('fs');
 const { isContext } = require('vm');
 var helper = require('./modules/helper.js');
+
+//const User = require('./public/user.js');
+var saved = require('./modules/saved.js');
+
 
 var app = express();
 var port = process.env.PORT || 3000;
@@ -28,10 +32,10 @@ app.get('/', function(req, res, next) {
   });
 });
 
-//Route to get ingredients
+// build page----------------------------------------------------------------------
+//Route to get  all ingredients
 app.get('/ingredientData', function(req, res, next) {
   console.log("transmitting ingredient data");
-  console.log(ingredientData);
   res.status(200)
   res.json({ingredientData});
 });
@@ -48,7 +52,7 @@ app.get('/buildEdit/:id', function(req, res, next) {
   console.log("Serving the Build Recipe Page");
   var context = {};
   context.recipe = [];
-  console.log(req.params.id);
+
   var id = req.params.id;
   var recipeID;
   //grab recipe by ingredient ids and store in object recipe = [{}]
@@ -72,28 +76,62 @@ app.get('/buildEdit/:id', function(req, res, next) {
   res.render("buildPageEdit", context)
 });
 
-//req is going to be the user id maybe idk
+app.get('/popuplog', function(req, res, next) {
+  console.log("Opened login popup window");
+  res.status(200);
+  res.sendFile(__dirname + '/public/login\ popup/loginPop.html'); 
+});
+
+app.post('/saveRecipe/:userID', function(req, res, next) {
+  var userID = req.params.userID;
+  let userdata = fs.readFileSync('userData.json');
+  let userD = JSON.parse(userdata);
+
+  var recipeId = req.body.ID, name = req.body.Name, rIngred = req.body.Ingredients;
+  
+  let mealdata = fs.readFileSync('mealData.json');
+  let mealD = JSON.parse(mealdata);
+  
+  //check if meal already exists
+  if (mealD[recipeId] && mealD[recipeId].ID == recipeId 
+    && mealD[recipeId].Name == name) {
+    //check if the recipe name was changed
+    var OGmeal = mealD[recipeId].Ingredients;
+    OGmeal = OGmeal.sort().toString();
+    rIngred = rIngred.sort().toString();
+  }
+    //check if any ingredients were changed
+    if (OGmeal == rIngred) {
+      req.body.Public = true;
+      //save meal to userID
+      userD[userID].Recipes.push(recipeId);
+      //remove double entries of same meal
+      let deldoubles = new Set(userD[userID].Recipes);
+      userD[userID].Recipes = Array.from(deldoubles);
+      let udata = JSON.stringify(userD, null, 1);
+      fs.writeFileSync('userData.json', udata);
+
+      res.status(200).send({"result":true});
+    } else {
+        req.body.ID = mealD.length;
+        mealD.push(req.body);
+        let data = JSON.stringify(mealD, null, 1);
+        fs.writeFileSync('mealData.json', data);
+
+        userD[userID].Recipes.push(req.body.ID);
+        let udata = JSON.stringify(userD, null, 1);
+        fs.writeFileSync('userData.json', udata);
+
+        res.status(200).send({"result":true});
+  }
+})
+// build page-----------------------------------------------------------------------
+
 app.get('/saved', function(req, res, next) {
   console.log("Serving the Saved Recipes Page");
+  //current url syntax: http://localhost:3000/saved/?ID=0&userID=1
 
-  var context = {};
-
-  //this is wrong, bc uhhhh i think it is
-  //var userIdNum = req.params.id;
-  var userIdNum = "1";
-  context.userInfo = userData[userIdNum];
-  var recipeID;
-  context.savedRecipes = [];
-
-  for(var i in context.userInfo.Recipes){
-    recipeID = context.userInfo.Recipes[i];
-    //adding the meal objects to the context???
-    context.savedRecipes[i] = {"meal": mealData[recipeID]};
-  }
-
-  res.status(200);
-  res.render("savedPage", context);
-  // res.render("savedPage");
+  saved.getInfo(req, res, next, ingredientData, mealData, userData);
 });
 
 app.get('/meal', function(req, res, next){
@@ -121,7 +159,7 @@ app.get('/browse', function(req, res, next) {
   res.status(200);
   res.render("browsePage",context);
 });
-
+// Login routes ---------------------------------------------------------------
 app.get('/login', function(req, res, next) {
   console.log("Serving the Login Page");
   res.status(200);
@@ -130,6 +168,25 @@ app.get('/login', function(req, res, next) {
   });
 });
 
+app.post('/checkLogin', function(req, res, next) {
+  let userdata = fs.readFileSync('userData.json');
+  let userD = JSON.parse(userdata);
+  let found = false;
+  for (var i=0; i < userD.length; i++){
+    if (userD[i].Username == req.body.Username 
+      && userD[i].Password == req.body.Password){
+      found = true;
+      userD[i].Access = req.body.Access;
+      let udata = JSON.stringify(userD, null, 1);
+      fs.writeFileSync('userData.json', udata);
+      res.status(200).json(userD[i]);
+      break;
+    } else {continue;}
+  }
+  if (found == false) {res.status(200).send('false');}
+  
+});
+// Login routes ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 app.get('/signup', function(req, res, next) {
   console.log("Serving the Sign Up Page");
   res.status(200);
@@ -141,34 +198,22 @@ app.get('/signup', function(req, res, next) {
 
 app.post('/newUser', function(req, res, next) {
 
-  console.log("Adding new user...");
-  if (req.body && req.body.name && req.body.email && req.body.message) {
-    console.log("==Name: ", req.body.name);
-    console.log("==Email: ", req.body.email);
-    console.log("==Message: ", req.body.message);
+  let userData = fs.readFileSync('userData.json');
+  let jUserData = JSON.parse(userData);
 
+  var user = {
+    ID: jUserData.length,
+    Username: req.body.Username,
+    Password: req.body.Password,
+    Recipes: [],
+  };
+  
+  if (req.body.Username && req.body.Password) {
+    jUserData.push(user);
+    let data = JSON.stringify(jUserData, null, 1);
+
+    fs.writeFileSync('userData.json', data);
     res.status(200).send("Your information was saved.");
-
-    fs.appendFile('userData.json', req.body.username + "\n", function(err) {
-      if (err) {
-        return console.log(err);
-      }
-      console.log(req.body.username);
-    });
-
-    fs.appendFile('userData.json', req.body.password + "\n", function(err) {
-      if (err) {
-        return console.log(err);
-      }
-      console.log(req.body.password);
-    });
-
-    fs.appendFile('userData.json', req.body.email + "\n", function(err) {
-      if (err) {
-        return console.log(err);
-      }
-      console.log(req.body.email);
-    });
   }
   else {
     res.status(400).send("You must fill out all fields.");
@@ -186,13 +231,13 @@ app.get('/ingredients/:IDs', function(req, res, next) {
       for (var k=0; k < ingredientData.length; k++) {
         if (IDs[i] == ingredientData[k].ID) {
           ing = ingredientData[k];
-          console.log(ing)
           s = ing.Subsitutes
           for (var j = 0; j < s.length; j++){
             if(typeof(s[j]) !== "object"){
               ing.Subsitutes[j] = {
                 name: ingredientData[s[j]].Name,
-                rating: ingredientData[s[j]].Rating
+                rating: ingredientData[s[j]].Rating,
+                ID: s[j],
               }
             }
           }

@@ -1,5 +1,5 @@
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-  <div class="build-form">
+  <form id="build-form" autocomplete="on">
     <div class="inputs" id="recipe-name"><label for="title">RECIPE NAME</label><br>
     <input type="hidden" id="recipe-id" value="{{meal.ID}}">
        <input type="text" id="recipeTitle" name="recipeTitle" placeholder="Enter name here" value="{{meal.Name}}">
@@ -9,27 +9,32 @@
     <span class="inputs ingredients" id="ingredient-box">
       <!---put ingredients here-->
       {{#each recipe}}
- <br><input list="product"  class="ingredient-input" name="{{Name}}" placeholder="Select Ingredient" value="{{Name}}    {{Rating}}"/>
+ <span><br><input type="button" class="deleteEdit" value="X" onClick="deleteIngredient(this)" style="display:inline;"/>
+ <input list="product"  class="ingredient-input" name="{{Name}}" placeholder="Select Ingredient" value="{{Name}}    {{Rating}}"/></span>
  {{/each}}
   <datalist id="product">
     {{#each ingred}}
   <option value="{{Name}}    {{Rating}}" name="{{Name}}">
     {{/each}}
-</datalist></span><span><id="add"><input type="button" id="button-add" value="+"/></span>
+</datalist>
+</span><span id="add"><input type="button" id="button-add" value="+"/></span>
     <br><br>
         <!---buttons--->
     <div id="check-ingredients"><input type="button" id="verify" value="CHECK INGREDIENTS"/></div>
-      <!---toggle private------->
+      <!----------------------toggle private----------------------->
 <div class="custom-control custom-switch">
-  <input type="checkbox" class="custom-control-input input-private" id="customSwitch1">
-  <label class="custom-control-label" for="customSwitch1">Private</label>
+  <input type="checkbox" class="custom-control-input" id="customSwitch1">
+  <label class="custom-control-label" for="customSwitch1">Public</label>
 </div>
-      <!--check user logged in------>
+      <!----------------------check user logged in------------------->
     <div class="save-buttons">
       <input type="button" id="verify-login" value="SAVE RECIPE"/>
-    <input type="button" id="saved" value="SAVED &#10004" disabled/>
+    <input type="button" id="saved" value="SAVED &#10004" style="display:none;"/>
     </div>
-  </div>
+
+  </form>
+  <br>
+  <input type="button" id="reset" value="RESET FORM">
 
     <script type="text/javascript" src="http://localhost:3000/build.js"></script>
  
