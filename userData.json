@@ -30,6 +30,10 @@
   "ID": 4,
   "Username": "agentScarn",
   "Password": "cookamunga",
-  "Recipes": []
+  "Recipes": [
+   6,
+   7,
+   8
+  ]
  }
 ]

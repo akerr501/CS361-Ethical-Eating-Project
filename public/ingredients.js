@@ -16,10 +16,12 @@ function assignCollapseListeners(){
     buttons[i].addEventListener("click", function() {
       this.classList.toggle("active");
       var content = this.nextElementSibling;
+
       if (content.style.display === "flex") { // swap visibility state of container
         content.style.display = "none";
       } else {
         content.style.display = "flex";
+
       }
     });
   }
@@ -43,6 +45,7 @@ function subsitutionSwapListener(sub){
   let clear = false; // used if the user wants to deselect swap
   for(var i = 1; i < container.length; i++){
     tempSub = container[i];
+
     if(tempSub.style.backgroundColor == "rgb(183, 206, 168)" || tempSub.style.backgroundColor == "rgb(239, 85, 75)"){
       tempSub.style.backgroundColor = "";
       if(tempSub == sub) clear = true;
@@ -78,4 +81,17 @@ function swapListener(){
     if(og) IDs.push(sub_children[0].innerHTML);
   }
   console.log(IDs); // actually go back to build recipe page from here
+}
+
+function swapListener(){
+  for (i = 0; i < subsitutes.length; i++){
+    sub_children = subsitutes[i].children;
+    IDs[i] = sub_children[0].innerHTML;
+    for(var j = 1; j <sub_children.length; j++){
+      if(sub_children[j].style.backgroundColor == "darkseagreen") IDs[i] = sub_children[j].children[0].innerHTML;
+    }
+  }
+  //console.log(IDs); // actually go back to build recipe page from here
+  localStorage.setItem('swap', JSON.stringify(IDs));
+  location.replace(document.referrer);
 }

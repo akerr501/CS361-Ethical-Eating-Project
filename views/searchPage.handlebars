@@ -7,9 +7,9 @@
    <ul class="fList">
     {{#each meals}}
       <li>
-        <div class="result">
+        <div class="result shadow">
           <a href="http://localhost:3000/meal?ID={{{ID}}}">{{Name}}</a>
-          <p>Ethic Rating: {{Rating}}</p>
+          <p class="rating">Ethic Rating: {{Rating}}</p>
         </div>
       </li>
     {{/each}}
@@ -25,10 +25,10 @@
     <ul class="fList">
       {{#each ingredients}}
       <li>
-        <div class="result">
+        <div class="result shadow">
           <a href="http://localhost:3000/ingredients/[{{ID}}]">{{Name}}</a>
-          <p> Ethic Rating: {{Rating}}</p>
-          <p>{{Issues}}</p>
+          <p class="rating"> Ethic Rating: {{Rating}}</p>
+          <p class="rating">{{Issues}}</p>
         </div>
       </li>
     {{/each}}
