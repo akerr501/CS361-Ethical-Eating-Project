@@ -25,6 +25,7 @@ h1{
   margin: 0 auto 0 auto;
   padding:0px 0px 70px 0px;
   border: #4d3942 4px solid; 
+  box-shadow: 5px 5px 2px grey;
 }
 
 .username{
@@ -55,8 +56,8 @@ h1{
   padding-bottom:5px;
   color:black;
   border-radius:14px;
-  border: #b7cea9 1px solid;
-  
+  border: #4d3942 1px solid;
+  box-shadow: 5px 5px 2px grey;
   margin-top:20px;
   margin-bottom:20px;
   float:left;
@@ -66,7 +67,7 @@ h1{
 }
 
 .btn:hover{
-  background:#2CC06B; 
+  background:#63b7af; 
 }
 
 #signup{
@@ -77,7 +78,7 @@ h1{
   color:white;
   border-radius:4px;
   border: #6b8c8e 1px solid;
-  
+  box-shadow: 5px 5px 2px grey;
   margin-top:20px;
   margin-bottom:20px;
   margin-left:10px;
@@ -86,9 +87,10 @@ h1{
 }
 
 #signup:hover{ 
-background:#3594D2; 
+background:#4d3942; 
 }
 
 #close {
   width: 265px;
+  box-shadow: 5px 5px 2px grey;
 }
