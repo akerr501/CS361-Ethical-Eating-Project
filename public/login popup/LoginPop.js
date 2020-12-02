@@ -18,27 +18,42 @@ $('a').click(function(event){
     event.preventDefault();
 	});
 // functions belonging to design ^^^^^^^^^^^^^^^^^^^^^^^^^^
+window.onunload = refreshParent;
 
 document.getElementById('login').addEventListener('click', function(){
   createLoginObj();
 });
 
+document.getElementById('signup').addEventListener('click', function(){
+  //send to signup page
+  url = "http://localhost:3000/signup";
+  window.location.href = url;
+})
+
+function refreshParent(){
+  window.opener.location.reload();
+}
+
 function createLoginObj() {
- var loginObj = {
-   user: document.getElementById('username').value,
-    pw: document.getElementById('password').value
+
+  let user = document.getElementById('username').value;
+  let pw = document.getElementById('password').value;
+
+  checkUser(user, pw, verifyUser);
+}
+
+function verifyUser(){
+
+  if (localStorage.getItem('user')){
+    //changed text to 'welcome back!' and close button 
+    document.getElementById('msg1').style.display = "none";
+    document.getElementById('msg3').style.display = "inline-block";
+    document.getElementById('login').style.display = "none";
+    document.getElementById('signup').style.display = "none";
+    document.getElementById('close').style.display = "inline";
+  } else {
+    //change text to 'something doesnt match'
+    document.getElementById('msg1').style.display = "none";
+    document.getElementById('msg2').style.display = "inline-block";
   }
- checkinUser(loginObj);
-}
-
-function checkinUser(obj){
-  //get req for user object if result is true (user found) -- change prompt to welcome back!
-  //think there is already a function for this in build.js
-  //if result is false ---> prompt login again --
-  //
-}
-
-function close(){
-  // myWindow = window.open("", "myWindow", "width=200,height=100");
-  //myWindow.close();
 }
