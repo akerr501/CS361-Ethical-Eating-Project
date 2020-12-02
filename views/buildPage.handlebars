@@ -1,16 +1,16 @@
   <link href="http://localhost:3000/build.css" rel="stylesheet" type="text/css" />
-  <form id="build-form" autocomplete="on">
-    <div class="inputs" id="recipe-name"><label for="title">RECIPE NAME</label><br>
+  <form id="build-form" autocomplete="on"><br>
+    <div class="inputs" id="recipe-name"><label for="title"><h4>RECIPE NAME</h4></label><br>
        <input type="hidden" id="recipe-id" value="">
-       <input type="text" id="recipeTitle" name="recipeTitle" placeholder="Enter name here" value="">
+       <input type="text" id="recipeTitle" name="recipeTitle" placeholder="  Enter name here" value="">
     </div>
     <br>
     <div class="inputs">
-    <label for="ingredients" id="label-ingred">INGREDIENTS</label>
+    <label for="ingredients" id="label-ingred"><h4>INGREDIENTS</h4></label>
     <span class="inputs ingredients" id="ingredient-box">
       <!---put ingredients here-->
  <span><br><input type="button" class="delete" id="delete0" value="X" onClick="deleteIngredient(this)" style="display:none;"/>
- <input list="product"  class="ingredient-input" placeholder="Select Ingredient"/></span>
+ <input list="product"  class="ingredient-input" placeholder="  Select Ingredient"/></span>
   <datalist id="product">
     {{#each ingred}}
   <option value="{{Name}}    {{Rating}}" name="{{Name}}">
@@ -30,7 +30,7 @@
     <div class="save-buttons">
       <input type="button" id="verify-login" value="SAVE RECIPE"/>
     <input type="button" id="saved" value="SAVED &#10004" style="display:none;"/>
-    </div>
+    </div><br>
 
   </form>
   <br>
