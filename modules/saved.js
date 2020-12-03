@@ -62,11 +62,12 @@ const getInfo = (req, res, next, ingredientData, mealData, userData, userInforma
             }
         }
 
-
+      console.log("sending stuff");
         res.status(200);
         res.render("savedPage", context);}
 
     else{
+      console.log("sending nothing");
         var context = {};
         context.savedMealsInfo = [];
         context.curMeal = 0;

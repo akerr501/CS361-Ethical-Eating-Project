@@ -73,17 +73,18 @@ function gettingLocalStorage(){
         }
 
         var myReq = new XMLHttpRequest();
+        myReq.open("POST", 'http://localhost:3000/saved', true); 
+        myReq.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
         myReq.onload = function() {
             if(myReq.status >= 200 && myReq.status <400){
                 console.log("hey");
+                console.log(myReq.responseText);
             }
             else{
                 console.error(myReq.statusText);
             }
         }
-        myReq.open("POST", 'http://localhost:3000/saved', true); 
-        myReq.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-        myReq.send(JSON.stringify(userID));
+       myReq.send(JSON.stringify(userID));
     }
 
     else{

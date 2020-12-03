@@ -9,6 +9,7 @@ var userData = require('./userData.json')
 var fs = require('fs');
 const { isContext } = require('vm');
 var helper = require('./modules/helper.js');
+var userInformation = "";
 
 //const User = require('./public/user.js');
 var saved = require('./modules/saved.js');
@@ -128,10 +129,12 @@ app.post('/saveRecipe/:userID', function(req, res, next) {
 // build page-----------------------------------------------------------------------
 
 
-var userInformation = "";
 app.post('/saved', function(req, res, next) {
   console.log("Serving the POST Saved Recipes Page");
+  console.log(req.body);
   userInformation = req.body;
+  saved.getInfo(req, res, next, ingredientData, mealData, userData, userInformation);
+
 });
 
 app.get('/saved', function(req, res, next) {
@@ -183,6 +186,8 @@ app.post('/checkLogin', function(req, res, next) {
       found = true;
       userD[i].Access = req.body.Access;
       let udata = JSON.stringify(userD, null, 1);
+      userInformation = { "userID":i};
+      console.log(userInformation);
       fs.writeFileSync('userData.json', udata);
       res.status(200).json(userD[i]);
       break;
