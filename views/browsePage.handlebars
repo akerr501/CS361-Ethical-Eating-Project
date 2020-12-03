@@ -9,7 +9,7 @@
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
       <ul class="filterList">
         {{#each ingredients}}
-          <li><input data-ingredientid={{ID}} class="filterIn" type="checkbox">{{Name}}</li> 
+          <li><input data-ingredientid={{ID}} class="filterIn" type="checkbox">{{Name}}</li>
         {{/each}}
       </ul>
     </div>
@@ -22,7 +22,7 @@
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
       <ul class="filterList">
         {{#each ingredients}}
-          <li><input data-ingredientid={{ID}} class="filterOut" type="checkbox">{{Name}}</li> 
+          <li><input data-ingredientid={{ID}} class="filterOut" type="checkbox">{{Name}}</li>
         {{/each}}
       </ul>
     </div>
@@ -54,7 +54,7 @@
     {{#each ingredients}}
       <li>
         <div class="result shadow ingredients" data-ingredientid={{ID}} data-ingrating={{Rating}} data-name={{Name}}>
-          <a href="/ingredients/[{{{ID}}}]">{{Name}}</a>
+          <a href="/ingredient/{{{ID}}}">{{Name}}</a>
           <p class="rating">Ethic rating: {{Rating}}
           <p class="rating"> {{Issues}}</p>
       </li>
