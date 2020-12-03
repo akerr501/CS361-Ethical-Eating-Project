@@ -56,8 +56,21 @@ function gettingLocalStorage(){
         //userInfo = JSON.parse(userInfo);
         var userID = getID();
         console.log(userID);
+
         //userInfo.userID = userID;
         //userInfo = JSON.stringify(userInfo);
+        if(localStorage.getItem("curRec")){
+            curRec = localStorage.getItem("curRec");
+            userID = {
+                "userID": userID,
+                "curRec": curRec
+            }            
+        }
+        else{
+            userID = {
+                "userID": userID
+            }
+        }
 
         var myReq = new XMLHttpRequest();
         myReq.onload = function() {
@@ -69,8 +82,8 @@ function gettingLocalStorage(){
             }
         }
         myReq.open("POST", 'http://localhost:3000/saved', true); 
-        myReq.setRequestHeader('Content-Type', 'number');
-        myReq.send(userID);
+        myReq.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+        myReq.send(JSON.stringify(userID));
     }
 
     else{
@@ -79,3 +92,16 @@ function gettingLocalStorage(){
 }
 
 window.onload = gettingLocalStorage();
+
+var list = document.getElementsByClassName("recipeButton");
+for(let b = 0; b < list.length; b++){
+    list[b].addEventListener('click', function(){
+        //console.log("button clicked" + b);
+        curButton = list[b];
+
+        //click current recipe
+        var recID = curButton.getAttribute('value');
+        localStorage.setItem('curRec', recID);
+    }
+    )
+}

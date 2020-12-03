@@ -25,10 +25,10 @@
     </lh>
     {{#each savedMealsInfo}}
     <li>
-        <a href="/saved/?ID={{this.ID}}">
+        {{!-- <a href="/saved/?ID={{this.ID}}"> --}}
         {{!-- <a href="/saved/?ID={{this.ID}}&userID={{@root.curUserInfo.ID}}"> --}}
-            <button class = "recipeButton">{{this.Name}}</button>
-        </a>
+            <button class = "recipeButton" value = {{this.ID}}>{{this.Name}}</button>
+        {{!-- </a> --}}
     </li>
     {{/each}}
 </ul>

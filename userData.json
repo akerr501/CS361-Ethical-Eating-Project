@@ -4,9 +4,10 @@
   "Username": "Username",
   "Password": "Password",
   "Recipes": [
-   1,
-   5
-  ]
+   2,
+   4
+  ],
+  "Access": 1
  },
  {
   "ID": 1,
@@ -18,7 +19,8 @@
   "ID": 2,
   "Username": "turbo",
   "Password": "crushers",
-  "Recipes": []
+  "Recipes": [],
+  "Access": 1
  },
  {
   "ID": 3,
@@ -33,7 +35,8 @@
   "Recipes": [
    6,
    7,
-   8
-  ]
+   3
+  ],
+  "Access": 1
  }
 ]

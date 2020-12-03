@@ -81,6 +81,10 @@
 }
 */
 
+.nonRecipeButton{
+    margin-top: 20px;
+}
+
 .nonRecipeButton:hover{
     background-color: #E4E3E6;
 }

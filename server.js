@@ -127,17 +127,17 @@ app.post('/saveRecipe/:userID', function(req, res, next) {
 })
 // build page-----------------------------------------------------------------------
 
-app.get('/saved', function(req, res, next) {
-  console.log("Serving the Saved Recipes Page");
-  saved.getInfo(req, res, next, ingredientData, mealData, userData);
-});
 
+var userInformation = "";
 app.post('/saved', function(req, res, next) {
-  console.log("Serving the Saved Recipes Page");
-  saved.getInfo(req, res, next, ingredientData, mealData, userData);
+  console.log("Serving the POST Saved Recipes Page");
+  userInformation = req.body;
 });
 
-
+app.get('/saved', function(req, res, next) {
+  console.log("Serving the GET Saved Recipes Page");
+  saved.getInfo(req, res, next, ingredientData, mealData, userData, userInformation);
+});
 
 app.get('/meal', function(req, res, next){
   console.log("serving meall page");
