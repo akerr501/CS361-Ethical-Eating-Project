@@ -79,7 +79,7 @@ app.get('/buildEdit/:id', function(req, res, next) {
 app.get('/popuplog', function(req, res, next) {
   console.log("Opened login popup window");
   res.status(200);
-  res.sendFile(__dirname + '/public/login\ popup/loginPop.html'); 
+  res.sendFile(__dirname + '/public/login\ popup/loginPop.html');
 });
 
 app.post('/saveRecipe/:userID', function(req, res, next) {
@@ -178,7 +178,7 @@ app.post('/checkLogin', function(req, res, next) {
   let userD = JSON.parse(userdata);
   let found = false;
   for (var i=0; i < userD.length; i++){
-    if (userD[i].Username == req.body.Username 
+    if (userD[i].Username == req.body.Username
       && userD[i].Password == req.body.Password){
       found = true;
       userD[i].Access = req.body.Access;
@@ -189,7 +189,7 @@ app.post('/checkLogin', function(req, res, next) {
     } else {continue;}
   }
   if (found == false) {res.status(200).send('false');}
-  
+
 });
 // Login routes ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 app.get('/signup', function(req, res, next) {
@@ -212,7 +212,7 @@ app.post('/newUser', function(req, res, next) {
     Password: req.body.Password,
     Recipes: [],
   };
-  
+
   if (req.body.Username && req.body.Password) {
     jUserData.push(user);
     let data = JSON.stringify(jUserData, null, 1);
@@ -269,7 +269,7 @@ app.get('/ingredients/:IDs', function(req, res, next) {
 
 app.get('/ingredient/:ID', function(req, res, next) {
   var id = req.params.ID;
-  var ingredients = [];
+  var ing;
   for (var k=0; k < ingredientData.length; k++) {
     if (id == ingredientData[k].ID) {
       ing = ingredientData[k];
@@ -283,16 +283,13 @@ app.get('/ingredient/:ID', function(req, res, next) {
           }
         }
       }
-      ingredients = [ing];
+      ing;
     }
   }
 
-  if(ingredients.length > 0){
+  if(ing != null){
     res.status(200);
-    res.render('ingredientsPage', {
-      INGREDIENTS: ingredients,
-      swap: false
-    });
+    res.render('ingredientPage', ing);
   }
   else res.render('404Page', {});
 });
