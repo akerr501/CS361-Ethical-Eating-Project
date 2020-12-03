@@ -212,8 +212,15 @@ app.post('/newUser', function(req, res, next) {
     Password: req.body.Password,
     Recipes: [],
   };
+
+  let i = 0, add = 1;
+  for (i = 0; i < jUserData.length; i++) {
+    if (req.body.Username == jUserData[i].Username) {
+      add = 0;
+    }
+  }
   
-  if (req.body.Username && req.body.Password) {
+  if (req.body.Username && req.body.Password && add == 1) {
     jUserData.push(user);
     let data = JSON.stringify(jUserData, null, 1);
 
@@ -222,7 +229,12 @@ app.post('/newUser', function(req, res, next) {
     res.status(200).send("Your information was saved.");
   }
   else {
-    res.status(400).send("You must fill out all fields.");
+    if (add == 0) {
+      res.status(400).send("Username unavailable.");
+    }
+    else {
+      res.status(400).send("You must fill out all fields.");
+    }  
   }
 });
 
