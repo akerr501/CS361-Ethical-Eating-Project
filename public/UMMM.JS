@@ -46,3 +46,36 @@ function signOut(){
     localStorage.removeItem('user');
 }
 
+function idk(){
+    var userInfo;
+    console.log("inside idk");
+
+    if(localStorage.getItem("user")){
+        console.log("logged in");
+        //userInfo = localStorage.getItem('user');
+        //userInfo = JSON.parse(userInfo);
+        var userID = getID();
+        console.log(userID);
+        //userInfo.userID = userID;
+        //userInfo = JSON.stringify(userInfo);
+
+        var myReq = new XMLHttpRequest();
+        myReq.onload = function() {
+            if(myReq.status >= 200 && myReq.status <400){
+                console.log("hey");
+            }
+            else{
+                console.error(myReq.statusText);
+            }
+        }
+        myReq.open("POST", 'http://localhost:3000/saved', true); 
+        myReq.setRequestHeader('Content-Type', 'number');
+        myReq.send(userID);
+    }
+
+    else{
+        console.log("not logged in");
+    }
+}
+
+window.onload = idk();

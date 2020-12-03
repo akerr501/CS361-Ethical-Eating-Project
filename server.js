@@ -79,7 +79,7 @@ app.get('/buildEdit/:id', function(req, res, next) {
 app.get('/popuplog', function(req, res, next) {
   console.log("Opened login popup window");
   res.status(200);
-  res.sendFile(__dirname + '/public/login\ popup/loginPop.html');
+  res.sendFile(__dirname + '/public/login\ popup/loginPop.html'); 
 });
 
 app.post('/saveRecipe/:userID', function(req, res, next) {
@@ -111,7 +111,7 @@ app.post('/saveRecipe/:userID', function(req, res, next) {
       let udata = JSON.stringify(userD, null, 1);
       fs.writeFileSync('userData.json', udata);
 
-      res.status(200).send({"result":true, "data":userData[userID]});
+      res.status(200).send({"result":true});
     } else {
         req.body.ID = mealD.length;
         mealD.push(req.body);
@@ -122,17 +122,22 @@ app.post('/saveRecipe/:userID', function(req, res, next) {
         let udata = JSON.stringify(userD, null, 1);
         fs.writeFileSync('userData.json', udata);
 
-        res.status(200).send({"result":true, "data":userData[userID]});
+        res.status(200).send({"result":true});
   }
 })
 // build page-----------------------------------------------------------------------
 
 app.get('/saved', function(req, res, next) {
   console.log("Serving the Saved Recipes Page");
-  //current url syntax: http://localhost:3000/saved/?ID=0&userID=1
-
   saved.getInfo(req, res, next, ingredientData, mealData, userData);
 });
+
+app.post('/saved', function(req, res, next) {
+  console.log("Serving the Saved Recipes Page");
+  saved.getInfo(req, res, next, ingredientData, mealData, userData);
+});
+
+
 
 app.get('/meal', function(req, res, next){
   console.log("serving meall page");
@@ -149,7 +154,6 @@ app.get('/browse', function(req, res, next) {
   console.log("Serving the Browse Page");
   var context = {};
   context.ingredients = ingredientData;
-
   context.meals = [];
   //only get public meals
   for (i in mealData){
@@ -157,7 +161,6 @@ app.get('/browse', function(req, res, next) {
       context.meals.push(mealData[i]);
     }
   }
-
   res.status(200);
   res.render("browsePage",context);
 });
@@ -171,19 +174,22 @@ app.get('/login', function(req, res, next) {
 });
 
 app.post('/checkLogin', function(req, res, next) {
-
+  let userdata = fs.readFileSync('userData.json');
+  let userD = JSON.parse(userdata);
   let found = false;
-  for (var i=0; i < userData.length; i++){
-    if (userData[i].Username == req.body.Username
-      && userData[i].Password == req.body.Password){
+  for (var i=0; i < userD.length; i++){
+    if (userD[i].Username == req.body.Username 
+      && userD[i].Password == req.body.Password){
       found = true;
-      res.status(200).json(userData[i]);
-
+      userD[i].Access = req.body.Access;
+      let udata = JSON.stringify(userD, null, 1);
+      fs.writeFileSync('userData.json', udata);
+      res.status(200).json(userD[i]);
       break;
     } else {continue;}
   }
   if (found == false) {res.status(200).send('false');}
-
+  
 });
 // Login routes ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 app.get('/signup', function(req, res, next) {
@@ -206,7 +212,7 @@ app.post('/newUser', function(req, res, next) {
     Password: req.body.Password,
     Recipes: [],
   };
-
+  
   if (req.body.Username && req.body.Password) {
     jUserData.push(user);
     let data = JSON.stringify(jUserData, null, 1);
@@ -263,7 +269,7 @@ app.get('/ingredients/:IDs', function(req, res, next) {
 
 app.get('/ingredient/:ID', function(req, res, next) {
   var id = req.params.ID;
-  var ing;
+  var ingredients = [];
   for (var k=0; k < ingredientData.length; k++) {
     if (id == ingredientData[k].ID) {
       ing = ingredientData[k];
@@ -277,12 +283,16 @@ app.get('/ingredient/:ID', function(req, res, next) {
           }
         }
       }
+      ingredients = [ing];
     }
   }
 
-  if(ing != null){
+  if(ingredients.length > 0){
     res.status(200);
-    res.render('ingredientPage', ing);
+    res.render('ingredientsPage', {
+      INGREDIENTS: ingredients,
+      swap: false
+    });
   }
   else res.render('404Page', {});
 });

@@ -1,4 +1,23 @@
 <link rel= "stylesheet" href = "/savedPage.css">
+<script>    
+        const myUser = {
+        Username: 'username',
+        Password: 'password',      
+    };
+    localStorage.setItem('user', JSON.stringify(myUser));
+</script>
+
+<script>
+//window.addEventListener('load', (event) =>
+  //  let id = JSON.parse(localStorage.getItem('user'));
+    //id = Number(id.ID);
+    //var idHolder = document.createElement("p");
+    //idHolder.style.display = "none";
+    //idHolder.setAttribute(value=id);
+    //idHolder.setAttribute(id="idHolder");
+    //idHolder.setAttribute(runat="server");
+//)
+</script>
 
 <ul class = "recipeList" id="recipeList">
     <lh id = "savedHeader">
@@ -6,7 +25,8 @@
     </lh>
     {{#each savedMealsInfo}}
     <li>
-        <a href="/saved/?ID={{this.ID}}&userID={{@root.curUserInfo.ID}}">
+        <a href="/saved/?ID={{this.ID}}">
+        {{!-- <a href="/saved/?ID={{this.ID}}&userID={{@root.curUserInfo.ID}}"> --}}
             <button class = "recipeButton">{{this.Name}}</button>
         </a>
     </li>
@@ -64,5 +84,8 @@
     {{!-- <button class = "nonRecipeButton" id = "deleteButton">
         Delete from Recipe Book
     </button> --}}
+
+
 </div>  
 
+<script type = "text/javascript" src="http://localhost:3000/UMMM.JS"></script>
