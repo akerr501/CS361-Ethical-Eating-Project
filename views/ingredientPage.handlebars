@@ -1,9 +1,8 @@
 <main class="ingredient-body">
-  <div class="header">Ingredients</div>
+  <div class="header">{{Name}}</div>
   <div class="subheader">Read about the issues and select alternatives</div>
 
   <div class = "ingredient-list-container">
-    {{#each INGREDIENTS}}
     <div class = "ingredient-container shadow">
       <div><b>{{Name}}</b></div>
       <div>{{Rating}}</div>
@@ -18,11 +17,8 @@
           <div>{{this.name}} - {{this.rating}}</div>
         </button>
         {{/each}}
-        <button class = "subs-button shadow">Remove Ingredient</button>
       </div>
     </div>
-    {{/each}}
-    <button type = "button" class = "swap-button shadow">Make Swaps!</button>
   </div>
 
 

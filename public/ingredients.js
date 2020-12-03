@@ -84,14 +84,20 @@ function swapListener(){
 }
 
 function swapListener(){
+  IDs = [];
   for (i = 0; i < subsitutes.length; i++){
     sub_children = subsitutes[i].children;
-    IDs[i] = sub_children[0].innerHTML;
+    var og = true;
     for(var j = 1; j <sub_children.length; j++){
-      if(sub_children[j].style.backgroundColor == "darkseagreen") IDs[i] = sub_children[j].children[0].innerHTML;
+      var color = sub_children[j].style.backgroundColor;
+      if(color == "rgb(183, 206, 168)" || color == "rgb(239, 85, 75)") {
+        if(color != "rgb(239, 85, 75)") IDs.push(sub_children[j].children[0].innerHTML);
+        og = false;
+      }
     }
+    if(og) IDs.push(sub_children[0].innerHTML);
   }
-  //console.log(IDs); // actually go back to build recipe page from here
+  console.log(IDs); // actually go back to build recipe page from here
   localStorage.setItem('swap', JSON.stringify(IDs));
   location.replace(document.referrer);
 }
