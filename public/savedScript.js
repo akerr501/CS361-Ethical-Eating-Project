@@ -46,7 +46,6 @@ function signOut(){
 }
 
 function gettingLocalStorage(){
-    var userInfo;
 
     if(localStorage.getItem("user")){
         //userInfo = localStorage.getItem('user');

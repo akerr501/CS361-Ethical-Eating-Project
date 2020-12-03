@@ -38,5 +38,14 @@
    3
   ],
   "Access": 1
- }
+ },
+ {
+    "ID": 5,
+    "Username": "Guest",
+    "Password": "Guest",
+    "Recipes": [
+        0
+    ],
+    "Access": 1
+   }
 ]
