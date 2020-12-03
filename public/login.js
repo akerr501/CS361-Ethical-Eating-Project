@@ -1,9 +1,5 @@
 // Authors: Maddie Smith
 
-// Require fs to be able to read and write with userData.json
-var path = require('path');
-var fs = require('fs');
-
 // Get the submit button to add a new user
 var submitLogin = document.querySelector('.submit');
 
@@ -13,32 +9,23 @@ var passwordInput = document.querySelector('#pwd');
 
 console.log("ENTERED LOGIN.JS\n");
 
-submitLogin.addEventListener('click', function() {
-
+submitLogin.addEventListener('click', function(event) {
+    event.preventDefault();
     // Store the values from the input boxes in variables
     var username = usernameInput.value;
     var password = passwordInput.value;
 
     checkUser(username, password);
-
-    // Reset the input values to be used for the next time
-    resetInputs(n_usernameInput, n_passwordInput, nv_passwordInput);
 });
 
 function checkUser(username, password) {
-    
-    // Add access for a user if the username and password meet the criteria
-    if (verifyUser(username) && minimumRequirement(password)) {
-
         var loggedUser = {
             Username: username,
             Password: password,
             Access: 1
         };
         var requestBody = JSON.stringify(loggedUser);
-
-        sendResponseAndRequest(event, request, requestBody);
-    }
+        sendResponseAndRequest(event, requestBody);
 }
 
 function resetInputs(user, pass, vpass) {
@@ -47,54 +34,27 @@ function resetInputs(user, pass, vpass) {
     vpass.value = "";
 }
 
-function sendResponseAndRequest(event, request, requestBody) {
-
-    /*if (event.target.status !== 200) {
-        var responseToUser = event.target.response;
-        //alert("Error storing in database! " + responseToUser);
-    } else {
-        console.log("Successfully stored in database!");
-    }*/
-
-    request.setRequestHeader(
-        'Content-Type', 'application/json'
-    );
-    request.send(requestBody);
-}
-
-// Make sure that the username is unique and not taken
-function verifyUser(username) {
-    console.log("verifying username");
-    minimumRequirement(username);
-    let userData = fs.readFileSync('userData.json');
-    let jUserData = JSON.parse(userData);
-
-    var i = 0;
-
-    for (i = 0; i < jUserData.length; i++) {
-        console.log("Stored: ",jUserData[i].Username);
-        if (jUserData[i].Username == username) {
-            console.log("USERNAME EXISTS!", username);
-            if (jUserData[i].Password == password) {
-                console.log("LOGIN SUCCESSFUL!");
-                return 1;
-            }
+function sendResponseAndRequest(event, requestBody) {
+   var requestURL = "/checkLogin"
+    var req = new XMLHttpRequest();
+    req.open("POST", requestURL, true);
+    req.setRequestHeader('Content-Type', 'application/json');
+    req.addEventListener("load", function(){
+    if (req.status >= 200 && req.status < 400){
+        var res = JSON.parse(req.responseText);
+        if (res == false){
+          alert("Invalid username or password, please re-enter");
+          console.log(res);
+        } else {
+          localStorage.setItem('user', req.responseText);
+          window.location.href = "/";
         }
+    } else{
+        alert(req.responseText);
+      }
     }
-    return 0;
-};
-
-// Make sure that the username or password is at least 8 characters long
-function minimumRequirement(entry) {
-    console.log(entry);
-    if (entry.length >= 8) {
-        console.log("Is at least 8 char\n");
-        return 1;
-    }
-    else {
-        console.log("Must be at least 8 char\n");
-        return 0;
-    }
+);
+   req.send(requestBody);
 }
 
 /**

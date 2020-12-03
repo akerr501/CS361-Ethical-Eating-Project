@@ -197,9 +197,9 @@ app.get('/signup', function(req, res, next) {
 
 app.post('/newUser', function(req, res, next) {
 
-  let userData = fs.readFileSync('userData.json');
-  let jUserData = JSON.parse(userData);
-
+//  let userData = fs.readFileSync('userData.json');
+//  let jUserData = JSON.parse(userData);
+  let jUserData = userData;
   var user = {
     ID: jUserData.length,
     Username: req.body.Username,
@@ -212,6 +212,7 @@ app.post('/newUser', function(req, res, next) {
     let data = JSON.stringify(jUserData, null, 1);
 
     fs.writeFileSync('userData.json', data);
+    userData = jUserData;
     res.status(200).send("Your information was saved.");
   }
   else {
