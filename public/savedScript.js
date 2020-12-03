@@ -115,5 +115,3 @@ function reload()
       localStorage.removeItem('firstLoad');
   }
 }
-
-reload();
