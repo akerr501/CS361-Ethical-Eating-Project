@@ -46,7 +46,7 @@ function signOut(){
     localStorage.removeItem('user');
 }
 
-function idk(){
+function gettingLocalStorage(){
     var userInfo;
     console.log("inside idk");
 
@@ -78,4 +78,4 @@ function idk(){
     }
 }
 
-window.onload = idk();
+window.onload = gettingLocalStorage();
