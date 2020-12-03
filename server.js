@@ -88,12 +88,12 @@ app.post('/saveRecipe/:userID', function(req, res, next) {
   let userD = JSON.parse(userdata);
 
   var recipeId = req.body.ID, name = req.body.Name, rIngred = req.body.Ingredients;
-
+  
   let mealdata = fs.readFileSync('mealData.json');
   let mealD = JSON.parse(mealdata);
-
+  
   //check if meal already exists
-  if (mealD[recipeId] && mealD[recipeId].ID == recipeId
+  if (mealD[recipeId] && mealD[recipeId].ID == recipeId 
     && mealD[recipeId].Name == name) {
     //check if the recipe name was changed
     var OGmeal = mealD[recipeId].Ingredients;
@@ -111,7 +111,7 @@ app.post('/saveRecipe/:userID', function(req, res, next) {
       let udata = JSON.stringify(userD, null, 1);
       fs.writeFileSync('userData.json', udata);
 
-      res.status(200).send({"result":true});
+      res.status(200).send({"result":true, "data":userData[userID]});
     } else {
         req.body.ID = mealD.length;
         mealD.push(req.body);
@@ -122,7 +122,7 @@ app.post('/saveRecipe/:userID', function(req, res, next) {
         let udata = JSON.stringify(userD, null, 1);
         fs.writeFileSync('userData.json', udata);
 
-        res.status(200).send({"result":true});
+        res.status(200).send({"result":true, "data":userData[userID]});
   }
 })
 // build page-----------------------------------------------------------------------
