@@ -13,17 +13,7 @@ const getInfo = (req, res, next, ingredientData, mealData, userData, userInforma
         context.allUsers = [];
         
         context.curUserInfo = userData[curUser];
-        console.log("curUserinfo " + userData[curUser]);
         var savedIDs = userData[curUser].Recipes;
-        console.log("saved ids " + savedIDs);
-
-        //logged in user has no saved recipes
-        if(context.curUserInfo.Recipes.length == 0){
-            context.curMeal = null;
-            //add error meal to context
-            context.savedMealsInfo.push(meal[1]);
-            context.curMealInfo = meal[1];
-        }
 
         //user is logged in AND has saved recipes
 
@@ -62,17 +52,15 @@ const getInfo = (req, res, next, ingredientData, mealData, userData, userInforma
             }
         }
 
-      console.log("sending stuff");
         res.status(200);
         res.render("savedPage", context);}
 
     else{
-      console.log("sending nothing");
         var context = {};
         context.savedMealsInfo = [];
-        context.curMeal = 0;
-        context.savedMealsInfo.push(meal[0]);
-        context.curMealInfo = meal[0];
+        context.curMeal = 9;
+        context.savedMealsInfo.push(meal[9]);
+        context.curMealInfo = meal[9];
         res.render("savedPage", context);
     }
 }

@@ -15,7 +15,6 @@ function checkUser(username, pw, urFunc){
             
             if (res != 'false')
             {
-                console.log(res);
                 localStorage.setItem('user', res);
                 //callback to process result inside async
                 urFunc();
@@ -48,14 +47,11 @@ function signOut(){
 
 function gettingLocalStorage(){
     var userInfo;
-    console.log("inside idk");
 
     if(localStorage.getItem("user")){
-        console.log("logged in");
         //userInfo = localStorage.getItem('user');
         //userInfo = JSON.parse(userInfo);
         var userID = getID();
-        console.log(userID);
 
         //userInfo.userID = userID;
         //userInfo = JSON.stringify(userInfo);
@@ -77,11 +73,8 @@ function gettingLocalStorage(){
         myReq.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
         myReq.onload = function() {
             if(myReq.status >= 200 && myReq.status <400){
-                console.log("hey");
-                console.log(myReq.responseText);
             }
             else{
-                console.error(myReq.statusText);
             }
         }
        myReq.send(JSON.stringify(userID));
@@ -103,6 +96,24 @@ for(let b = 0; b < list.length; b++){
         //click current recipe
         var recID = curButton.getAttribute('value');
         localStorage.setItem('curRec', recID);
+        reload();
+        reload();
     }
     )
 }
+
+function reload()
+{
+  if( window.localStorage )
+  {
+    if( !localStorage.getItem('firstLoad') )
+    {
+      localStorage['firstLoad'] = true;
+      window.location.reload();
+    }  
+    else
+      localStorage.removeItem('firstLoad');
+  }
+}
+
+reload();
