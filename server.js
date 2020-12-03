@@ -196,11 +196,11 @@ app.post('/checkLogin', function(req, res, next) {
   if (found == false) {res.status(200).send('false');}
 
 });
-// Login routes ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+// Login routes
 app.get('/signup', function(req, res, next) {
   console.log("Serving the Sign Up Page");
   res.status(200);
-  //let context = {};
   res.render("signupPage", {
     userData: userData
   });
@@ -208,8 +208,6 @@ app.get('/signup', function(req, res, next) {
 
 app.post('/newUser', function(req, res, next) {
 
-//  let userData = fs.readFileSync('userData.json');
-//  let jUserData = JSON.parse(userData);
   let jUserData = userData;
   var user = {
     ID: jUserData.length,
