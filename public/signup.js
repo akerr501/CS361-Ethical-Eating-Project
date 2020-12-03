@@ -22,8 +22,9 @@ submitSignup.addEventListener('click', function() {
     var v_password = nv_passwordInput.value;
 
     // Only add a user if the username and passwords meet the criteria
-    let result = verifyPassword(password, v_password);
-    if (result == 1){addUser(username, password, v_password);}
+    let presult = verifyPassword(password, v_password);
+    let uresult = verifyUsername(username);
+    if (presult == 1 && uresult == 1){addUser(username, password, v_password);}
 
     // Reset the input values to be used for the next time
     resetInputs(n_usernameInput, n_passwordInput, nv_passwordInput);
@@ -61,9 +62,22 @@ function addUser(username, password) {
     request.send(requestBody);
 }
 
+// Make sure that the username is at least 8 characters long
+function verifyUsername(username) {
+
+    if (username.length >= 8) {
+        console.log("Username is at least 8 char\n");
+        return 1;
+    }
+    else {
+        alert("Username must be at least 8 characters\n");
+        return 0;
+    }
+  
+};
+
 // Make sure that the passwords match and are at least 8 characters long
 function verifyPassword(password, v_password) {
-    console.log("verifying password");
     if (password == v_password) {
         console.log("Passwords match!\n");
         if (password.length >= 8) {
@@ -71,7 +85,7 @@ function verifyPassword(password, v_password) {
             return 1;
         }
         else {
-            console.log("Password must be at least 8 characters\n");
+            alert("Password must be at least 8 characters\n");
             return 0;
         }
     } else {
