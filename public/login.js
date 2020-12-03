@@ -29,7 +29,7 @@ function checkUser(username, password) {
     
     // Add access for a user if the username and password meet the criteria
 //    if (verifyUser(username) && minimumRequirement(password)) {
-    if (minimumRequirement(password)){
+//    if (minimumRequirement(password)){
         var loggedUser = {
             Username: username,
             Password: password,
@@ -38,7 +38,7 @@ function checkUser(username, password) {
         var requestBody = JSON.stringify(loggedUser);
 
         sendResponseAndRequest(event, requestBody);
-    }
+//    }
 }
 
 function resetInputs(user, pass, vpass) {
@@ -61,9 +61,14 @@ function sendResponseAndRequest(event, requestBody) {
     req.setRequestHeader('Content-Type', 'application/json');
     req.addEventListener("load", function(){
     if (req.status >= 200 && req.status < 400){
-        console.log("status successful");
         var res = JSON.parse(req.responseText);
-        localStorage.setItem('user', req.responseText);
+        if (res == false){
+          alert("Invalid username or password, please re-enter");
+          console.log(res);
+        } else {
+          localStorage.setItem('user', req.responseText);
+          window.location.href = "/";
+        }
     } else{
         alert(req.responseText);
       }
@@ -73,39 +78,39 @@ function sendResponseAndRequest(event, requestBody) {
 }
 
 // Make sure that the username is unique and not taken
-function verifyUser(username) {
-    console.log("verifying username");
-    minimumRequirement(username);
-    let userData = fs.readFileSync('userData.json');
-    let jUserData = JSON.parse(userData);
-
-    var i = 0;
-
-    for (i = 0; i < jUserData.length; i++) {
-        console.log("Stored: ",jUserData[i].Username);
-        if (jUserData[i].Username == username) {
-            console.log("USERNAME EXISTS!", username);
-            if (jUserData[i].Password == password) {
-                console.log("LOGIN SUCCESSFUL!");
-                return 1;
-            }
-        }
-    }
-    return 0;
-};
-
-// Make sure that the username or password is at least 8 characters long
-function minimumRequirement(entry) {
-    console.log(entry);
-    if (entry.length >= 8) {
-        console.log("Is at least 8 char\n");
-        return 1;
-    }
-    else {
-        console.log("Must be at least 8 char\n");
-        return 0;
-    }
-}
+//function verifyUser(username) {
+//    console.log("verifying username");
+//    minimumRequirement(username);
+//    let userData = fs.readFileSync('userData.json');
+//    let jUserData = JSON.parse(userData);
+//
+//    var i = 0;
+//
+//    for (i = 0; i < jUserData.length; i++) {
+//        console.log("Stored: ",jUserData[i].Username);
+//        if (jUserData[i].Username == username) {
+//            console.log("USERNAME EXISTS!", username);
+//            if (jUserData[i].Password == password) {
+//                console.log("LOGIN SUCCESSFUL!");
+//                return 1;
+//            }
+//        }
+//    }
+//    return 0;
+//};
+//
+//// Make sure that the username or password is at least 8 characters long
+//function minimumRequirement(entry) {
+//    console.log(entry);
+//    if (entry.length >= 8) {
+//        console.log("Is at least 8 char\n");
+//        return 1;
+//    }
+//    else {
+//        console.log("Must be at least 8 char\n");
+//        return 0;
+//    }
+//}
 
 /**
  * Model for User object, used to create new User
