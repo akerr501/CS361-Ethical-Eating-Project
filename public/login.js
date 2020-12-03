@@ -1,8 +1,8 @@
 // Authors: Maddie Smith
 
 // Require fs to be able to read and write with userData.json
-var path = require('path');
-var fs = require('fs');
+//var path = require('path');
+//var fs = require('fs');
 
 // Get the submit button to add a new user
 var submitLogin = document.querySelector('.submit');
