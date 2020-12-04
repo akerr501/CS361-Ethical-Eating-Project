@@ -4,8 +4,8 @@
   "Username": "Username",
   "Password": "Password",
   "Recipes": [
-   2,
-   4
+   1,
+   0
   ],
   "Access": 1
  },
@@ -13,7 +13,9 @@
   "ID": 1,
   "Username": "asdf",
   "Password": "asdfasdf",
-  "Recipes": []
+  "Recipes": [
+   1
+  ]
  },
  {
   "ID": 2,
@@ -33,10 +35,28 @@
   "Username": "agentScarn",
   "Password": "cookamunga",
   "Recipes": [
-   6,
-   7,
-   3
+   2,
+   3,
+   4
   ],
+  "Access": 1
+ },
+ {
+  "ID": 5,
+  "Username": "ericsanchez",
+  "Password": "password",
+  "Recipes": [
+   2,
+   3,
+   5
+  ],
+  "Access": 1
+ },
+ {
+  "ID": 6,
+  "Username": "kylesmith",
+  "Password": "asdfqwer",
+  "Recipes": [],
   "Access": 1
  }
 ]

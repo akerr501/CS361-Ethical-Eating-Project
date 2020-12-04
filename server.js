@@ -154,6 +154,8 @@ app.get('/search', function(req, res, next){
 });
 
 app.get('/browse', function(req, res, next) {
+  mealdata = fs.readFileSync('mealData.json');
+  userdata = fs.readFileSync('userData.json');
   console.log("Serving the Browse Page");
   var context = {};
   context.ingredients = ingredientData;

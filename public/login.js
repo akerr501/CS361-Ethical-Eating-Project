@@ -47,6 +47,7 @@ function sendResponseAndRequest(event, requestBody) {
           console.log(res);
         } else {
           localStorage.setItem('user', req.responseText);
+          localStorage.removeItem('curRec');
           window.location.href = "/";
         }
     } else{
